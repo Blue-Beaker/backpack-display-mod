@@ -1,0 +1,16 @@
+[
+{
+  "modid": "backpackdisplay",
+  "name": "BackpackDisplay",
+  "description": "Crafttweaker support for Keybinds.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Blue_Beaker"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
