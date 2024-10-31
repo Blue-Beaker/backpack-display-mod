@@ -29,6 +29,7 @@ public class BackpackDisplayMod
     
     public BackpackDisplayMod() {
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(BackpackDisplayTooltip.class);
         BackpackDisplayMod.INSTANCE=this;
     }
     
@@ -40,7 +41,7 @@ public class BackpackDisplayMod
     public void onServerStart(FMLServerStartingEvent event){
         this.server=event.getServer();
     }
-    
+
     @SubscribeEvent
     public void onConfigChangedEvent(OnConfigChangedEvent event) {
         if (event.getModID().equals(MODID)) {

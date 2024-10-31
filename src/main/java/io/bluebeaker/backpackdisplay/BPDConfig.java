@@ -9,5 +9,5 @@ import net.minecraftforge.common.config.Config.Type;
 public class BPDConfig {
     @Comment("Example")
     @LangKey("config.examplemod.example.name")
-    public static String[] vanillalikeRules = {};
+    public static String[] displayRules = {};
 }
