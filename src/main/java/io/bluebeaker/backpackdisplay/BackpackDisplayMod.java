@@ -62,4 +62,8 @@ public class BackpackDisplayMod
         if (logger!=null)
         logger.info(log);
     }
+    public static void logError(String log){
+        if (logger!=null)
+        logger.error(log);
+    }
 }

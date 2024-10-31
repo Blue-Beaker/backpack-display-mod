@@ -19,24 +19,12 @@ public class BackpackDisplayRegistry {
     public static void updateFromConfig(){
         registry.clear();
         for (String rule : BPDConfig.displayRules){
-            addRule(rule);
-        }
-    }
-    public static Set<Integer> parseMetadata(String metadataString){
-        Set<Integer> metadataList = new HashSet<Integer>();
-        for (String metaEntry:metadataString.split(",")){
-            if(metaEntry.contains("-")){
-                String[] splitted2=metaEntry.split("-");
-                int lower = Integer.parseInt(splitted2[0]);
-                int higher = Integer.parseInt(splitted2[1]);
-                for(int i = lower;i<higher;i++){
-                    metadataList.add(i);
-                }
-            }else{
-                metadataList.add(Integer.parseInt(metaEntry));
+            try {
+                addRule(rule);
+            } catch (Exception e) {
+                BackpackDisplayMod.logError("Error when processing rule '"+rule+"': \n"+e.getStackTrace().toString());
             }
         }
-        return metadataList;
     }
     public static void addRule(String rule){
         String[] splitted = rule.split("(?<!\\\\)#");
@@ -48,13 +36,25 @@ public class BackpackDisplayRegistry {
         String[] itemsplit = itemStr.split(":");
         String modid = itemsplit[0];
         String resourceid = itemsplit[1];
+
         ResourceLocation itemID = new ResourceLocation(modid, resourceid);
         if(!Item.REGISTRY.containsKey(itemID)) return;
         Item item = Item.REGISTRY.getObject(itemID);
         Set<Integer> metadataList;
-        if(itemsplit.length>=3) metadataList=parseMetadata(itemsplit[2]);
+
+        if(itemsplit.length>=3) metadataList=parseMeta(itemsplit[2]);
         else metadataList=new HashSet<Integer>();
 
+        IDisplaySlotEntry entry = buildEntryFromStringRule(type, nbtRule, metadataList);
+
+        if (entry!=null && item!=null){
+            addEntry(item, entry);
+            BackpackDisplayMod.logInfo("Adding entry with "+item.toString()+"type:"+type+", entry: "+entry.toString());
+        }else{
+            BackpackDisplayMod.logInfo("Item: "+String.valueOf(item==null)+", entry: "+String.valueOf(entry==null));
+        }
+    }
+    public static IDisplaySlotEntry buildEntryFromStringRule(String type,String nbtRule,Set<Integer> metadataList){
         IDisplaySlotEntry entry = null;
         switch (type) {
             case "dummy":
@@ -67,20 +67,38 @@ public class BackpackDisplayRegistry {
                 entry=new DisplaySlotEntryList(metadataList,nbtRule);
                 break;
             default:
-                BackpackDisplayMod.logInfo("Unknown item entry type '"+type+"' in rule '"+rule+"'.");
+                BackpackDisplayMod.logInfo("Unknown item entry type '"+type+"'.");
                 break;
         }
-        if (entry!=null && item!=null){
-            addEntry(item, entry);
-            BackpackDisplayMod.logInfo("Adding entry with "+item.toString()+"type:"+type+", entry: "+entry.toString());
-        }else{
-            BackpackDisplayMod.logInfo("Item: "+String.valueOf(item==null)+", entry: "+String.valueOf(entry==null));
-        }
+
+        return entry;
     }
     public static void addEntry(Item item, IDisplaySlotEntry entry){
         if(!registry.containsKey(item)){
             registry.put(item, new ArrayList<IDisplaySlotEntry>());
         }
         registry.get(item).add(entry);
+    }
+
+    /**
+     * @param metaString Comma-separated list of accepted meta values, may use '-' to define a range.
+     * For Example: 1,2,5-9 -> {1,2,5,6,7,8,9}
+     * @return
+     */
+    public static Set<Integer> parseMeta(String metaString){
+        Set<Integer> metadataList = new HashSet<Integer>();
+        for (String metaEntry:metaString.split(",")){
+            if(metaEntry.contains("-")){
+                String[] splitted2=metaEntry.split("-");
+                int lower = Integer.parseInt(splitted2[0]);
+                int higher = Integer.parseInt(splitted2[1]);
+                for(int i = lower;i<higher;i++){
+                    metadataList.add(i);
+                }
+            }else{
+                metadataList.add(Integer.parseInt(metaEntry));
+            }
+        }
+        return metadataList;
     }
 }
