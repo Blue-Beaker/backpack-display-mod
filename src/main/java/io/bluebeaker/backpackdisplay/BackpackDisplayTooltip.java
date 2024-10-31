@@ -47,7 +47,7 @@ public class BackpackDisplayTooltip {
             ItemStack stack2 = items.get(i);
             int slotX=count%BPDConfig.tooltipWidth;
             int slotY=count/BPDConfig.tooltipWidth;
-            renderItemStack(stack2, x+(slotX)*18, y-18+(-totalHeight+slotY)*18);
+            renderItemStack(stack2, x+(slotX)*18, y-20+(-totalHeight+slotY)*18);
             count++;
         }
         RenderHelper.disableStandardItemLighting();
@@ -55,7 +55,21 @@ public class BackpackDisplayTooltip {
     }
     public static void renderItemStack(ItemStack stack,int x,int y){
         client.getRenderItem().renderItemIntoGUI(stack,x,y);
-        client.getRenderItem().renderItemOverlayIntoGUI(client.fontRenderer, stack, x, y, null);
+        String numRep = getNumRepresentation(stack.getCount());
+        client.getRenderItem().renderItemOverlayIntoGUI(client.fontRenderer, stack, x, y, numRep);
+    }
+    public static String getNumRepresentation(int number){
+        if(number>=1000000000){
+            return String.valueOf(number/1000000000)+"G";
+        }else if(number>=1000000){
+            return String.valueOf(number/1000000)+"M";
+        }else if(number>=1000){
+            return String.valueOf(number/1000)+"k";
+        }else if(number>1){
+            return String.valueOf(number);
+        }else{
+            return null;
+        }
     }
     public static List<IDisplaySlotEntry> getRenderRules(ItemStack stack){
         Item item = stack.getItem();
