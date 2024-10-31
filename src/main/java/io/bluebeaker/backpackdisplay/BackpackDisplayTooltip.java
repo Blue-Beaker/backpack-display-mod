@@ -1,5 +1,6 @@
 package io.bluebeaker.backpackdisplay;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.bluebeaker.backpackdisplay.displayslot.IDisplaySlotEntry;
@@ -24,21 +25,22 @@ public class BackpackDisplayTooltip {
         if(stack.isEmpty()) return;
         List<IDisplaySlotEntry> entries = getRenderRules(stack);
         if(entries==null) return;
+        List<ItemStack> items = new ArrayList<ItemStack>();
         for (IDisplaySlotEntry rule : entries){
             if(rule.isItemMatches(stack)){
-                List<ItemStack> items = rule.getItemsFromContainer(stack);
+                items.addAll(rule.getItemsFromContainer(stack));
                 // renderItems(items,event.getMouseX()-container.getGuiLeft(),event.getMouseY()-container.getGuiTop());
-                renderItems(items,event.getX(),event.getY());
             }
         }
+        renderItems(items,event.getX(),event.getY());
     }
     private static void renderItems(List<ItemStack> items,int x,int y){
         GlStateManager.translate(0.0F, 0.0F, 256.0F);
         GlStateManager.enableRescaleNormal();
         RenderHelper.enableGUIStandardItemLighting();
         int count=0;
-        int totalHeight=Math.min(items.size()-1/BPDConfig.tooltipWidth,BPDConfig.tooltipHeight);
-        int maxCount=BPDConfig.tooltipWidth*BPDConfig.tooltipHeight-1;
+        int totalHeight=Math.min((items.size()-1)/BPDConfig.tooltipWidth,BPDConfig.tooltipHeight);
+        int maxCount=BPDConfig.tooltipWidth*BPDConfig.tooltipHeight;
         int totalCount = items.size();
         if(totalCount>maxCount) totalCount=maxCount-1;
         for (int i=0;i<totalCount;i++){
