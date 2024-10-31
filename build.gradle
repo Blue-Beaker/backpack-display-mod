@@ -115,6 +115,9 @@ dependencies {
 
     implementation rfg.deobf('curse.maven:had-enough-items-557549:4543375')
 
+    //FTB Utils for easy debugging
+    runtimeOnly rfg.deobf('curse.maven:ftb-library-legacy-forge-237167:2985811')
+    runtimeOnly rfg.deobf('curse.maven:ftb-utilities-forge-237102:3157548')
     // implementation rfg.deobf("CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}")
 
     if (project.use_mixins.toBoolean()) {

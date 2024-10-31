@@ -12,11 +12,13 @@ import net.minecraftforge.common.config.Config.Type;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod(modid = BackpackDisplayMod.MODID, name = BackpackDisplayMod.NAME, version = BackpackDisplayMod.VERSION)
+@Mod(modid = BackpackDisplayMod.MODID, name = BackpackDisplayMod.NAME, version = BackpackDisplayMod.VERSION,clientSideOnly = true)
 public class BackpackDisplayMod
 {
     public static final String MODID = "backpackdisplay";
@@ -37,6 +39,12 @@ public class BackpackDisplayMod
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
     }
+
+    @EventHandler
+    public void postInit(FMLInitializationEvent event) {
+        BackpackDisplayRegistry.updateFromConfig();
+    }
+
     @EventHandler
     public void onServerStart(FMLServerStartingEvent event){
         this.server=event.getServer();
@@ -46,6 +54,7 @@ public class BackpackDisplayMod
     public void onConfigChangedEvent(OnConfigChangedEvent event) {
         if (event.getModID().equals(MODID)) {
             ConfigManager.sync(MODID, Type.INSTANCE);
+            BackpackDisplayRegistry.updateFromConfig();
         }
     }
 

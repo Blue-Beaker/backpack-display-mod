@@ -70,8 +70,11 @@ public class BackpackDisplayRegistry {
                 BackpackDisplayMod.logInfo("Unknown item entry type '"+type+"' in rule '"+rule+"'.");
                 break;
         }
-        if (entry!=null){
+        if (entry!=null && item!=null){
             addEntry(item, entry);
+            BackpackDisplayMod.logInfo("Adding entry with "+item.toString()+"type:"+type+", entry: "+entry.toString());
+        }else{
+            BackpackDisplayMod.logInfo("Item: "+String.valueOf(item==null)+", entry: "+String.valueOf(entry==null));
         }
     }
     public static void addEntry(Item item, IDisplaySlotEntry entry){
