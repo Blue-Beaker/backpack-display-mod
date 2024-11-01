@@ -31,10 +31,33 @@ public class BPDConfig {
         "minecraft:red_shulker_box#list#BlockEntityTag.Items",
         "minecraft:black_shulker_box#list#BlockEntityTag.Items"};
 
-    @LangKey("config.backpackdisplay.tooltipRows.name")
+    @Comment("Max width of the backpack tooltip, in slots")
+    @LangKey("config.backpackdisplay.tooltip_rows.name")
     @Config.RangeInt(min = 1)
     public static int tooltipWidth = 9;
-    @LangKey("config.backpackdisplay.tooltipHeight.name")
+
+    @Comment("Max height of the backpack tooltip, in slots.")
+    @LangKey("config.backpackdisplay.tooltip_height.name")
     @Config.RangeInt(min = 1)
     public static int tooltipHeight = 4;
+
+    @Comment("The item label will keep this count of digits before using k, M and G prefixes")
+    @LangKey("config.backpackdisplay.full_digits.name")
+    @Config.RangeInt(min = 3)
+    public static int full_digits = 4;
+
+    enum KeybindType{
+        NOT_NEEDED,
+        PRESSED,
+        RELEASED
+    }
+
+    @Comment("Whether a keybind is needed to show the container tooltip.")
+    @LangKey("config.backpackdisplay.needs_keybind.name")
+    public static KeybindType needs_keybind = KeybindType.NOT_NEEDED;
+    
+    @LangKey("config.backpackdisplay.offset_x.name")
+    public static int offset_x = 0;
+    @LangKey("config.backpackdisplay.offset_y.name")
+    public static int offset_y = -20;
 }

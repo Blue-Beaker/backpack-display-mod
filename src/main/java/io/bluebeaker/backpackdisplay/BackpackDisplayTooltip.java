@@ -11,16 +11,14 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderTooltipEvent;
+import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class BackpackDisplayTooltip {
     static Minecraft client = Minecraft.getMinecraft();
+    static FontRenderer fontRenderer = client.fontRenderer;
     @SubscribeEvent
     public static void render(RenderTooltipEvent.PostText event){
-        // GuiContainer container = event.getGuiContainer();
-        // Slot slot = container.getSlotUnderMouse();
-        // if (slot==null) return;
-        // ItemStack stack=slot.getStack();
         ItemStack stack=event.getStack();
         if(stack.isEmpty()) return;
         List<IDisplaySlotEntry> entries = getRenderRules(stack);
@@ -29,42 +27,95 @@ public class BackpackDisplayTooltip {
         for (IDisplaySlotEntry rule : entries){
             if(rule.isItemMatches(stack)){
                 items.addAll(rule.getItemsFromContainer(stack));
-                // renderItems(items,event.getMouseX()-container.getGuiLeft(),event.getMouseY()-container.getGuiTop());
             }
         }
         renderItems(items,event.getX(),event.getY());
     }
     private static void renderItems(List<ItemStack> items,int x,int y){
-        GlStateManager.translate(0.0F, 0.0F, 256.0F);
         GlStateManager.enableRescaleNormal();
         RenderHelper.enableGUIStandardItemLighting();
         int count=0;
-        int totalHeight=Math.min((items.size()-1)/BPDConfig.tooltipWidth,BPDConfig.tooltipHeight);
         int maxCount=BPDConfig.tooltipWidth*BPDConfig.tooltipHeight;
         int totalCount = items.size();
-        if(totalCount>maxCount) totalCount=maxCount-1;
+        //Cancel rendering when container is empty
+        if(totalCount==0) return;
+
+        int totalWidth = Math.min(items.size(),BPDConfig.tooltipWidth);
+        //Draw label for overflowed items
+        if(totalCount>maxCount){
+            totalCount=maxCount-1;
+        }
+        int totalHeight=Math.min((totalCount-1)/BPDConfig.tooltipWidth,BPDConfig.tooltipHeight)+1;
+
+        int backgroundColor = 0xF0100010;
+        int borderColorStart = 0x505000FF;
+        int borderColorEnd = (borderColorStart & 0xFEFEFE) >> 1 | borderColorStart & 0xFF000000;
+
+        drawBackground(x+BPDConfig.offset_x,y+BPDConfig.offset_y-(totalHeight)*18,totalWidth*18,totalHeight*18,backgroundColor,borderColorStart,borderColorEnd);
+        GlStateManager.translate(0.0F, 0.0F, 512.0F);
+        if(items.size()>totalCount){
+            drawLabelCentered(x+BPDConfig.offset_x+(BPDConfig.tooltipWidth-1)*18, y-18+BPDConfig.offset_y,"+"+getNumRepresentation(items.size()-totalCount));
+        }
+        //Render every item
         for (int i=0;i<totalCount;i++){
             ItemStack stack2 = items.get(i);
             int slotX=count%BPDConfig.tooltipWidth;
-            int slotY=count/BPDConfig.tooltipWidth;
-            renderItemStack(stack2, x+(slotX)*18, y-20+(-totalHeight+slotY)*18);
+            int slotY=(count/BPDConfig.tooltipWidth)-totalHeight;
+            renderItemStack(stack2, x+BPDConfig.offset_x+(slotX)*18, y+BPDConfig.offset_y+(slotY)*18);
             count++;
         }
         RenderHelper.disableStandardItemLighting();
         GlStateManager.disableRescaleNormal();
     }
+
+    /** Render item stack for the tooltip
+     * @param stack Itemstack to render
+     * @param x
+     * @param y
+     */
     public static void renderItemStack(ItemStack stack,int x,int y){
         client.getRenderItem().renderItemIntoGUI(stack,x,y);
         String numRep = getNumRepresentation(stack.getCount());
         client.getRenderItem().renderItemOverlayIntoGUI(client.fontRenderer, stack, x, y, numRep);
     }
+   /** Draw a text in the middle of slot
+     * @param x
+     * @param y
+     * @param text
+     */
+     public static void drawLabelCentered(int x,int y,String text){
+        GlStateManager.disableLighting();
+        GlStateManager.disableDepth();
+        GlStateManager.disableBlend();
+        fontRenderer.drawStringWithShadow(text, (float)(x + 9 - fontRenderer.getStringWidth(text)/2), (float)(y + 9 - fontRenderer.FONT_HEIGHT/2), 16777215);
+        GlStateManager.enableLighting();
+        GlStateManager.enableDepth();
+        GlStateManager.enableBlend();
+    }
+    public static void drawBackground(int x,int y,int width,int height,int bgColor,int borderColorStart,int borderColorEnd){
+        final int zLevel = 300;
+        GuiUtils.drawGradientRect(zLevel, x - 3, y - 4, x + width + 3, y - 3, bgColor, bgColor);
+        GuiUtils.drawGradientRect(zLevel, x - 3, y + height + 3, x + width + 3, y + height + 4, bgColor, bgColor);
+        GuiUtils.drawGradientRect(zLevel, x - 3, y - 3, x + width + 3, y + height + 3, bgColor, bgColor);
+        GuiUtils.drawGradientRect(zLevel, x - 4, y - 3, x - 3, y + height + 3, bgColor, bgColor);
+        GuiUtils.drawGradientRect(zLevel, x + width + 3, y - 3, x + width + 4, y + height + 3, bgColor, bgColor);
+        GuiUtils.drawGradientRect(zLevel, x - 3, y - 3 + 1, x - 3 + 1, y + height + 3 - 1, borderColorStart, borderColorEnd);
+        GuiUtils.drawGradientRect(zLevel, x + width + 2, y - 3 + 1, x + width + 3, y + height + 3 - 1, borderColorStart, borderColorEnd);
+        GuiUtils.drawGradientRect(zLevel, x - 3, y - 3, x + width + 3, y - 3 + 1, borderColorStart, borderColorStart);
+        GuiUtils.drawGradientRect(zLevel, x - 3, y + height + 2, x + width + 3, y + height + 3, borderColorEnd, borderColorEnd);
+    }
+
     public static String getNumRepresentation(int number){
         if(number>=1000000000){
-            return String.valueOf(number/1000000000)+"G";
+            return String.format("%.1fG",number/100000000/10.0);
+        }else if(number>=10000000){
+            return String.format("%dM",number/1000000);
         }else if(number>=1000000){
-            return String.valueOf(number/1000000)+"M";
+            return String.format("%.1fM",number/100000/10.0);
+        }else if(number>=10000){
+            return String.format("%dk",number/1000);
         }else if(number>=1000){
-            return String.valueOf(number/1000)+"k";
+            return String.format("%.1fk",number/100/10.0);
         }else if(number>1){
             return String.valueOf(number);
         }else{
