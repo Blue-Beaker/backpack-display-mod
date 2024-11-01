@@ -14,6 +14,7 @@ public class BPDConfig {
     "rule type 'dummy': fixed items intended for testing the display"})
     @LangKey("config.backpackdisplay.displayrules.name")
     public static String[] displayRules = {
+        //Vanilla Shulker Boxes
         "minecraft:white_shulker_box#list#BlockEntityTag.Items",
         "minecraft:orange_shulker_box#list#BlockEntityTag.Items",
         "minecraft:magenta_shulker_box#list#BlockEntityTag.Items",
@@ -30,6 +31,7 @@ public class BPDConfig {
         "minecraft:green_shulker_box#list#BlockEntityTag.Items",
         "minecraft:red_shulker_box#list#BlockEntityTag.Items",
         "minecraft:black_shulker_box#list#BlockEntityTag.Items",
+        //Storage Drawers (Creative ctrl+pick block)
         "storagedrawers:basicdrawers:0#single#BlockEntityTag.Drawers.0.Item;BlockEntityTag.Drawers.0.Count",
         "storagedrawers:basicdrawers:1,3#single#BlockEntityTag.Drawers.0.Item;BlockEntityTag.Drawers.0.Count",
         "storagedrawers:basicdrawers:1,3#single#BlockEntityTag.Drawers.1.Item;BlockEntityTag.Drawers.1.Count",
@@ -46,7 +48,40 @@ public class BPDConfig {
         "storagedrawers:customdrawers:2,4#single#BlockEntityTag.Drawers.3.Item;BlockEntityTag.Drawers.3.Count",
         "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.0.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.0.Conv",
         "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.1.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.1.Conv",
-        "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.2.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.2.Conv"
+        "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.2.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.2.Conv",
+        //Storage Drawers (Digged)
+        "storagedrawers:basicdrawers:0#single#tile.Drawers.0.Item;tile.Drawers.0.Count",
+        "storagedrawers:basicdrawers:1,3#single#tile.Drawers.0.Item;tile.Drawers.0.Count",
+        "storagedrawers:basicdrawers:1,3#single#tile.Drawers.1.Item;tile.Drawers.1.Count",
+        "storagedrawers:basicdrawers:2,4#single#tile.Drawers.0.Item;tile.Drawers.0.Count",
+        "storagedrawers:basicdrawers:2,4#single#tile.Drawers.1.Item;tile.Drawers.1.Count",
+        "storagedrawers:basicdrawers:2,4#single#tile.Drawers.2.Item;tile.Drawers.2.Count",
+        "storagedrawers:basicdrawers:2,4#single#tile.Drawers.3.Item;tile.Drawers.3.Count",
+        "storagedrawers:customdrawers:0#single#tile.Drawers.0.Item;tile.Drawers.0.Count",
+        "storagedrawers:customdrawers:1,3#single#tile.Drawers.0.Item;tile.Drawers.0.Count",
+        "storagedrawers:customdrawers:1,3#single#tile.Drawers.1.Item;tile.Drawers.1.Count",
+        "storagedrawers:customdrawers:2,4#single#tile.Drawers.0.Item;tile.Drawers.0.Count",
+        "storagedrawers:customdrawers:2,4#single#tile.Drawers.1.Item;tile.Drawers.1.Count",
+        "storagedrawers:customdrawers:2,4#single#tile.Drawers.2.Item;tile.Drawers.2.Count",
+        "storagedrawers:customdrawers:2,4#single#tile.Drawers.3.Item;tile.Drawers.3.Count",
+        "storagedrawers:compdrawers#single#tile.Drawers.Items.0.Item;tile.Drawers.Count;/tile.Drawers.Items.0.Conv",
+        "storagedrawers:compdrawers#single#tile.Drawers.Items.1.Item;tile.Drawers.Count;/tile.Drawers.Items.1.Conv",
+        "storagedrawers:compdrawers#single#tile.Drawers.Items.2.Item;tile.Drawers.Count;/tile.Drawers.Items.2.Conv",
+        //Forestry Backpacks
+        "forestry:apiarist_bag#list#Slots",
+        "forestry:lepidopterist_bag#list#Slots",
+        "forestry:miner_bag#list#Slots",
+        "forestry:miner_bag_t2#list#Slots",
+        "forestry:digger_bag#list#Slots",
+        "forestry:digger_bag_t2#list#Slots",
+        "forestry:forester_bag#list#Slots",
+        "forestry:forester_bag_t2#list#Slots",
+        "forestry:hunter_bag#list#Slots",
+        "forestry:hunter_bag_t2#list#Slots",
+        "forestry:adventurer_bag#list#Slots",
+        "forestry:adventurer_bag_t2#list#Slots",
+        "forestry:builder_bag#list#Slots",
+        "forestry:builder_bag_t2#list#Slots"
     };
 
     @Comment("Max width of the backpack tooltip, in slots")
