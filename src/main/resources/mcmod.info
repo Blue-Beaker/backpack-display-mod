@@ -2,7 +2,7 @@
 {
   "modid": "backpackdisplay",
   "name": "BackpackDisplay",
-  "description": "Crafttweaker support for Keybinds.",
+  "description": "Shows contents of backpack-like items.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",

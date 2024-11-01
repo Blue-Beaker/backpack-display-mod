@@ -13,7 +13,7 @@ import io.bluebeaker.backpackdisplay.displayslot.IDisplaySlotEntry;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
-public class BackpackDisplayRegistry {
+public class BPDRegistry {
     public static HashMap<Item,List<IDisplaySlotEntry>> registry = new HashMap<Item,List<IDisplaySlotEntry>>();
 
     public static void updateFromConfig(){

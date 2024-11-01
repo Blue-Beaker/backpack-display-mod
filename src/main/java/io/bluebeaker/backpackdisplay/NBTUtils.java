@@ -1,8 +1,5 @@
 package io.bluebeaker.backpackdisplay;
 
-import org.luaj.vm2.lib.PackageLib.searchpath;
-
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;

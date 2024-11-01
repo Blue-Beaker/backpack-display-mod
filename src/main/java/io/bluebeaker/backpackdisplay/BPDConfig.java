@@ -29,7 +29,25 @@ public class BPDConfig {
         "minecraft:brown_shulker_box#list#BlockEntityTag.Items",
         "minecraft:green_shulker_box#list#BlockEntityTag.Items",
         "minecraft:red_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:black_shulker_box#list#BlockEntityTag.Items"};
+        "minecraft:black_shulker_box#list#BlockEntityTag.Items",
+        "storagedrawers:basicdrawers:0#single#BlockEntityTag.Drawers.0.Item;BlockEntityTag.Drawers.0.Count",
+        "storagedrawers:basicdrawers:1,3#single#BlockEntityTag.Drawers.0.Item;BlockEntityTag.Drawers.0.Count",
+        "storagedrawers:basicdrawers:1,3#single#BlockEntityTag.Drawers.1.Item;BlockEntityTag.Drawers.1.Count",
+        "storagedrawers:basicdrawers:2,4#single#BlockEntityTag.Drawers.0.Item;BlockEntityTag.Drawers.0.Count",
+        "storagedrawers:basicdrawers:2,4#single#BlockEntityTag.Drawers.1.Item;BlockEntityTag.Drawers.1.Count",
+        "storagedrawers:basicdrawers:2,4#single#BlockEntityTag.Drawers.2.Item;BlockEntityTag.Drawers.2.Count",
+        "storagedrawers:basicdrawers:2,4#single#BlockEntityTag.Drawers.3.Item;BlockEntityTag.Drawers.3.Count",
+        "storagedrawers:customdrawers:0#single#BlockEntityTag.Drawers.0.Item;BlockEntityTag.Drawers.0.Count",
+        "storagedrawers:customdrawers:1,3#single#BlockEntityTag.Drawers.0.Item;BlockEntityTag.Drawers.0.Count",
+        "storagedrawers:customdrawers:1,3#single#BlockEntityTag.Drawers.1.Item;BlockEntityTag.Drawers.1.Count",
+        "storagedrawers:customdrawers:2,4#single#BlockEntityTag.Drawers.0.Item;BlockEntityTag.Drawers.0.Count",
+        "storagedrawers:customdrawers:2,4#single#BlockEntityTag.Drawers.1.Item;BlockEntityTag.Drawers.1.Count",
+        "storagedrawers:customdrawers:2,4#single#BlockEntityTag.Drawers.2.Item;BlockEntityTag.Drawers.2.Count",
+        "storagedrawers:customdrawers:2,4#single#BlockEntityTag.Drawers.3.Item;BlockEntityTag.Drawers.3.Count",
+        "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.0.Item",
+        "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.1.Item",
+        "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.2.Item"
+    };
 
     @Comment("Max width of the backpack tooltip, in slots")
     @LangKey("config.backpackdisplay.tooltip_rows.name")

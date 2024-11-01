@@ -14,7 +14,7 @@ import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class BackpackDisplayTooltip {
+public class BPDTooltip {
     static Minecraft client = Minecraft.getMinecraft();
     static FontRenderer fontRenderer = client.fontRenderer;
     @SubscribeEvent
@@ -29,9 +29,9 @@ public class BackpackDisplayTooltip {
                 items.addAll(rule.getItemsFromContainer(stack));
             }
         }
-        renderItems(items,event.getX(),event.getY());
+        renderBPDTooltip(items,event.getX(),event.getY());
     }
-    private static void renderItems(List<ItemStack> items,int x,int y){
+    private static void renderBPDTooltip(List<ItemStack> items,int x,int y){
         GlStateManager.enableRescaleNormal();
         RenderHelper.enableGUIStandardItemLighting();
         int count=0;
@@ -124,7 +124,7 @@ public class BackpackDisplayTooltip {
     }
     public static List<IDisplaySlotEntry> getRenderRules(ItemStack stack){
         Item item = stack.getItem();
-        List<IDisplaySlotEntry> entries = BackpackDisplayRegistry.registry.get(item);
+        List<IDisplaySlotEntry> entries = BPDRegistry.registry.get(item);
         return entries;
     }
 }

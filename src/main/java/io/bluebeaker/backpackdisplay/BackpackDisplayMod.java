@@ -2,10 +2,7 @@ package io.bluebeaker.backpackdisplay;
 
 import org.apache.logging.log4j.Logger;
 
-import mezz.jei.gui.TooltipRenderer;
 import net.minecraft.server.MinecraftServer;
-import net.minecraftforge.client.event.GuiContainerEvent;
-import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.common.config.Config.Type;
@@ -13,7 +10,6 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEve
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -31,7 +27,7 @@ public class BackpackDisplayMod
     
     public BackpackDisplayMod() {
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(BackpackDisplayTooltip.class);
+        MinecraftForge.EVENT_BUS.register(BPDTooltip.class);
         BackpackDisplayMod.INSTANCE=this;
     }
     
@@ -42,7 +38,7 @@ public class BackpackDisplayMod
 
     @EventHandler
     public void postInit(FMLInitializationEvent event) {
-        BackpackDisplayRegistry.updateFromConfig();
+        BPDRegistry.updateFromConfig();
     }
 
     @EventHandler
@@ -54,7 +50,7 @@ public class BackpackDisplayMod
     public void onConfigChangedEvent(OnConfigChangedEvent event) {
         if (event.getModID().equals(MODID)) {
             ConfigManager.sync(MODID, Type.INSTANCE);
-            BackpackDisplayRegistry.updateFromConfig();
+            BPDRegistry.updateFromConfig();
         }
     }
 

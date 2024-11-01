@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class DisplaySlotEntryBase implements IDisplaySlotEntry {
@@ -18,6 +19,8 @@ public class DisplaySlotEntryBase implements IDisplaySlotEntry {
     public List<ItemStack> getItemsFromContainer(ItemStack stack){
         List<ItemStack> output = new ArrayList<ItemStack>();
         output.add(new ItemStack(Blocks.STONE));
+        output.add(new ItemStack(Items.DIAMOND_PICKAXE,1,500));
+        output.add(new ItemStack(Blocks.STAINED_GLASS_PANE,1,3));
         return output;
     }
 }
