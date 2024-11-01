@@ -2,6 +2,11 @@
 Adds a tooltip to show what's in your backpack, shulker box or other container item.  
 Configurable of how to get contents for the container item.  
 
+Configurable options(See the mod's config): 
+- The items that the mod's tooltip should be shown for  
+- Position and color of the tooltip  
+- Optional hold or release a keybind to show the tooltip  
+
 ## Config Format
 `displayRules` is the main config of the mod. It lets you to add new container  items to display the backpack tooltip, with the following format:  
 Format: `<modID>:<itemID>[:meta]#<rule type>#<rule definition>`  
