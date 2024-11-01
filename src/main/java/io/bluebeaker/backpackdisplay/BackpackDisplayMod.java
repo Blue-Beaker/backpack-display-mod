@@ -37,7 +37,7 @@ public class BackpackDisplayMod
     }
 
     @EventHandler
-    public void postInit(FMLInitializationEvent event) {
+    public void init(FMLInitializationEvent event) {
         BPDRegistry.updateFromConfig();
     }
 
