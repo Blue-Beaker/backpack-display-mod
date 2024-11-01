@@ -47,8 +47,8 @@ public class BackpackDisplayTooltip {
         }
         int totalHeight=Math.min((totalCount-1)/BPDConfig.tooltipWidth,BPDConfig.tooltipHeight)+1;
 
-        int backgroundColor = 0xF0100010;
-        int borderColorStart = 0x505000FF;
+        int backgroundColor = BPDConfig.backgroundColor;
+        int borderColorStart = BPDConfig.borderColorStart;
         int borderColorEnd = (borderColorStart & 0xFEFEFE) >> 1 | borderColorStart & 0xFF000000;
 
         drawBackground(x+BPDConfig.offset_x,y+BPDConfig.offset_y-(totalHeight)*18,totalWidth*18,totalHeight*18,backgroundColor,borderColorStart,borderColorEnd);

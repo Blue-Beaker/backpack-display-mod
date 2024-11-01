@@ -33,12 +33,12 @@ public class BPDConfig {
 
     @Comment("Max width of the backpack tooltip, in slots")
     @LangKey("config.backpackdisplay.tooltip_rows.name")
-    @Config.RangeInt(min = 1)
+    @Config.RangeInt(min = 1,max = 36)
     public static int tooltipWidth = 9;
 
     @Comment("Max height of the backpack tooltip, in slots.")
     @LangKey("config.backpackdisplay.tooltip_height.name")
-    @Config.RangeInt(min = 1)
+    @Config.RangeInt(min = 1,max = 36)
     public static int tooltipHeight = 4;
 
     @Comment("The item label will keep this count of digits before using k, M and G prefixes")
@@ -56,8 +56,16 @@ public class BPDConfig {
     @LangKey("config.backpackdisplay.needs_keybind.name")
     public static KeybindType needs_keybind = KeybindType.NOT_NEEDED;
     
+
+    @Comment("Offset of the backpack display")
     @LangKey("config.backpackdisplay.offset_x.name")
     public static int offset_x = 0;
+    @Comment("Offset of the backpack display")
     @LangKey("config.backpackdisplay.offset_y.name")
-    public static int offset_y = -20;
+    public static int offset_y = -8;
+
+    @Comment("Color of the backpack display")
+    public static int backgroundColor = 0xF0100010;
+    @Comment("Color of the backpack display")
+    public static int borderColorStart = 0x505000FF;
 }
