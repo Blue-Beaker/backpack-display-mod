@@ -49,6 +49,7 @@ public class BPDRegistry {
 
         if (entry!=null && item!=null){
             addEntry(item, entry);
+            if(BPDConfig.verbose_info)
             BackpackDisplayMod.logInfo("Adding entry with "+item.toString()+"type:"+type+", entry: "+entry.toString());
         }
     }

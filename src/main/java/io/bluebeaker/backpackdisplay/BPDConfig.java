@@ -82,6 +82,14 @@ public class BPDConfig {
     @LangKey("config.backpackdisplay.offset_y.name")
     public static int offset_y = -8;
 
+    @Comment("Scale of the count label in display when number is too long")
+    @LangKey("config.backpackdisplay.label_scale.name")
+    public static float label_scale = 0.5f;
+
+    @Comment("Show verbose info when loading mod. Useful for writing new rules.")
+    @LangKey("config.backpackdisplay.verbose_info.name")
+    public static boolean verbose_info = false;
+
     @Comment("Color of the backpack display")
     public static int backgroundColor = 0xF0100010;
     @Comment("Color of the backpack display")
