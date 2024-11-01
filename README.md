@@ -1,5 +1,5 @@
 # BackpackDisplay
-Adds a tooltip for showing items in your backpack, shulker box or other container item.  
+Adds a tooltip to show what's in your backpack, shulker box or other container item.  
 Configurable of how to get contents for the container item.  
 
 ## Config Format

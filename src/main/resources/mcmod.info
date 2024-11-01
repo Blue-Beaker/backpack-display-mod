@@ -2,14 +2,14 @@
 {
   "modid": "backpackdisplay",
   "name": "BackpackDisplay",
-  "description": "Shows contents of backpack-like items.",
+  "description": "Shows what's in your backpack!",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "https://github.com/Blue-Beaker/backpack-display-mod",
   "updateUrl": "",
   "authorList": ["Blue_Beaker"],
   "credits": "",
-  "logoFile": "",
+  "logoFile": "icon.png",
   "screenshots": [],
   "dependencies": []
 }
