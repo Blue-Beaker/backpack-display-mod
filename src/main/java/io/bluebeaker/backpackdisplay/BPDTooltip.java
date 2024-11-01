@@ -45,8 +45,6 @@ public class BPDTooltip {
     }
 
     private static void renderBPDTooltip(List<ItemStack> items, int x, int y) {
-        GlStateManager.enableRescaleNormal();
-        RenderHelper.enableGUIStandardItemLighting();
         int count = 0;
         int maxCount = BPDConfig.tooltipWidth * BPDConfig.tooltipHeight;
         int totalCount = items.size();
@@ -67,6 +65,8 @@ public class BPDTooltip {
 
         drawBackground(x + BPDConfig.offset_x, y + BPDConfig.offset_y - (totalHeight) * 18, totalWidth * 18,
                 totalHeight * 18, backgroundColor, borderColorStart, borderColorEnd);
+        GlStateManager.enableRescaleNormal();
+        RenderHelper.enableGUIStandardItemLighting();
         GlStateManager.translate(0.0F, 0.0F, 512.0F);
         if (items.size() > totalCount) {
             drawLabelCentered(x + BPDConfig.offset_x + (BPDConfig.tooltipWidth - 1) * 18, y - 18 + BPDConfig.offset_y,
