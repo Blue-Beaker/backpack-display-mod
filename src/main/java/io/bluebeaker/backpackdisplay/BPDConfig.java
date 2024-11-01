@@ -8,10 +8,10 @@ import net.minecraftforge.common.config.Config.Type;
 @Config(modid = BackpackDisplayMod.MODID,type = Type.INSTANCE,category = "general")
 public class BPDConfig {
     @Comment({"Rules for getting contained items of container items for the tooltip to display.",
-    "Format: '<modID>:<itemID>[:metadatas]#<content type>#<rule def>'",
-    "Content type 'single': single item stored in certain path of NBT;",
-    "Content type 'list': a list of items stored under a NBTTagList",
-    "Content type 'dummy': fixed items intended for testing the display"})
+    "Format: '<modID>:<itemID>[:meta]#<rule type>#<rule definition>'",
+    "rule type 'single': single item stored in certain path of NBT;",
+    "rule type 'list': a list of items stored under a NBTTagList",
+    "rule type 'dummy': fixed items intended for testing the display"})
     @LangKey("config.backpackdisplay.displayrules.name")
     public static String[] displayRules = {
         "minecraft:white_shulker_box#list#BlockEntityTag.Items",
