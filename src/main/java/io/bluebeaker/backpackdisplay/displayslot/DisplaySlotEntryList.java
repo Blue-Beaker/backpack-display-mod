@@ -58,7 +58,7 @@ public class DisplaySlotEntryList extends DisplaySlotEntryBase {
     private ItemStack getSingleItem(NBTBase tag){
         NBTBase itemTag = NBTUtils.getTagRecursive(tag, pathToItem);
         if(itemTag instanceof NBTTagCompound){
-            ItemStack newStack = new ItemStack((NBTTagCompound)tag);
+            ItemStack newStack = new ItemStack((NBTTagCompound)itemTag);
             if(!newStack.isEmpty()){
                 if(pathToCount!=null){
                     NBTBase countTag = NBTUtils.getTagRecursive(tag, pathToCount);
