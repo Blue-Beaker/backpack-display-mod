@@ -3,8 +3,6 @@ package io.bluebeaker.backpackdisplay.displayslot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import io.bluebeaker.backpackdisplay.utils.ComparatorWithNumbers;
