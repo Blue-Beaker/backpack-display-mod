@@ -20,7 +20,7 @@ public class DisplaySlotEntryList extends DisplaySlotEntryBase {
     /**The path from the list to the count of the item.     */
     String[] pathToCount = null;
     public DisplaySlotEntryList(Set<Integer> metadataList,String nbtRule){
-        super(metadataList);
+        super(metadataList,nbtRule);
         String[] splitted = nbtRule.split("(?<!\\\\);");
         pathToList = NBTUtils.getKeysList(splitted[0]);
         if(splitted.length>=2)

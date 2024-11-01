@@ -10,8 +10,10 @@ import net.minecraft.item.ItemStack;
 
 public class DisplaySlotEntryBase implements IDisplaySlotEntry {
     Set<Integer> metadataList;
-    public DisplaySlotEntryBase(Set<Integer> metadataList){
+    String rule;
+    public DisplaySlotEntryBase(Set<Integer> metadataList,String rule){
         this.metadataList=metadataList;
+        this.rule=rule;
     }
     public boolean isItemMatches(ItemStack stack){
         return metadataList.isEmpty() || metadataList.contains(stack.getMetadata());
@@ -22,5 +24,9 @@ public class DisplaySlotEntryBase implements IDisplaySlotEntry {
         output.add(new ItemStack(Items.DIAMOND_PICKAXE,1,500));
         output.add(new ItemStack(Blocks.STAINED_GLASS_PANE,1,3));
         return output;
+    }
+    @Override
+    public String toString(){
+        return "["+this.getClass().getName()+":"+this.rule+"]";
     }
 }

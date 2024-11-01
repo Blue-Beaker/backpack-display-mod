@@ -22,7 +22,7 @@ public class BPDRegistry {
             try {
                 addRule(rule);
             } catch (Exception e) {
-                BackpackDisplayMod.logError("Error when processing rule '"+rule+"': \n"+e.getStackTrace().toString());
+                BackpackDisplayMod.logError("Error when processing rule '"+rule+"': \n"+e.toString());
             }
         }
     }
@@ -50,15 +50,13 @@ public class BPDRegistry {
         if (entry!=null && item!=null){
             addEntry(item, entry);
             BackpackDisplayMod.logInfo("Adding entry with "+item.toString()+"type:"+type+", entry: "+entry.toString());
-        }else{
-            BackpackDisplayMod.logInfo("Item: "+String.valueOf(item==null)+", entry: "+String.valueOf(entry==null));
         }
     }
     public static IDisplaySlotEntry buildEntryFromStringRule(String type,String nbtRule,Set<Integer> metadataList){
         IDisplaySlotEntry entry = null;
         switch (type) {
             case "dummy":
-                entry=new DisplaySlotEntryBase(metadataList);
+                entry=new DisplaySlotEntryBase(metadataList,nbtRule);
                 break;
             case "single":
                 entry=new DisplaySlotEntrySingle(metadataList,nbtRule);

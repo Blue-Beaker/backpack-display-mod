@@ -44,9 +44,9 @@ public class BPDConfig {
         "storagedrawers:customdrawers:2,4#single#BlockEntityTag.Drawers.1.Item;BlockEntityTag.Drawers.1.Count",
         "storagedrawers:customdrawers:2,4#single#BlockEntityTag.Drawers.2.Item;BlockEntityTag.Drawers.2.Count",
         "storagedrawers:customdrawers:2,4#single#BlockEntityTag.Drawers.3.Item;BlockEntityTag.Drawers.3.Count",
-        "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.0.Item",
-        "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.1.Item",
-        "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.2.Item"
+        "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.0.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.0.Conv",
+        "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.1.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.1.Conv",
+        "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.2.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.2.Conv"
     };
 
     @Comment("Max width of the backpack tooltip, in slots")
