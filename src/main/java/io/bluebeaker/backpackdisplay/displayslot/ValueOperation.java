@@ -1,5 +1,6 @@
 package io.bluebeaker.backpackdisplay.displayslot;
-import io.bluebeaker.backpackdisplay.NBTUtils;
+import io.bluebeaker.backpackdisplay.utils.NBTUtils;
+import io.bluebeaker.backpackdisplay.utils.ValueOperator;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTPrimitive;
 import net.minecraft.nbt.NBTTagCompound;

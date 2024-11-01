@@ -120,6 +120,7 @@ dependencies {
     runtimeOnly rfg.deobf('curse.maven:ftb-utilities-forge-237102:3157548')
     runtimeOnly rfg.deobf("curse.maven:chameleon-230497:2450900")
     runtimeOnly rfg.deobf("curse.maven:storage-drawers-223852:5758109")
+    runtimeOnly rfg.deobf("curse.maven:forestry-59751:2918418")
     // implementation rfg.deobf("CraftTweaker2:CraftTweaker2-MC1120-Main:${version_crafttweaker}")
 
     if (project.use_mixins.toBoolean()) {

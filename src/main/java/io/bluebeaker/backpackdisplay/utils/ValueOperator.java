@@ -1,4 +1,4 @@
-package io.bluebeaker.backpackdisplay.displayslot;
+package io.bluebeaker.backpackdisplay.utils;
 
 public interface ValueOperator {
     public int calc(int a,int b);

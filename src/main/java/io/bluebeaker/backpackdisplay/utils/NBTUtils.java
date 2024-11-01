@@ -1,4 +1,4 @@
-package io.bluebeaker.backpackdisplay;
+package io.bluebeaker.backpackdisplay.utils;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;

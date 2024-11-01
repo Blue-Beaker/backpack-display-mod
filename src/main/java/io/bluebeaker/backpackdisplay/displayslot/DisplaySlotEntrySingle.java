@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import io.bluebeaker.backpackdisplay.BackpackDisplayMod;
-import io.bluebeaker.backpackdisplay.NBTUtils;
+import io.bluebeaker.backpackdisplay.utils.NBTUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTPrimitive;

@@ -23,7 +23,7 @@ The path `list.1.key2` will get the tag "item" from it.
 ### List rule
 Rule type: `list`  
 
-In this rule, items are under a list.  
+In this rule, items are all under a NBTTagList or a NBTTagCompound.  
 
 Rule definition:`path.to.the.list[;path.to.the.itemstack[;path.to.the.counts]]`  
 The last 2 paths is relative to the tag item in the list. 
