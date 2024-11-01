@@ -1,6 +1,7 @@
 # BackpackDisplay
 Adds a tooltip to show what's in your backpack, shulker box or other container item.  
 Configurable of how to get contents for the container item.  
+The mod has out-of-the-box support for vanilla shulker boxes, storage drawers drawers, and forestry backpacks. You can add support to more items by writing custom rules in the mod's config.  
 
 Configurable options(See the mod's config): 
 - The items that the mod's tooltip should be shown for  
