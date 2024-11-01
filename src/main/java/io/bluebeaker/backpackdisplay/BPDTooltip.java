@@ -3,9 +3,12 @@ package io.bluebeaker.backpackdisplay;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
+
 import io.bluebeaker.backpackdisplay.displayslot.IDisplaySlotEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.Item;
@@ -20,6 +23,12 @@ public class BPDTooltip {
 
     @SubscribeEvent
     public static void render(RenderTooltipEvent.PostText event) {
+        if(BPDConfig.needs_keybind!=BPDConfig.KeybindType.NOT_NEEDED){
+            if(BPDConfig.needs_keybind==BPDConfig.KeybindType.PRESSED ^ Keyboard.isKeyDown(Keybind.keyShowContents.getKeyCode())){
+                return;
+            }
+        }
+
         ItemStack stack = event.getStack();
         if (stack.isEmpty())
             return;

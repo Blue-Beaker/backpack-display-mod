@@ -2,11 +2,13 @@ package io.bluebeaker.backpackdisplay;
 
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.common.config.Config.Type;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -39,6 +41,7 @@ public class BackpackDisplayMod
     @EventHandler
     public void init(FMLInitializationEvent event) {
         BPDRegistry.updateFromConfig();
+        ClientRegistry.registerKeyBinding(Keybind.keyShowContents);
     }
 
     @EventHandler
