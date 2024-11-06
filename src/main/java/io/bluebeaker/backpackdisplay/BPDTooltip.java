@@ -19,11 +19,22 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class BPDTooltip {
     static Minecraft client = Minecraft.getMinecraft();
     static FontRenderer fontRenderer = client.fontRenderer;
+    static int screenWidth = 1;
+    static int screenHeight = 1;
+    static int mouseX = 1;
+
+    @SubscribeEvent
+    public static void pre(RenderTooltipEvent.Pre event) {
+        screenWidth = event.getScreenWidth();
+        screenHeight = event.getScreenHeight();
+        mouseX = event.getX();
+    }
 
     @SubscribeEvent
     public static void render(RenderTooltipEvent.PostText event) {
-        if(BPDConfig.needs_keybind!=BPDConfig.KeybindType.NOT_NEEDED){
-            if(BPDConfig.needs_keybind==BPDConfig.KeybindType.PRESSED ^ Keyboard.isKeyDown(Keybind.keyShowContents.getKeyCode())){
+        if (BPDConfig.needs_keybind != BPDConfig.KeybindType.NOT_NEEDED) {
+            if (BPDConfig.needs_keybind == BPDConfig.KeybindType.PRESSED
+                    ^ Keyboard.isKeyDown(Keybind.keyShowContents.getKeyCode())) {
                 return;
             }
         }
@@ -40,10 +51,10 @@ public class BPDTooltip {
                 items.addAll(rule.getItemsFromContainer(stack));
             }
         }
-        renderBPDTooltip(items, event.getX(), event.getY());
+        renderBPDTooltip(items, event);
     }
 
-    private static void renderBPDTooltip(List<ItemStack> items, int x, int y) {
+    private static void renderBPDTooltip(List<ItemStack> items, RenderTooltipEvent.PostText event) {
         int count = 0;
         int maxCount = BPDConfig.tooltipWidth * BPDConfig.tooltipHeight;
         int totalCount = items.size();
@@ -51,32 +62,57 @@ public class BPDTooltip {
         if (totalCount == 0)
             return;
 
+        // Get width of tooltip
         int totalWidth = Math.min(items.size(), BPDConfig.tooltipWidth);
-        // Draw label for overflowed items
+        // Draw label for overflowed items that takes a slot
         if (totalCount > maxCount) {
             totalCount = maxCount - 1;
         }
+        // Get height of tooltip
         int totalHeight = Math.min((totalCount - 1) / BPDConfig.tooltipWidth, BPDConfig.tooltipHeight) + 1;
 
+        int pixelWidth = totalWidth * 18;
+        // int pixelHeight=totalHeight*18;
+
+        // Set colors and positions
         int backgroundColor = BPDConfigHelper.backgroundColor;
         int borderColorStart = BPDConfigHelper.borderColorStart;
         int borderColorEnd = (borderColorStart & 0xFEFEFE) >> 1 | borderColorStart & 0xFF000000;
 
-        drawBackground(x + BPDConfig.offset_x, y + BPDConfig.offset_y - (totalHeight) * 18, totalWidth * 18,
+        int x = event.getX();
+        int y = event.getY();
+
+        // Upper left corner of first item to draw
+        int drawX = x + BPDConfig.offset_x;
+        int drawY = y + BPDConfig.offset_y - (totalHeight) * 18;
+        // Move down when top out of screen
+        if (drawY < 4) {
+            drawY = event.getY() + event.getHeight() + 8;
+        }
+        // Align to right end of tooltip when right out of screen, or tooltip is at left of mouse
+        if (drawX + pixelWidth + 4 > screenWidth || event.getX() + event.getWidth() < mouseX) {
+            drawX = event.getX() + event.getWidth() - pixelWidth;
+        }
+
+        // Draw background and extra item count label
+        drawBackground(drawX, drawY, totalWidth * 18,
                 totalHeight * 18, backgroundColor, borderColorStart, borderColorEnd);
+
         GlStateManager.enableRescaleNormal();
         RenderHelper.enableGUIStandardItemLighting();
         GlStateManager.translate(0.0F, 0.0F, 512.0F);
+
         if (items.size() > totalCount) {
-            drawLabelCentered(x + BPDConfig.offset_x + (BPDConfig.tooltipWidth - 1) * 18, y - 18 + BPDConfig.offset_y,
+            drawLabelCentered(drawX + (BPDConfig.tooltipWidth - 1) * 18, drawY + (totalHeight - 1) * 18,
                     "+" + getNumRepresentation(items.size() - totalCount));
         }
+
         // Render every item
         for (int i = 0; i < totalCount; i++) {
             ItemStack stack2 = items.get(i);
             int slotX = count % BPDConfig.tooltipWidth;
-            int slotY = (count / BPDConfig.tooltipWidth) - totalHeight;
-            renderItemStack(stack2, x + BPDConfig.offset_x + (slotX) * 18, y + BPDConfig.offset_y + (slotY) * 18);
+            int slotY = count / BPDConfig.tooltipWidth;
+            renderItemStack(stack2, drawX + (slotX) * 18, drawY + (slotY) * 18);
             count++;
         }
         RenderHelper.disableStandardItemLighting();
@@ -118,7 +154,7 @@ public class BPDTooltip {
         GlStateManager.disableDepth();
         GlStateManager.disableBlend();
         fontRenderer.drawStringWithShadow(text, (float) ((x + 15) / scale - fontRenderer.getStringWidth(text) + 2),
-                (float) ((y + 6 +fontRenderer.FONT_HEIGHT) / scale-fontRenderer.FONT_HEIGHT + 3), 16777215);
+                (float) ((y + 6 + fontRenderer.FONT_HEIGHT) / scale - fontRenderer.FONT_HEIGHT + 3), 16777215);
         GlStateManager.enableLighting();
         GlStateManager.enableDepth();
         GlStateManager.enableBlend();
