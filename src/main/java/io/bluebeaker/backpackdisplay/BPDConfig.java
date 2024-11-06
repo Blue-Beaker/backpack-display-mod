@@ -101,8 +101,35 @@ public class BPDConfig {
     @LangKey("config.backpackdisplay.verbose_info.name")
     public static boolean verbose_info = false;
 
-    @Comment("Color of the backpack display")
-    public static int backgroundColor = 0xF0100010;
-    @Comment("Color of the backpack display")
-    public static int borderColorStart = 0x505000FF;
+    public static Colors colors = new Colors();
+
+    public static class Colors{
+        // public static int backgroundColor = 0xF0100010;
+        // public static int borderColorStart = 0x505000FF;
+        public Color backgroundColor = new Color(0xF0100010);
+        public Color borderColor = new Color(0x505000FF);
+        public static class Color{
+            public Color(int color){
+                alpha=color>>24&255;
+                red=color>>16&255;
+                green=color>>8&255;
+                blue=color&255;
+            }
+            @Config.SlidingOption
+            @Config.RangeInt(min = 0,max = 255)
+            public int alpha = 255;
+            @Config.SlidingOption
+            @Config.RangeInt(min = 0,max = 255)
+            public int red = 255;
+            @Config.SlidingOption
+            @Config.RangeInt(min = 0,max = 255)
+            public int green = 255;
+            @Config.SlidingOption
+            @Config.RangeInt(min = 0,max = 255)
+            public int blue = 255;
+            public int getColor(){
+                return (alpha<<24)+(red<<16)+(green<<8)+blue;
+            }
+        }
+    }
 }

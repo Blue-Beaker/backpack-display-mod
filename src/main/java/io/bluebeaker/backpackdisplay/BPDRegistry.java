@@ -26,6 +26,7 @@ public class BPDRegistry {
             }
         }
     }
+
     public static void addRule(String rule){
         String[] splitted = rule.split("(?<!\\\\)#");
         if(splitted.length<3) return;

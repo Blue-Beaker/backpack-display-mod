@@ -8,7 +8,6 @@ import org.lwjgl.input.Keyboard;
 import io.bluebeaker.backpackdisplay.displayslot.IDisplaySlotEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.Item;
@@ -59,8 +58,8 @@ public class BPDTooltip {
         }
         int totalHeight = Math.min((totalCount - 1) / BPDConfig.tooltipWidth, BPDConfig.tooltipHeight) + 1;
 
-        int backgroundColor = BPDConfig.backgroundColor;
-        int borderColorStart = BPDConfig.borderColorStart;
+        int backgroundColor = BPDConfigHelper.backgroundColor;
+        int borderColorStart = BPDConfigHelper.borderColorStart;
         int borderColorEnd = (borderColorStart & 0xFEFEFE) >> 1 | borderColorStart & 0xFF000000;
 
         drawBackground(x + BPDConfig.offset_x, y + BPDConfig.offset_y - (totalHeight) * 18, totalWidth * 18,
