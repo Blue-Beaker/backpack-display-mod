@@ -3,8 +3,11 @@ package io.bluebeaker.backpackdisplay;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import org.lwjgl.input.Keyboard;
 
+import io.bluebeaker.backpackdisplay.crafttweaker.CTIntegration;
 import io.bluebeaker.backpackdisplay.displayslot.IDisplaySlotEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -14,6 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.fml.client.config.GuiUtils;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class BPDTooltip {
@@ -40,18 +44,34 @@ public class BPDTooltip {
         }
 
         ItemStack stack = event.getStack();
+        List<ItemStack> items = getDisplayedItemsForItem(stack);
+        if(items==null || items.size()==0)
+            return;
+        renderBPDTooltip(items, event);
+    }
+
+    private static @Nullable List<ItemStack> getDisplayedItemsForItem(ItemStack stack) {
         if (stack.isEmpty())
-            return;
+            return null;
         List<IDisplaySlotEntry> entries = getRenderRules(stack);
-        if (entries == null)
-            return;
+        if (entries == null) {
+            if (Loader.isModLoaded("crafttweaker")) {
+
+                try {
+                    return CTIntegration.getItemsForCT(stack);
+                } catch (Exception e) {
+                    BackpackDisplayMod.getLogger().error("Exception when getting display items from crafttweaker: ", e);
+                }
+            }
+            return null;
+        }
         List<ItemStack> items = new ArrayList<ItemStack>();
         for (IDisplaySlotEntry rule : entries) {
             if (rule.isItemMatches(stack)) {
                 items.addAll(rule.getItemsFromContainer(stack));
             }
         }
-        renderBPDTooltip(items, event);
+        return items;
     }
 
     private static void renderBPDTooltip(List<ItemStack> items, RenderTooltipEvent.PostText event) {
@@ -89,7 +109,8 @@ public class BPDTooltip {
         if (drawY < 4) {
             drawY = event.getY() + event.getHeight() + 8;
         }
-        // Align to right end of tooltip when right out of screen, or tooltip is at left of mouse
+        // Align to right end of tooltip when right out of screen, or tooltip is at left
+        // of mouse
         if (drawX + pixelWidth + 4 > screenWidth || event.getX() + event.getWidth() < mouseX) {
             drawX = event.getX() + event.getWidth() - pixelWidth;
         }
