@@ -17,10 +17,15 @@ import stanhebben.zenscript.annotations.ZenMethod;
  */
 @ZenClass("mods.backpackdisplay.BackpackDisplay")
 @ZenRegister
+
 public class DisplaySlotEntriesCT {
     private static final IngredientMap<IContainerFunction> PREVIEW_FUNCTIONS = new IngredientMap<>();
 
     
+    /**
+     * @param ingredient IIngredient representing items to add tooltip for
+     * @param function Function to get displayed items from the container item: IItemStack->IItemStack[]
+     */
     @ZenMethod
     public static void addBackDisplay(IIngredient ingredient, IContainerFunction function) {
         CraftTweakerAPI.apply(new AddBackpackDisplayAction(ingredient, function));

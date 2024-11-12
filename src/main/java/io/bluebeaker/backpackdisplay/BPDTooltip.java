@@ -45,7 +45,7 @@ public class BPDTooltip {
 
         ItemStack stack = event.getStack();
         List<ItemStack> items = getDisplayedItemsForItem(stack);
-        if(items==null || items.size()==0)
+        if (items == null || items.size() == 0)
             return;
         renderBPDTooltip(items, event);
     }
@@ -53,25 +53,28 @@ public class BPDTooltip {
     private static @Nullable List<ItemStack> getDisplayedItemsForItem(ItemStack stack) {
         if (stack.isEmpty())
             return null;
-        List<IDisplaySlotEntry> entries = getRenderRules(stack);
-        if (entries == null) {
-            if (Loader.isModLoaded("crafttweaker")) {
+        List<ItemStack> items = new ArrayList<ItemStack>();
 
-                try {
-                    return CTIntegration.getItemsForCT(stack);
-                } catch (Exception e) {
-                    BackpackDisplayMod.getLogger().error("Exception when getting display items from crafttweaker: ", e);
+        if (Loader.isModLoaded("crafttweaker")) {
+            try {
+                items.addAll(CTIntegration.getItemsForCT(stack));
+            } catch (Exception e) {
+                BackpackDisplayMod.getLogger().error("Exception when getting display items from crafttweaker: ", e);
+            }
+        }
+
+        List<IDisplaySlotEntry> entries = getRenderRules(stack);
+        if (entries != null) {
+            for (IDisplaySlotEntry rule : entries) {
+                if (rule.isItemMatches(stack)) {
+                    items.addAll(rule.getItemsFromContainer(stack));
                 }
             }
+        }
+        if (items.size() > 0)
+            return items;
+        else
             return null;
-        }
-        List<ItemStack> items = new ArrayList<ItemStack>();
-        for (IDisplaySlotEntry rule : entries) {
-            if (rule.isItemMatches(stack)) {
-                items.addAll(rule.getItemsFromContainer(stack));
-            }
-        }
-        return items;
     }
 
     private static void renderBPDTooltip(List<ItemStack> items, RenderTooltipEvent.PostText event) {
