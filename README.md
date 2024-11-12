@@ -1,4 +1,5 @@
 # BackpackDisplay
+![Icon](icon.png)
 Adds a tooltip to show what's in your backpack, shulker box or other container item.  
 Configurable of how to get contents for the container item.  
 The mod has out-of-the-box support for vanilla shulker boxes, storage drawers drawers, and forestry backpacks. You can add support to more items by writing custom rules in the mod's config.  
@@ -69,4 +70,22 @@ storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.1.Item;BlockEntit
 storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.2.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.2.Conv
 ```
 
-### 
+### Crafttweaker Support
+Starting from v1.3, crafttweaker is supported to add custom functions to get what items to display.  
+```
+import mods.backpackdisplay.BackpackDisplay;
+// IIngredient to match items to add the tooltip, function to return an array of items from a given itemstack
+BackpackDisplay.addBackDisplay( IIngredient, (IItemStack) -> IItemStack[] );
+```
+Example: show a crafting table and the crafting result for every wood log in `<ore:logWood>`
+```
+import mods.backpackdisplay.BackpackDisplay;
+import crafttweaker.item.IItemStack;
+BackpackDisplay.addBackDisplay(<ore:logWood>,function(item){
+    var items = [<minecraft:crafting_table>,recipes.craft([[item]])] as IItemStack[];
+    return items;
+});
+```
+![ct_support](ct_support.png)  
+
+With both crafttweaker rules and normal rules present on an item, items from crafttweaker support will appear before items from normal rules.  
