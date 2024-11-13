@@ -122,6 +122,8 @@ dependencies {
     runtimeOnly rfg.deobf("curse.maven:storage-drawers-223852:5758109")
     runtimeOnly rfg.deobf("curse.maven:forestry-59751:2918418")
 
+    runtimeOnly rfg.deobf("curse.maven:applied-energistics-2-223794:2747063")
+
     implementation rfg.deobf("curse.maven:mtlib-253211:3308160")
     implementation rfg.deobf("CraftTweaker2:CraftTweaker2-MC1120-Main:${project.version_crafttweaker}")
 
