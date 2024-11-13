@@ -11,8 +11,10 @@ import io.bluebeaker.backpackdisplay.crafttweaker.CTIntegration;
 import io.bluebeaker.backpackdisplay.displayslot.IDisplaySlotEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderTooltipEvent;
@@ -32,6 +34,7 @@ public class BPDTooltip {
         screenWidth = event.getScreenWidth();
         screenHeight = event.getScreenHeight();
         mouseX = event.getX();
+        // BackpackDisplayMod.logInfo(event.getStack() + ":" + screenWidth + "," + screenHeight);
     }
 
     @SubscribeEvent
@@ -44,10 +47,25 @@ public class BPDTooltip {
         }
 
         ItemStack stack = event.getStack();
+
+        //Workaround for AE2 GUIs which event.getStack() always returns 1xtile.air
+        if(stack.isEmpty() && client.currentScreen instanceof GuiContainer){
+            Slot slot=((GuiContainer)client.currentScreen).getSlotUnderMouse();
+            if(slot!=null)
+            stack=slot.getStack();
+        }
+        
+        // BackpackDisplayMod.logInfo(stack + ":" + screenWidth + "," + screenHeight + "," + event.getWidth()
+        //         + "," + event.getHeight());
+
+        renderBPDTooltipFromItemStack(stack, event.getX(), event.getY(), event.getWidth(), event.getHeight());
+    }
+    
+    public static void renderBPDTooltipFromItemStack(ItemStack stack, int x, int y, int w, int h) {
         List<ItemStack> items = getDisplayedItemsForItem(stack);
         if (items == null || items.size() == 0)
             return;
-        renderBPDTooltip(items, event);
+        renderTooltipRaw(items, x, y, w, h);
     }
 
     private static @Nullable List<ItemStack> getDisplayedItemsForItem(ItemStack stack) {
@@ -77,7 +95,7 @@ public class BPDTooltip {
             return null;
     }
 
-    private static void renderBPDTooltip(List<ItemStack> items, RenderTooltipEvent.PostText event) {
+    private static void renderTooltipRaw(List<ItemStack> items, int x, int y, int w, int h) {
         int count = 0;
         int maxCount = BPDConfig.tooltipWidth * BPDConfig.tooltipHeight;
         int totalCount = items.size();
@@ -102,20 +120,17 @@ public class BPDTooltip {
         int borderColorStart = BPDConfigHelper.borderColorStart;
         int borderColorEnd = (borderColorStart & 0xFEFEFE) >> 1 | borderColorStart & 0xFF000000;
 
-        int x = event.getX();
-        int y = event.getY();
-
         // Upper left corner of first item to draw
         int drawX = x + BPDConfig.offset_x;
         int drawY = y + BPDConfig.offset_y - (totalHeight) * 18;
         // Move down when top out of screen
         if (drawY < 4) {
-            drawY = event.getY() + event.getHeight() + 8;
+            drawY = y + h + 8;
         }
         // Align to right end of tooltip when right out of screen, or tooltip is at left
         // of mouse
-        if (drawX + pixelWidth + 4 > screenWidth || event.getX() + event.getWidth() < mouseX) {
-            drawX = event.getX() + event.getWidth() - pixelWidth;
+        if (drawX + pixelWidth + 4 > screenWidth || x + w < mouseX) {
+            drawX = x + w - pixelWidth;
         }
 
         // Draw background and extra item count label
