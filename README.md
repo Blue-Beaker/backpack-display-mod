@@ -9,6 +9,9 @@ Configurable options(See the mod's config):
 - Position and color of the tooltip  
 - Optional hold or release a keybind to show the tooltip  
 
+## Downloads
+[CurseForge](https://www.curseforge.com/minecraft/mc-mods/backpack-display) [Modrinth](https://modrinth.com/mod/backpack-display)  
+
 ## Config Format
 `displayRules` is the main config of the mod. It lets you to add new container  items to display the backpack tooltip, with the following format:  
 Format: `<modID>:<itemID>[:meta]#<rule type>#<rule definition>`  
