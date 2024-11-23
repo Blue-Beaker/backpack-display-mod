@@ -75,6 +75,8 @@ storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.2.Item;BlockEntit
 
 ### Crafttweaker Support
 Starting from v1.3, crafttweaker is supported to add custom functions to get what items to display.  
+It's suggested to only write entries in a script with `#sideonly client` Preprocessor. Otherwise it will cause errors on dedicated server, because this mod is client only.  
+
 ```
 import mods.backpackdisplay.BackpackDisplay;
 // IIngredient to match items to add the tooltip, function to return an array of items from a given itemstack
@@ -82,6 +84,7 @@ BackpackDisplay.addBackDisplay( IIngredient, (IItemStack) -> IItemStack[] );
 ```
 Example: show a crafting table and the crafting result for every wood log in `<ore:logWood>`
 ```
+#sideonly client
 import mods.backpackdisplay.BackpackDisplay;
 import crafttweaker.item.IItemStack;
 BackpackDisplay.addBackDisplay(<ore:logWood>,function(item){
