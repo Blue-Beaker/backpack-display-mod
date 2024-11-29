@@ -54,7 +54,7 @@ public class BPDTooltip {
     }
     
     public static void renderBPDTooltipFromItemStack(ItemStack stack, int x, int y, int w, int h) {
-        List<IDisplaySection> sections = SectionsManager.sections;
+        List<IDisplaySection> sections = SectionsManager.getSections();
         for(IDisplaySection section:sections){
             section.update(stack);
         }
@@ -62,7 +62,7 @@ public class BPDTooltip {
     }
 
     private static void renderTooltip(int x, int y, int w, int h) {
-        List<IDisplaySection> sections = SectionsManager.sections;
+        List<IDisplaySection> sections = SectionsManager.getSections();
 
         /**Height of this tooltip */
         int height=0;

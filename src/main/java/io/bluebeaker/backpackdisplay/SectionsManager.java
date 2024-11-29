@@ -9,22 +9,27 @@ import java.util.List;
 import io.bluebeaker.backpackdisplay.api.IDisplaySection;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.common.config.Config.Type;
-
+/**Sections manager for internal use. Plugins should use 
+ * {@link io.bluebeaker.backpackdisplay.api.Sections} to register their sections instead.  */
 public class SectionsManager {
-    public static List<IDisplaySection> sections = new ArrayList<IDisplaySection>();
-    public static HashMap<String, Integer> sectionPriorities = new HashMap<String, Integer>();
-    private static SectionSorter sectionSorter = new SectionSorter();
+    private static List<IDisplaySection> sections = new ArrayList<IDisplaySection>();
+    protected static HashMap<String, Integer> sectionPriorities = new HashMap<String, Integer>();
+    protected static SectionSorter sectionSorter = new SectionSorter();
 
-    /** Use this to add your custom section to the tooltip. */
+    /** Adds new section. */
     public static void addSection(IDisplaySection newSection) {
         sections.add(newSection);
     }
-    
+    /** Get a list of all registered sections. */
+    public static List<IDisplaySection> getSections(){
+        return sections;
+    }
+    /** Sort sections after getting priorities from the config. */
     public static void sortSections() {
         sections.sort(sectionSorter);
     }
 
-    private static class SectionSorter implements Comparator<IDisplaySection> {
+    protected static class SectionSorter implements Comparator<IDisplaySection> {
         @Override
         public int compare(IDisplaySection o1, IDisplaySection o2) {
             int result = getPriority(o2) - getPriority(o1);
