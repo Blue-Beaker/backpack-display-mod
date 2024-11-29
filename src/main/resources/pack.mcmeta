@@ -1,7 +1,6 @@
 {
-    "pack": {
-        "description": "backpackdisplay resources",
-        "pack_format": 3,
-        "_comment": "Crafttweaker support for Keybinds."
-    }
+	"pack": {
+		"description": "${mod_name} Resources",
+		"pack_format": 3
+	}
 }

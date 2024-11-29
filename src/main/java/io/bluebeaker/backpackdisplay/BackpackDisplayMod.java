@@ -15,12 +15,12 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod(modid = BackpackDisplayMod.MODID, name = BackpackDisplayMod.NAME, version = BackpackDisplayMod.VERSION,clientSideOnly = true)
+@Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION,clientSideOnly = true)
 public class BackpackDisplayMod
 {
-    public static final String MODID = "backpackdisplay";
-    public static final String NAME = "BackpackDisplay";
-    public static final String VERSION = "1.4";
+    public static final String MODID = Tags.MOD_ID;
+    public static final String NAME = Tags.MOD_NAME;
+    public static final String VERSION = Tags.VERSION;
     private static BackpackDisplayMod INSTANCE;
     public MinecraftServer server;
 
