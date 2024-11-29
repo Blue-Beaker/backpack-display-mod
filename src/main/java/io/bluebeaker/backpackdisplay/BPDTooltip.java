@@ -1,6 +1,5 @@
 package io.bluebeaker.backpackdisplay;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.input.Keyboard;
@@ -109,10 +108,11 @@ public class BPDTooltip {
         drawBackground(drawX, drawY, width,
                 height, backgroundColor, borderColorStart, borderColorEnd);
 
-        //Get total size
+        //Draw every display sections
         for(IDisplaySection section:sections){
             if(section.isAvailable()){
                 section.render(drawX, drawY);
+                drawY=drawY+section.getHeight();
             }
         }
     }

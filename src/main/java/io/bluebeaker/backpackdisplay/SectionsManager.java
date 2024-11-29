@@ -47,14 +47,14 @@ public class SectionsManager {
     /**Update section priorities */
     public static void updateFromConfig() {
         for (String rule : BPDConfig.priorities) {
-            String[] split = rule.split(":");
-            if (split.length > 2) {
+            String[] split = rule.replaceAll(" ", "").split(":");
+            if (split.length >= 2) {
                 String id = split[0];
                 try {
                     int priority = Integer.parseInt(split[1]);
                     sectionPriorities.put(id, priority);
                 } catch (Exception e) {
-                    BackpackDisplayMod.getLogger().error("Priority rule format error: must be 'id:priority'", e);
+                    BackpackDisplayMod.getLogger().error("Error when loading priority, please check it.", e);
                 }
             } else {
                 BackpackDisplayMod.getLogger().error("Priority rule format error: must be 'id:priority'");

@@ -103,7 +103,8 @@ public class BPDConfig {
     public static boolean verbose_info = false;
 
     @Comment({"Change priorities for display sections in this mod. ",
-    "A section with higher priority will show on above another one with lower priority. "})
+    "A section with higher priority will show on above another one with lower priority. ",
+    "Format: id:priority"})
     @RequiresMcRestart
     public static String[] priorities = {"items:0"};
 
