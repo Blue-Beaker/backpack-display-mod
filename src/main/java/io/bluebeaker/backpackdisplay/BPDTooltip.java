@@ -3,32 +3,28 @@ package io.bluebeaker.backpackdisplay;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nullable;
-
 import org.lwjgl.input.Keyboard;
 
-import io.bluebeaker.backpackdisplay.crafttweaker.CTIntegration;
+import io.bluebeaker.backpackdisplay.api.IDisplaySection;
 import io.bluebeaker.backpackdisplay.displayslot.IDisplaySlotEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.fml.client.config.GuiUtils;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class BPDTooltip {
     static Minecraft client = Minecraft.getMinecraft();
     static FontRenderer fontRenderer = client.fontRenderer;
-    static int screenWidth = 1;
-    static int screenHeight = 1;
-    static int mouseX = 1;
-
+    private static int screenWidth = 1;
+    private static int screenHeight = 1;
+    private static int mouseX = 1;
+    
     @SubscribeEvent
     public static void pre(RenderTooltipEvent.Pre event) {
         screenWidth = event.getScreenWidth();
@@ -62,100 +58,63 @@ public class BPDTooltip {
     }
     
     public static void renderBPDTooltipFromItemStack(ItemStack stack, int x, int y, int w, int h) {
-        List<ItemStack> items = getDisplayedItemsForItem(stack);
-        if (items == null || items.size() == 0)
-            return;
-        renderTooltipRaw(items, x, y, w, h);
+        List<IDisplaySection> sections = SectionsManager.sections;
+        for(IDisplaySection section:sections){
+            section.update(stack);
+        }
+        renderTooltip(x, y, w, h);
     }
 
-    private static @Nullable List<ItemStack> getDisplayedItemsForItem(ItemStack stack) {
-        if (stack.isEmpty())
-            return null;
-        List<ItemStack> items = new ArrayList<ItemStack>();
+    private static void renderTooltip(int x, int y, int w, int h) {
+        List<IDisplaySection> sections = SectionsManager.sections;
 
-        if (Loader.isModLoaded("crafttweaker")) {
-            try {
-                items.addAll(CTIntegration.getItemsForCT(stack));
-            } catch (Exception e) {
-                BackpackDisplayMod.getLogger().error("Exception when getting display items from crafttweaker: ", e);
+        /**Height of this tooltip */
+        int height=0;
+        /**Width of this tooltip */
+        int width=0;
+
+        int availaleSections = 0;
+        
+        //Get total size
+        for(IDisplaySection section:sections){
+            if(section.isAvailable()){
+                availaleSections+=1;
+                height+=section.getHeight();
+                width=Math.max(section.getWidth(), width);
             }
         }
 
-        List<IDisplaySlotEntry> entries = getRenderRules(stack);
-        if (entries != null) {
-            for (IDisplaySlotEntry rule : entries) {
-                if (rule.isItemMatches(stack)) {
-                    items.addAll(rule.getItemsFromContainer(stack));
-                }
-            }
-        }
-        if (items.size() > 0)
-            return items;
-        else
-            return null;
-    }
-
-    private static void renderTooltipRaw(List<ItemStack> items, int x, int y, int w, int h) {
-        int count = 0;
-        int maxCount = BPDConfig.tooltipWidth * BPDConfig.tooltipHeight;
-        int totalCount = items.size();
-        // Cancel rendering when container is empty
-        if (totalCount == 0)
+        //Cancel when no sections available for item
+        if(availaleSections==0)
             return;
-
-        // Get width of tooltip
-        int totalWidth = Math.min(items.size(), BPDConfig.tooltipWidth);
-        // Draw label for overflowed items that takes a slot
-        if (totalCount > maxCount) {
-            totalCount = maxCount - 1;
-        }
-        // Get height of tooltip
-        int totalHeight = Math.min((totalCount - 1) / BPDConfig.tooltipWidth, BPDConfig.tooltipHeight) + 1;
-
-        int pixelWidth = totalWidth * 18;
-        // int pixelHeight=totalHeight*18;
-
-        // Set colors and positions
-        int backgroundColor = BPDConfigHelper.backgroundColor;
-        int borderColorStart = BPDConfigHelper.borderColorStart;
-        int borderColorEnd = (borderColorStart & 0xFEFEFE) >> 1 | borderColorStart & 0xFF000000;
 
         // Upper left corner of first item to draw
         int drawX = x + BPDConfig.offset_x;
-        int drawY = y + BPDConfig.offset_y - (totalHeight) * 18;
+        int drawY = y + BPDConfig.offset_y - height;
         // Move down when top out of screen
         if (drawY < 4) {
             drawY = y + h + 8;
         }
         // Align to right end of tooltip when right out of screen, or tooltip is at left
         // of mouse
-        if (drawX + pixelWidth + 4 > screenWidth || x + w < mouseX) {
-            drawX = x + w - pixelWidth;
+        if (drawX + width + 4 > screenWidth || x + width < mouseX) {
+            drawX = x + w - width;
         }
 
-        // Draw background and extra item count label
-        drawBackground(drawX, drawY, totalWidth * 18,
-                totalHeight * 18, backgroundColor, borderColorStart, borderColorEnd);
+        // Set colors and positions
+        int backgroundColor = BPDConfigHelper.backgroundColor;
+        int borderColorStart = BPDConfigHelper.borderColorStart;
+        int borderColorEnd = (borderColorStart & 0xFEFEFE) >> 1 | borderColorStart & 0xFF000000;
+        // Draw background
+        drawBackground(drawX, drawY, width,
+                height, backgroundColor, borderColorStart, borderColorEnd);
 
-        GlStateManager.enableRescaleNormal();
-        RenderHelper.enableGUIStandardItemLighting();
-        GlStateManager.translate(0.0F, 0.0F, 512.0F);
-
-        if (items.size() > totalCount) {
-            drawLabelCentered(drawX + (BPDConfig.tooltipWidth - 1) * 18, drawY + (totalHeight - 1) * 18,
-                    "+" + getNumRepresentation(items.size() - totalCount));
+        //Get total size
+        for(IDisplaySection section:sections){
+            if(section.isAvailable()){
+                section.render(drawX, drawY);
+            }
         }
-
-        // Render every item
-        for (int i = 0; i < totalCount; i++) {
-            ItemStack stack2 = items.get(i);
-            int slotX = count % BPDConfig.tooltipWidth;
-            int slotY = count / BPDConfig.tooltipWidth;
-            renderItemStack(stack2, drawX + (slotX) * 18, drawY + (slotY) * 18);
-            count++;
-        }
-        RenderHelper.disableStandardItemLighting();
-        GlStateManager.disableRescaleNormal();
     }
 
     /**

@@ -10,6 +10,7 @@ public class BPDConfigHelper {
     public static void updateConfig(){
         updateColor();
         BPDRegistry.updateFromConfig();
+        SectionsManager.updateFromConfig();
     }
 
     public static void updateColor(){

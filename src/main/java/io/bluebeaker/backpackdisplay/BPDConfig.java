@@ -3,6 +3,7 @@ package io.bluebeaker.backpackdisplay;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Config.Comment;
 import net.minecraftforge.common.config.Config.LangKey;
+import net.minecraftforge.common.config.Config.RequiresMcRestart;
 import net.minecraftforge.common.config.Config.Type;
 
 @Config(modid = BackpackDisplayMod.MODID,type = Type.INSTANCE,category = "general")
@@ -100,6 +101,11 @@ public class BPDConfig {
     @Comment("Show verbose info when loading mod. Useful for writing new rules.")
     @LangKey("config.backpackdisplay.verbose_info.name")
     public static boolean verbose_info = false;
+
+    @Comment({"Change priorities for display sections in this mod. ",
+    "A section with higher priority will show on above another one with lower priority. "})
+    @RequiresMcRestart
+    public static String[] priorities = {"items:0"};
 
     public static Colors colors = new Colors();
 
