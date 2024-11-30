@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 import io.bluebeaker.backpackdisplay.BPDConfig;
 import io.bluebeaker.backpackdisplay.BPDRegistry;
@@ -22,30 +22,33 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Loader;
 
 public class DisplaySectionItem implements IDisplaySection {
-    
+
     static Minecraft client = Minecraft.getMinecraft();
     static FontRenderer fontRenderer = client.fontRenderer;
     private ItemStack itemStack;
     private List<ItemStack> itemsToRender;
-    /**Amount of items hidden by overflow */
+    /** Amount of items hidden by overflow */
     private int overflowItems = 0;
-    /**Width in pixels */
+    /** Width in pixels */
     private int width = 0;
-    /**Height in pixels */
+    /** Height in pixels */
     private int height = 0;
 
-    public DisplaySectionItem(){
+    public DisplaySectionItem() {
     }
 
-    /**Update the tooltip with a new ItemStack. */
-    public void update(ItemStack stack) {
-        this.itemStack=stack;
-        this.itemsToRender = this.getItemsForItem(stack);
+    /** Update the tooltip with a new ItemStack. */
+    public void update(@Nonnull ItemStack stack) {
+        // If stack is unchanged, skip updating
+        if (this.itemStack != null && ItemStack.areItemStacksEqual(stack, this.itemStack))
+            return;
+        this.itemStack = stack.copy();
+        this.itemsToRender = this.getItemsForItem(this.itemStack);
         this.updateGeometry();
     }
 
-    private @Nullable List<ItemStack> getItemsForItem(ItemStack stack){
-        if(stack==null || stack.isEmpty())
+    private List<ItemStack> getItemsForItem(ItemStack stack) {
+        if (stack == null || stack.isEmpty())
             return Collections.emptyList();
         List<ItemStack> items = new ArrayList<ItemStack>();
         if (Loader.isModLoaded("crafttweaker")) {
@@ -67,17 +70,17 @@ public class DisplaySectionItem implements IDisplaySection {
         return items;
     }
 
-    private void updateGeometry(){
+    private void updateGeometry() {
         List<ItemStack> items = this.itemsToRender;
 
-        if(items==null || items.isEmpty()){
-            this.width=0;
-            this.height=0;
+        if (items == null || items.isEmpty()) {
+            this.width = 0;
+            this.height = 0;
             return;
         }
 
         int maxCount = BPDConfig.tooltipWidth * BPDConfig.tooltipHeight;
-        
+
         int totalCount = items.size();
 
         // Get width of tooltip
@@ -86,7 +89,7 @@ public class DisplaySectionItem implements IDisplaySection {
         // Draw label for overflowed items that takes a slot
         if (totalCount > maxCount) {
             this.overflowItems = itemsToRender.size() - (maxCount - 1);
-        }else{
+        } else {
             this.overflowItems = 0;
         }
 
@@ -95,9 +98,9 @@ public class DisplaySectionItem implements IDisplaySection {
 
         int pixelWidth = totalWidth * 18;
         int pixelHeight = totalHeight * 18;
-        
-        this.width=pixelWidth;
-        this.height=pixelHeight;
+
+        this.width = pixelWidth;
+        this.height = pixelHeight;
     }
 
     private static List<IDisplaySlotEntry> getRenderRules(ItemStack stack) {
@@ -115,9 +118,9 @@ public class DisplaySectionItem implements IDisplaySection {
         RenderHelper.enableGUIStandardItemLighting();
         GlStateManager.translate(0.0F, 0.0F, 512.0F);
 
-        int totalCount = this.itemsToRender.size()-overflowItems;
+        int totalCount = this.itemsToRender.size() - overflowItems;
 
-        if (this.overflowItems>0) {
+        if (this.overflowItems > 0) {
             drawLabelCentered(x + (BPDConfig.tooltipWidth - 1) * 18, y + (BPDConfig.tooltipHeight - 1) * 18,
                     "+" + NumberUtils.getItemCountRepresentation(overflowItems));
         }
@@ -211,7 +214,7 @@ public class DisplaySectionItem implements IDisplaySection {
 
     @Override
     public boolean isAvailable() {
-        return this.itemsToRender!=null && this.itemsToRender.size()>0;
+        return this.itemsToRender != null && this.itemsToRender.size() > 0;
     }
 
     @Override

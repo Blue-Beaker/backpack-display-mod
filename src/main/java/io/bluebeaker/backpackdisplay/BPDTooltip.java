@@ -2,6 +2,8 @@ package io.bluebeaker.backpackdisplay;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.lwjgl.input.Keyboard;
 
 import io.bluebeaker.backpackdisplay.api.IDisplaySection;
@@ -20,13 +22,14 @@ public class BPDTooltip {
     private static int screenWidth = 1;
     private static int screenHeight = 1;
     private static int mouseX = 1;
-    
+
     @SubscribeEvent
     public static void pre(RenderTooltipEvent.Pre event) {
         screenWidth = event.getScreenWidth();
         screenHeight = event.getScreenHeight();
         mouseX = event.getX();
-        // BackpackDisplayMod.logInfo(event.getStack() + ":" + screenWidth + "," + screenHeight);
+        // BackpackDisplayMod.logInfo(event.getStack() + ":" + screenWidth + "," +
+        // screenHeight);
     }
 
     @SubscribeEvent
@@ -39,23 +42,25 @@ public class BPDTooltip {
         }
 
         ItemStack stack = event.getStack();
-
-        //Workaround for AE2 GUIs which event.getStack() always returns 1xtile.air
-        if(stack.isEmpty() && client.currentScreen instanceof GuiContainer){
-            Slot slot=((GuiContainer)client.currentScreen).getSlotUnderMouse();
-            if(slot!=null)
-            stack=slot.getStack();
+        // Workaround for AE2 GUIs which event.getStack() always returns 1xtile.air
+        if (stack.isEmpty() && client.currentScreen instanceof GuiContainer) {
+            Slot slot = ((GuiContainer) client.currentScreen).getSlotUnderMouse();
+            if (slot != null)
+                stack = slot.getStack();
         }
-        
-        // BackpackDisplayMod.logInfo(stack + ":" + screenWidth + "," + screenHeight + "," + event.getWidth()
-        //         + "," + event.getHeight());
+        if (stack == null)
+            return;
+
+        // BackpackDisplayMod.logInfo(stack + ":" + screenWidth + "," + screenHeight +
+        // "," + event.getWidth()
+        // + "," + event.getHeight());
 
         renderBPDTooltipFromItemStack(stack, event.getX(), event.getY(), event.getWidth(), event.getHeight());
     }
-    
-    public static void renderBPDTooltipFromItemStack(ItemStack stack, int x, int y, int w, int h) {
+
+    public static void renderBPDTooltipFromItemStack(@Nonnull ItemStack stack, int x, int y, int w, int h) {
         List<IDisplaySection> sections = SectionsManager.getSections();
-        for(IDisplaySection section:sections){
+        for (IDisplaySection section : sections) {
             section.update(stack);
         }
         renderTooltip(x, y, w, h);
@@ -64,24 +69,24 @@ public class BPDTooltip {
     private static void renderTooltip(int x, int y, int w, int h) {
         List<IDisplaySection> sections = SectionsManager.getSections();
 
-        /**Height of this tooltip */
-        int height=0;
-        /**Width of this tooltip */
-        int width=0;
+        /** Height of this tooltip */
+        int height = 0;
+        /** Width of this tooltip */
+        int width = 0;
 
         int availaleSections = 0;
-        
-        //Get total size
-        for(IDisplaySection section:sections){
-            if(section.isAvailable()){
-                availaleSections+=1;
-                height+=section.getHeight();
-                width=Math.max(section.getWidth(), width);
+
+        // Get total size
+        for (IDisplaySection section : sections) {
+            if (section.isAvailable()) {
+                availaleSections += 1;
+                height += section.getHeight();
+                width = Math.max(section.getWidth(), width);
             }
         }
 
-        //Cancel when no sections available for item
-        if(availaleSections==0)
+        // Cancel when no sections available for item
+        if (availaleSections == 0)
             return;
 
         // Upper left corner of first item to draw
@@ -105,15 +110,16 @@ public class BPDTooltip {
         drawBackground(drawX, drawY, width,
                 height, backgroundColor, borderColorStart, borderColorEnd);
 
-        //Draw every display sections
-        for(IDisplaySection section:sections){
-            if(section.isAvailable()){
+        // Draw every display sections
+        for (IDisplaySection section : sections) {
+            if (section.isAvailable()) {
                 section.render(drawX, drawY);
-                drawY=drawY+section.getHeight();
+                drawY = drawY + section.getHeight();
             }
         }
     }
-    /**Draws background for this tooltip */
+
+    /** Draws background for this tooltip */
     public static void drawBackground(int x, int y, int width, int height, int bgColor, int borderColorStart,
             int borderColorEnd) {
         final int zLevel = 300;

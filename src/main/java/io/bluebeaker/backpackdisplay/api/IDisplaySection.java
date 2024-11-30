@@ -1,5 +1,7 @@
 package io.bluebeaker.backpackdisplay.api;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.item.ItemStack;
 
 /**Implement this class to add a new section of display for BackPackDisplay. */
@@ -9,7 +11,7 @@ public interface IDisplaySection {
     /**ID of the section. Must not contain spaces and the symbol ':'. */
     public String getID();
     /**Update the tooltip with a new ItemStack */
-    public void update(ItemStack stack);
+    public void update(@Nonnull ItemStack stack);
     /**Get width of the tooltip */
     public int getWidth();
     /**Get height of the tooltip */
