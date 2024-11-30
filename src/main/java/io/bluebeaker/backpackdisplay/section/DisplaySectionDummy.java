@@ -1,5 +1,7 @@
 package io.bluebeaker.backpackdisplay.section;
 
+import javax.annotation.Nonnull;
+
 import io.bluebeaker.backpackdisplay.api.IDisplaySection;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
@@ -24,7 +26,7 @@ public class DisplaySectionDummy implements IDisplaySection {
     }
 
     @Override
-    public void update(ItemStack stack) {
+    public void update(@Nonnull ItemStack stack) {
         available=!stack.isEmpty();
     }
 
