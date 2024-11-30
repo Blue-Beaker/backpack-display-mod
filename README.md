@@ -95,3 +95,8 @@ BackpackDisplay.addBackDisplay(<ore:logWood>,function(item){
 ![ct_support](ct_support.png)  
 
 With both crafttweaker rules and normal rules present on an item, items from crafttweaker support will appear before items from normal rules.  
+
+## Plugin support  
+Starting from v1.5.0, plugins are supported. One can add more sections to this mod's tooltip, extending its function.  
+Implement [IDisplaySection](src/main/java/io/bluebeaker/backpackdisplay/api/IDisplaySection.java) to make your display section.  
+Then register it by calling [Secions.addSection](src/main/java/io/bluebeaker/backpackdisplay/api/Sections.java) in FMLInitializationEvent.  
