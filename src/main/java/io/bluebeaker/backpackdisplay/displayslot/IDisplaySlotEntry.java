@@ -4,7 +4,7 @@ import java.util.List;
 
 import net.minecraft.item.ItemStack;
 
-public interface IDisplaySlotEntry {
+public interface IDisplaySlotEntry extends IItemMatcher {
     public boolean isItemMatches(ItemStack stack);
     public List<ItemStack> getItemsFromContainer(ItemStack stack);
 }

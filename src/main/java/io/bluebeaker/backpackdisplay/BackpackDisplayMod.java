@@ -3,6 +3,7 @@ package io.bluebeaker.backpackdisplay;
 import org.apache.logging.log4j.Logger;
 
 import io.bluebeaker.backpackdisplay.section.DisplaySectionDummy;
+import io.bluebeaker.backpackdisplay.section.DisplaySectionFluid;
 import io.bluebeaker.backpackdisplay.section.DisplaySectionItem;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
@@ -45,6 +46,7 @@ public class BackpackDisplayMod
         BPDConfigHelper.updateConfig();
         ClientRegistry.registerKeyBinding(Keybind.keyShowContents);
         SectionsManager.addSection(new DisplaySectionItem());
+        SectionsManager.addSection(new DisplaySectionFluid());
         
         // Add dummy sections for debugging priority
         // SectionsManager.addSection(new DisplaySectionDummy("dummy"));

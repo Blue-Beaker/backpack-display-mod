@@ -10,10 +10,11 @@ import io.bluebeaker.backpackdisplay.displayslot.DisplaySlotEntryBase;
 import io.bluebeaker.backpackdisplay.displayslot.DisplaySlotEntryList;
 import io.bluebeaker.backpackdisplay.displayslot.DisplaySlotEntrySingle;
 import io.bluebeaker.backpackdisplay.displayslot.IDisplaySlotEntry;
+import io.bluebeaker.backpackdisplay.utils.NumberUtils;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
-public class BPDRegistry {
+public class BPDRegistryItems {
     public static HashMap<Item,List<IDisplaySlotEntry>> registry = new HashMap<Item,List<IDisplaySlotEntry>>();
 
     public static void updateFromConfig(){
@@ -43,7 +44,7 @@ public class BPDRegistry {
         Item item = Item.REGISTRY.getObject(itemID);
         Set<Integer> metadataList;
 
-        if(itemsplit.length>=3) metadataList=parseMeta(itemsplit[2]);
+        if(itemsplit.length>=3) metadataList=NumberUtils.parseMeta(itemsplit[2]);
         else metadataList=new HashSet<Integer>();
 
         IDisplaySlotEntry entry = buildEntryFromStringRule(type, nbtRule, metadataList);
@@ -78,27 +79,5 @@ public class BPDRegistry {
             registry.put(item, new ArrayList<IDisplaySlotEntry>());
         }
         registry.get(item).add(entry);
-    }
-
-    /**
-     * @param metaString Comma-separated list of accepted meta values, may use '-' to define a range.
-     * For Example: 1,2,5-9 -> {1,2,5,6,7,8,9}
-     * @return
-     */
-    public static Set<Integer> parseMeta(String metaString){
-        Set<Integer> metadataList = new HashSet<Integer>();
-        for (String metaEntry:metaString.split(",")){
-            if(metaEntry.contains("-")){
-                String[] splitted2=metaEntry.split("-");
-                int lower = Integer.parseInt(splitted2[0]);
-                int higher = Integer.parseInt(splitted2[1]);
-                for(int i = lower;i<higher;i++){
-                    metadataList.add(i);
-                }
-            }else{
-                metadataList.add(Integer.parseInt(metaEntry));
-            }
-        }
-        return metadataList;
     }
 }

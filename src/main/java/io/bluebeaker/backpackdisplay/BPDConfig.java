@@ -12,7 +12,8 @@ public class BPDConfig {
     "Format: '<modID>:<itemID>[:meta]#<rule type>#<rule definition>'",
     "rule type 'single': single item stored in certain path of NBT;",
     "rule type 'list': a list of items stored under a NBTTagList",
-    "rule type 'dummy': fixed items intended for testing the display"})
+    "rule type 'dummy': fixed items intended for testing the display",
+    "For more complex rules, see the CraftTweaker support. "})
     @LangKey("config.backpackdisplay.displayrules.name")
     public static String[] displayRules = {
         //Vanilla Shulker Boxes
@@ -101,6 +102,21 @@ public class BPDConfig {
     @Comment("Show verbose info when loading mod. Useful for writing new rules.")
     @LangKey("config.backpackdisplay.verbose_info.name")
     public static boolean verbose_info = false;
+
+
+    @Comment("Config for showing contained fluids.")
+    @LangKey("config.backpackdisplay.fluidSection.name")
+    public static FluidSection fluidSection = new FluidSection();
+    public static class FluidSection{
+        @Comment({"Simple fluid rule is to get fluid automatically from containers. ",
+        "If fluid can be drained/filled directly by using it on a tank-like block, it will be shown. ",
+        "For more complex rules, see the CraftTweaker support. "})
+        public boolean simpleRule = true;
+        @Comment("If simpleRuleBlacklist is true, simpleContainers will work as blacklist. ")
+        public boolean simpleRuleBlacklist = false;
+        @Comment("Containers to include/exclude for simple rule. Format: <modID>:<itemID>[:meta]")
+        public String[] simpleContainers = {};
+    }
 
     @Comment({"Change priorities for display sections in this mod. ",
     "A section with higher priority will show on above another one with lower priority. ",

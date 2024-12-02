@@ -5,3 +5,4 @@ config.backpackdisplay.full_digits.name=Full digits for count label
 config.backpackdisplay.needs_keybind.name=Keybind requirement
 config.backpackdisplay.offset_x.name=Tooltip offset X
 config.backpackdisplay.offset_y.name=Tooltip offset Y
+config.backpackdisplay.fluidSection.name=Fluid Section
