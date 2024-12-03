@@ -96,6 +96,27 @@ BackpackDisplay.addBackDisplay(<ore:logWood>,function(item){
 
 With both crafttweaker rules and normal rules present on an item, items from crafttweaker support will appear before items from normal rules.  
 
+## Fluid support
+### Simple Fluid containers
+Same as Items, but with only the item ID and metadata.  
+Fluid is get from forge. No customization needed or supported.  
+Example: (water bucket shows water in it)  
+```
+minecraft:water_bucket
+```
+### Crafttweaker
+Same as Items, except the class is `mods.backpackdisplay.BackpackDisplayFluid` and the output is `ILiquidStack[]`  
+Example: (ice block shows 1000mB water in it)  
+```
+#sideonly client
+import mods.backpackdisplay.BackpackDisplayFluid;
+import crafttweaker.liquid.ILiquidStack;
+BackpackDisplayFluid.addBackDisplay(<minecraft:ice>,function(item){
+    var fluids = [<liquid:water>*1000] as ILiquidStack[];
+    return fluids;
+});
+```
+
 ## Plugin support  
 Starting from v1.5.0, plugins are supported. One can add more sections to this mod's tooltip, extending its function.  
 Implement [IDisplaySection](src/main/java/io/bluebeaker/backpackdisplay/api/IDisplaySection.java) to make your display section.  

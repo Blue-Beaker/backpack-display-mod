@@ -10,3 +10,5 @@ Fix backpack display not shown in AE2 inventories.
 Refactoried, allows adding new section to the backpack display with plugins.  
 Optimization for the item section: Only update the tooltip when the item is actually changed.  
 Changed versioning scheme.  
+# 1.6.0
+Added fluid section and its CraftTweaker support.  
