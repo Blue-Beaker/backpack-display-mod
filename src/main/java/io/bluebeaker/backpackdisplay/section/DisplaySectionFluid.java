@@ -1,13 +1,18 @@
 package io.bluebeaker.backpackdisplay.section;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import crafttweaker.api.liquid.ILiquidStack;
 import io.bluebeaker.backpackdisplay.BPDConfig;
 import io.bluebeaker.backpackdisplay.BPDRegistryFluid;
+import io.bluebeaker.backpackdisplay.BackpackDisplayMod;
 import io.bluebeaker.backpackdisplay.api.IDisplaySection;
+import io.bluebeaker.backpackdisplay.crafttweaker.BackpackDisplayFluidCT;
+import io.bluebeaker.backpackdisplay.crafttweaker.CTIntegration;
 import io.bluebeaker.backpackdisplay.displayslot.IItemMatcher;
 import io.bluebeaker.backpackdisplay.utils.NumberUtils;
 import io.bluebeaker.backpackdisplay.utils.RenderUtils;
@@ -16,6 +21,7 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fml.common.Loader;
 
 public class DisplaySectionFluid implements IDisplaySection {
 
@@ -52,19 +58,33 @@ public class DisplaySectionFluid implements IDisplaySection {
         if (stack == null || stack.isEmpty())
             return Collections.emptyList();
 
+        List<FluidStack> fluids = new ArrayList<FluidStack>();
+        fluids.addAll(getFluidStacksCT(stack));
+
         if (BPDConfig.fluidSection.simpleRule
                 && (isSimpleContainer(stack))) {
-            FluidStack fluid = getFluidStackBasic(stack);
-            if (fluid != null) {
-                return Collections.singletonList(fluid);
+            FluidStack simpleFluid = getFluidStackBasic(stack);
+            if (simpleFluid != null) {
+                fluids.add(simpleFluid);
             }
         }
-        return Collections.emptyList();
+        return fluids;
     }
 
     private FluidStack getFluidStackBasic(@Nonnull ItemStack stack) {
         FluidStack fluid = FluidUtil.getFluidContained(stack);
         return fluid;
+    }
+
+    private List<FluidStack> getFluidStacksCT(@Nonnull ItemStack stack) {
+        if (Loader.isModLoaded("crafttweaker")) {
+            try {
+                return CTIntegration.getFluidsForCT(stack);
+            } catch (Exception e) {
+                BackpackDisplayMod.getLogger().error("Exception when getting display fluids from crafttweaker: ", e);
+            }
+        }
+        return Collections.emptyList();
     }
 
     private boolean isSimpleContainer(@Nonnull ItemStack stack) {
