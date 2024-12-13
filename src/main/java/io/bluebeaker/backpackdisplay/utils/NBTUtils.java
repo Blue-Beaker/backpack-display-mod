@@ -22,11 +22,13 @@ public class NBTUtils {
     public static NBTBase getTagRecursive(NBTBase root, String[] path){
         NBTBase tag = root;
         for(String key:path){
-            if(tag instanceof NBTTagCompound)
-            tag=((NBTTagCompound)tag).getTag(key);
-            else if(tag instanceof NBTTagList)
-            tag=((NBTTagList)tag).get(Integer.valueOf(key));
-            else return null;
+            if(!key.isEmpty()) {
+                if (tag instanceof NBTTagCompound)
+                    tag = ((NBTTagCompound) tag).getTag(key);
+                else if (tag instanceof NBTTagList)
+                    tag = ((NBTTagList) tag).get(Integer.parseInt(key));
+                else return null;
+            }
         }
         return tag;
     }
