@@ -7,7 +7,7 @@ import net.minecraft.nbt.NBTTagList;
 public class NBTUtils {
 
     /**
-     * @param keys: A string representing the path to the required value in NBT, splitted with dots.
+     * @param pathStr: A string representing the path to the required value in NBT, splitted with dots.
      * @return      The path to the value in a list
      */
     public static String[] getKeysList(String pathStr){
