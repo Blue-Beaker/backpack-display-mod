@@ -1,7 +1,8 @@
 # 1.1
 Fixed not following the pathToItem to get item Updated default config for storage drawers to use "list" rule  
 # 1.2
-Make color config easier to use Will try to keep the backpack tooltip in screen  
+Make color config easier to use  
+Will try to keep the backpack tooltip in screen  
 # 1.3
 Add Crafttweaker support to make advanced rules.  
 # 1.4
