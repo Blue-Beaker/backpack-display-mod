@@ -77,7 +77,7 @@ public class BPDConfig {
     @Config.RangeInt(min = 3)
     public static int full_digits = 4;
 
-    enum KeybindType{
+    public enum KeybindType{
         NOT_NEEDED,
         PRESSED,
         RELEASED
