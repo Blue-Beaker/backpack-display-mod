@@ -43,6 +43,12 @@ Example: Show contents when hovering a purple shulker box
 ```
 minecraft:purple_shulker_box#list#BlockEntityTag.Items
 ```
+
+Example 2: Show contents in an AE2 storage cell  
+```
+appliedenergistics2:storage_cell_64k#list#;;Cnt
+```
+
 ### Single rule
 Rule type: `single`  
 
