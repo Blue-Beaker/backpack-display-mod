@@ -12,3 +12,5 @@ Optimization for the item section: Only update the tooltip when the item is actu
 Changed versioning scheme.  
 # 1.6.0
 Added fluid section and its CraftTweaker support.  
+# 1.6.1
+Added hot-reload support for ZenUtils.  

@@ -12,6 +12,7 @@ import crafttweaker.api.liquid.ILiquidStack;
 import crafttweaker.api.util.IngredientMap;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
+import youyihj.zenutils.api.reload.Reloadable;
 
 /**
  * @author Blue_Beaker
@@ -49,11 +50,12 @@ public class BackpackDisplayFluidCT {
         }
         return items;
     }
-
-    private static class AddBackpackDisplayAction implements IAction {
+    @Reloadable
+    public static class AddBackpackDisplayAction implements IAction {
 
         private final IIngredient ingredient;
         private final IContainerFunctionFluid function;
+        private IngredientMap.IngredientMapEntry<IContainerFunctionFluid> entry;
         
         public AddBackpackDisplayAction(IIngredient ingredient, IContainerFunctionFluid function) {
             this.ingredient = ingredient;
@@ -62,10 +64,13 @@ public class BackpackDisplayFluidCT {
         
         @Override
         public void apply() {
-            PREVIEW_FUNCTIONS.register(ingredient, function);
+            entry = PREVIEW_FUNCTIONS.register(ingredient, function);
         }
-        
-        
+
+        public void undo(){
+            PREVIEW_FUNCTIONS.unregister(entry);
+        }
+
         @Override
         public String describe() {
             return "Adding backpack display fluid for " + ingredient;

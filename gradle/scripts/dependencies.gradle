@@ -86,6 +86,9 @@ dependencies {
     implementation rfg.deobf("curse.maven:mtlib-253211:3308160")
     implementation rfg.deobf("CraftTweaker2:CraftTweaker2-MC1120-Main:${project.version_crafttweaker}")
 
+    implementation rfg.deobf("libs:zenutils-1.21.4")
+    implementation rfg.deobf("libs:!configanytime-3.0")
+
     runtimeOnly rfg.deobf('libs:CodeChickenLib-1.12.2-3.2.3.358-universal')
     runtimeOnly rfg.deobf('libs:CoFHCore-1.12.2-4.6.6.1-universal')
     runtimeOnly rfg.deobf('libs:CoFHWorld-1.12.2-1.4.0.1-universal')
