@@ -1,27 +1,23 @@
 package io.bluebeaker.backpackdisplay.section;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import crafttweaker.api.liquid.ILiquidStack;
 import io.bluebeaker.backpackdisplay.BPDConfig;
 import io.bluebeaker.backpackdisplay.BPDRegistryFluid;
 import io.bluebeaker.backpackdisplay.BackpackDisplayMod;
 import io.bluebeaker.backpackdisplay.api.IDisplaySection;
-import io.bluebeaker.backpackdisplay.crafttweaker.BackpackDisplayFluidCT;
 import io.bluebeaker.backpackdisplay.crafttweaker.CTIntegration;
 import io.bluebeaker.backpackdisplay.displayslot.IItemMatcher;
 import io.bluebeaker.backpackdisplay.utils.NumberUtils;
 import io.bluebeaker.backpackdisplay.utils.RenderUtils;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fml.common.Loader;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class DisplaySectionFluid implements IDisplaySection {
 
@@ -101,11 +97,6 @@ public class DisplaySectionFluid implements IDisplaySection {
     }
 
     private void updateGeometry() {
-        if (this.fluidStacks.isEmpty()) {
-            this.width = 0;
-            this.height = 0;
-            return;
-        }
 
         List<FluidStack> fluids = this.fluidStacks;
 
@@ -160,7 +151,10 @@ public class DisplaySectionFluid implements IDisplaySection {
         List<FluidStack> fluids = this.fluidStacks;
 
         GlStateManager.enableRescaleNormal();
-        RenderHelper.enableGUIStandardItemLighting();
+        GlStateManager.enableBlend();
+        GlStateManager.enableAlpha();
+//        RenderHelper.enableGUIStandardItemLighting();
+        GlStateManager.disableLighting();
         GlStateManager.translate(0.0F, 0.0F, 512.0F);
 
         int totalCount = fluids.size() - overflowFluids;
@@ -179,7 +173,9 @@ public class DisplaySectionFluid implements IDisplaySection {
             RenderUtils.renderFluidStack(stack2, x + (slotX) * 18, y + (slotY) * 18);
             count++;
         }
-        RenderHelper.disableStandardItemLighting();
+        GlStateManager.disableAlpha();
+        GlStateManager.disableBlend();
+//        RenderHelper.disableStandardItemLighting();
         GlStateManager.disableRescaleNormal();
     }
 }
