@@ -33,7 +33,7 @@ The path `list.1.key2` will get the tag "item" from it.
 ### List rule
 Rule type: `list`  
 
-In this rule, items are all under a NBTTagList or a NBTTagCompound.  
+In this rule, items are all under a ListTag or a CompoundTag.  
 
 Rule definition:`path.to.the.list[;path.to.the.itemstack[;path.to.the.counts]]`  
 The last 2 paths is relative to the tag item in the list. 
@@ -111,14 +111,14 @@ Example: (water bucket shows water in it)
 minecraft:water_bucket
 ```
 ### Crafttweaker
-Same as Items, except the class is `mods.backpackdisplay.BackpackDisplayFluid` and the output is `ILiquidStack[]`  
+Same as Items, except the class is `mods.backpackdisplay.BackpackDisplayFluid` and the output is `IFluidStack[]`  
 Example: (ice block shows 1000mB water in it)  
 ```
 #sideonly client
 import mods.backpackdisplay.BackpackDisplayFluid;
-import crafttweaker.liquid.ILiquidStack;
+import crafttweaker.fluid.IFluidStack;
 BackpackDisplayFluid.addBackDisplay(<minecraft:ice>,function(item){
-    var fluids = [<liquid:water>*1000] as ILiquidStack[];
+    var fluids = [<liquid:water>*1000] as IFluidStack[];
     return fluids;
 });
 ```
