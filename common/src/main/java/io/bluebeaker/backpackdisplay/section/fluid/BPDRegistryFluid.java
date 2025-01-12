@@ -12,7 +12,7 @@ import io.bluebeaker.backpackdisplay.displayslot.IItemMatcher;
 import io.bluebeaker.backpackdisplay.displayslot.MetadataMatcher;
 import io.bluebeaker.backpackdisplay.utils.NumberUtils;
 import net.minecraft.world.item.Item;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 public class BPDRegistryFluid {
 

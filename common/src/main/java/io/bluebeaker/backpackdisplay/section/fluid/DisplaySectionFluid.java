@@ -6,6 +6,7 @@ import io.bluebeaker.backpackdisplay.BackpackDisplayMod;
 import io.bluebeaker.backpackdisplay.api.IDisplaySection;
 import io.bluebeaker.backpackdisplay.crafttweaker.CTIntegration;
 import io.bluebeaker.backpackdisplay.displayslot.IItemMatcher;
+import io.bluebeaker.backpackdisplay.utils.EnvironmentUtils;
 import io.bluebeaker.backpackdisplay.utils.NumberUtils;
 import io.bluebeaker.backpackdisplay.utils.RenderUtils;
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -70,7 +71,7 @@ public class DisplaySectionFluid implements IDisplaySection {
     }
 
     private List<FluidStack> getFluidStacksCT( ItemStack stack) {
-        if (BackpackDisplayMod.isCraftTweakerLoaded()) {
+        if (EnvironmentUtils.isCraftTweakerLoaded()) {
             try {
                 return CTIntegration.getFluidsForCT(stack);
             } catch (Exception e) {

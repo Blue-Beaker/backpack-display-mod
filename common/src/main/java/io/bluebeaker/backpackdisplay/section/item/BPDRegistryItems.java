@@ -14,7 +14,7 @@ import io.bluebeaker.backpackdisplay.displayslot.DisplaySlotEntrySingle;
 import io.bluebeaker.backpackdisplay.displayslot.IDisplaySlotEntry;
 import io.bluebeaker.backpackdisplay.utils.NumberUtils;
 import net.minecraft.world.item.Item;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 public class BPDRegistryItems {
     public static HashMap<Item,List<IDisplaySlotEntry>> registry = new HashMap<Item,List<IDisplaySlotEntry>>();

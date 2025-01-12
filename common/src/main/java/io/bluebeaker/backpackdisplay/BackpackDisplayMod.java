@@ -10,8 +10,6 @@ public class BackpackDisplayMod {
     // We can use this if we don't want to use DeferredRegister
     public static final Supplier<RegistrarManager> REGISTRIES = Suppliers.memoize(() -> RegistrarManager.get(MOD_ID));
 
-    private static boolean isCraftTweakerLoaded = false;
-
     public static void init() {
         System.out.println(BPDExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
     }
@@ -24,12 +22,5 @@ public class BackpackDisplayMod {
     }
     public static void logInfo(String str){
         System.out.println("[INFO][BackpackDisplay]"+str);
-    }
-
-    public static void onCraftTweakerLoaded(){
-        isCraftTweakerLoaded=true;
-    }
-    public static boolean isCraftTweakerLoaded() {
-        return isCraftTweakerLoaded;
     }
 }

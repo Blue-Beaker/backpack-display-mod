@@ -9,6 +9,7 @@ import io.bluebeaker.backpackdisplay.BackpackDisplayMod;
 import io.bluebeaker.backpackdisplay.api.IDisplaySection;
 import io.bluebeaker.backpackdisplay.crafttweaker.CTIntegration;
 import io.bluebeaker.backpackdisplay.displayslot.IDisplaySlotEntry;
+import io.bluebeaker.backpackdisplay.utils.EnvironmentUtils;
 import io.bluebeaker.backpackdisplay.utils.NumberUtils;
 import io.bluebeaker.backpackdisplay.utils.RenderUtils;
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -43,7 +44,7 @@ public class DisplaySectionItem implements IDisplaySection {
         if (stack == null || stack.isEmpty())
             return Collections.emptyList();
         List<ItemStack> items = new ArrayList<ItemStack>();
-        if (BackpackDisplayMod.isCraftTweakerLoaded()) {
+        if (EnvironmentUtils.isCraftTweakerLoaded()) {
             try {
                 items.addAll(CTIntegration.getItemsForCT(stack));
             } catch (Exception e) {
@@ -106,9 +107,10 @@ public class DisplaySectionItem implements IDisplaySection {
         int count = 0;
         List<ItemStack> items = this.itemsToRender;
 
-        GlStateManager.enableRescaleNormal();
-        RenderHelper.enableGUIStandardItemLighting();
-        GlStateManager.translate(0.0F, 0.0F, 512.0F);
+// TODO replace this
+//        GlStateManager.enableRescaleNormal();
+//        RenderHelper.enableGUIStandardItemLighting();
+//        GlStateManager.translate(0.0F, 0.0F, 512.0F);
 
         int totalCount = this.itemsToRender.size() - overflowItems;
 
@@ -125,8 +127,10 @@ public class DisplaySectionItem implements IDisplaySection {
             RenderUtils.renderItemStack(stack2, x + (slotX) * 18, y + (slotY) * 18);
             count++;
         }
-        RenderHelper.disableStandardItemLighting();
-        GlStateManager.disableRescaleNormal();
+        
+// TODO replace this
+//        RenderHelper.disableStandardItemLighting();
+//        GlStateManager.disableRescaleNormal();
     }
 
     @Override
