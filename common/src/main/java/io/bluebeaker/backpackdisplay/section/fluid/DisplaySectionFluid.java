@@ -8,9 +8,8 @@ import io.bluebeaker.backpackdisplay.crafttweaker.CTIntegration;
 import io.bluebeaker.backpackdisplay.displayslot.IItemMatcher;
 import io.bluebeaker.backpackdisplay.utils.NumberUtils;
 import io.bluebeaker.backpackdisplay.utils.RenderUtils;
-import net.minecraft.client.renderer.GlStateManager;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.fml.common.Loader;
 
 
 import java.util.ArrayList;
@@ -71,7 +70,7 @@ public class DisplaySectionFluid implements IDisplaySection {
     }
 
     private List<FluidStack> getFluidStacksCT( ItemStack stack) {
-        if (BackpackDisplayMod.isIsCraftTweakerLoaded()) {
+        if (BackpackDisplayMod.isCraftTweakerLoaded()) {
             try {
                 return CTIntegration.getFluidsForCT(stack);
             } catch (Exception e) {

@@ -3,14 +3,14 @@ package io.bluebeaker.backpackdisplay.utils;
 import io.bluebeaker.backpackdisplay.BPDConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.GlStateManager;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
+import net.minecraft.world.level.material.Fluid;
 import dev.architectury.fluid.FluidStack;
 
 public class RenderUtils {
 
-    static Minecraft client = Minecraft.getMinecraft();
+    static Minecraft client = Minecraft.getInstance();
     public static FontRenderer fontRenderer = client.fontRenderer;
 
     /**

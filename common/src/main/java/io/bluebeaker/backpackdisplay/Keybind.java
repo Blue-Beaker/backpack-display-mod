@@ -11,7 +11,7 @@ public class Keybind {
         GUI {
             @Override
             public boolean isActive() {
-                return Minecraft.getMinecraft().currentScreen != null;
+                return Minecraft.getInstance().currentScreen != null;
             }
     
             @Override

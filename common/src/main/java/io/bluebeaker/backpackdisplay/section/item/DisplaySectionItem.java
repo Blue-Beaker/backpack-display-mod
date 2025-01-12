@@ -11,11 +11,9 @@ import io.bluebeaker.backpackdisplay.crafttweaker.CTIntegration;
 import io.bluebeaker.backpackdisplay.displayslot.IDisplaySlotEntry;
 import io.bluebeaker.backpackdisplay.utils.NumberUtils;
 import io.bluebeaker.backpackdisplay.utils.RenderUtils;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.fml.common.Loader;
 
 public class DisplaySectionItem implements IDisplaySection {
 
@@ -45,11 +43,11 @@ public class DisplaySectionItem implements IDisplaySection {
         if (stack == null || stack.isEmpty())
             return Collections.emptyList();
         List<ItemStack> items = new ArrayList<ItemStack>();
-        if (BackpackDisplayMod.isIsCraftTweakerLoaded()) {
+        if (BackpackDisplayMod.isCraftTweakerLoaded()) {
             try {
                 items.addAll(CTIntegration.getItemsForCT(stack));
             } catch (Exception e) {
-                BackpackDisplayMod.getLogger().error("Exception when getting display items from crafttweaker: ", e);
+                BackpackDisplayMod.logError("Exception when getting display items from crafttweaker: ", e);
             }
         }
 

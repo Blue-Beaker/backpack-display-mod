@@ -16,14 +16,20 @@ public class BackpackDisplayMod {
         System.out.println(BPDExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
     }
 
+    public static void logError(String str,Throwable e){
+        logError(str+e.toString());
+    }
     public static void logError(String str){
         System.out.println("[ERROR][BackpackDisplay]"+str);
+    }
+    public static void logInfo(String str){
+        System.out.println("[INFO][BackpackDisplay]"+str);
     }
 
     public static void onCraftTweakerLoaded(){
         isCraftTweakerLoaded=true;
     }
-    public static boolean isIsCraftTweakerLoaded() {
+    public static boolean isCraftTweakerLoaded() {
         return isCraftTweakerLoaded;
     }
 }

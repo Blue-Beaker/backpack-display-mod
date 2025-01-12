@@ -10,6 +10,6 @@ public class MetadataMatcher implements IItemMatcher {
         this.metadataList=metadataList;
     }
     public boolean isItemMatches(ItemStack stack){
-        return metadataList.isEmpty() || metadataList.contains(stack.getMetadata());
+        return true;
     }
 }

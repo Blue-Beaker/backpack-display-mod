@@ -47,7 +47,7 @@ public class DisplaySectionDummy implements IDisplaySection {
 
     @Override
     public void render(int x, int y) {
-        Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(this.id, (float) x,
+        Minecraft.getInstance().fontRenderer.drawStringWithShadow(this.id, (float) x,
                 (float) y, 16777215);
     }
 }
