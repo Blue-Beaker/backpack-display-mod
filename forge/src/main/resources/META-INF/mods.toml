@@ -1,17 +1,17 @@
 modLoader = "javafml"
 loaderVersion = "[47,)"
 #issueTrackerURL = ""
-license = "Insert License Here"
+license = "MIT License"
 
 [[mods]]
 modId = "backpackdisplay"
 version = "${version}"
-displayName = "Example Mod"
-authors = "Me!"
+displayName = "Backpack Display"
+authors = "Blue_Beaker"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+Shows what's in your backpack!
 '''
-#logoFile = ""
+logoFile = "icon.png"
 
 [[dependencies.backpackdisplay]]
 modId = "forge"
@@ -31,5 +31,12 @@ side = "BOTH"
 modId = "architectury"
 mandatory = true
 versionRange = "[9.1.12,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.backpackdisplay]]
+modId = "crafttweaker"
+mandatory = false
+versionRange = "[14.0.44,)"
 ordering = "AFTER"
 side = "BOTH"
