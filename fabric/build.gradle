@@ -27,6 +27,10 @@ dependencies {
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+
+    def ctDep = "com.blamejared.crafttweaker:CraftTweaker-fabric-1.20.1:${rootProject.crafttweaker_version}"
+    modImplementation(ctDep)
+    architecturyTransformerClasspath(ctDep)
 }
 
 processResources {
