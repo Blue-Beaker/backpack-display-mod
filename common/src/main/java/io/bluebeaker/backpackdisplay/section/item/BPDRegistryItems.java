@@ -12,9 +12,11 @@ import io.bluebeaker.backpackdisplay.displayslot.DisplaySlotEntryBase;
 import io.bluebeaker.backpackdisplay.displayslot.DisplaySlotEntryList;
 import io.bluebeaker.backpackdisplay.displayslot.DisplaySlotEntrySingle;
 import io.bluebeaker.backpackdisplay.displayslot.IDisplaySlotEntry;
+import io.bluebeaker.backpackdisplay.utils.ItemUtils;
 import io.bluebeaker.backpackdisplay.utils.NumberUtils;
 import net.minecraft.world.item.Item;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 
 public class BPDRegistryItems {
     public static HashMap<Item,List<IDisplaySlotEntry>> registry = new HashMap<Item,List<IDisplaySlotEntry>>();
@@ -42,8 +44,8 @@ public class BPDRegistryItems {
         String resourceid = itemsplit[1];
 
         ResourceLocation itemID = new ResourceLocation(modid, resourceid);
-        if(!Item.REGISTRY.containsKey(itemID)) return;
-        Item item = Item.REGISTRY.getObject(itemID);
+        Item item = ItemUtils.getItemFromID(itemID);
+        if(item== Items.AIR) return;
         Set<Integer> metadataList;
 
         if(itemsplit.length>=3) metadataList=NumberUtils.parseMeta(itemsplit[2]);
@@ -51,28 +53,16 @@ public class BPDRegistryItems {
 
         IDisplaySlotEntry entry = buildEntryFromStringRule(type, nbtRule, metadataList);
 
-        if (entry!=null && item!=null){
-            addEntry(item, entry);
-            if(BPDConfig.verbose_info)
+        addEntry(item, entry);
+        if(BPDConfig.verbose_info)
             BackpackDisplayMod.logInfo("Adding entry with "+item.toString()+"type:"+type+", entry: "+entry.toString());
-        }
     }
-    public static IDisplaySlotEntry buildEntryFromStringRule(String type,String nbtRule,Set<Integer> metadataList){
-        IDisplaySlotEntry entry = null;
-        switch (type) {
-            case "dummy":
-                entry=new DisplaySlotEntryBase(metadataList,nbtRule);
-                break;
-            case "single":
-                entry=new DisplaySlotEntrySingle(metadataList,nbtRule);
-                break;
-            case "list":
-                entry=new DisplaySlotEntryList(metadataList,nbtRule);
-                break;
-            default:
-                BackpackDisplayMod.logInfo("Unknown item entry type '"+type+"'.");
-                break;
-        }
+    public static IDisplaySlotEntry buildEntryFromStringRule(String type, String nbtRule, Set<Integer> metadataList){
+        IDisplaySlotEntry entry = switch (type) {
+            case "single" -> new DisplaySlotEntrySingle(metadataList, nbtRule);
+            case "list" -> new DisplaySlotEntryList(metadataList, nbtRule);
+            default -> new DisplaySlotEntryBase(metadataList, nbtRule);
+        };
 
         return entry;
     }

@@ -13,6 +13,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.level.ItemLike;
+import org.jetbrains.annotations.Nullable;
 
 public class DisplaySlotEntryList extends DisplaySlotEntryBase {
 
@@ -21,15 +22,15 @@ public class DisplaySlotEntryList extends DisplaySlotEntryBase {
     /**The path from the list to the item.     */
     String[] pathToItem = {};
     /**The path from the list to the count of the item.     */
-    String[] pathToCount = null;
+    @Nullable String[] pathToCount = null;
     public DisplaySlotEntryList(Set<Integer> metadataList,String nbtRule){
         super(metadataList,nbtRule);
         String[] splitted = nbtRule.split("(?<!\\\\);");
-        pathToList = NBTUtils.getKeysList(splitted[0]);
+            pathToList = NBTUtils.getKeysList(splitted[0]);
         if(splitted.length>=2)
-        pathToItem = NBTUtils.getKeysList(splitted[1]);
+            pathToItem = NBTUtils.getKeysList(splitted[1]);
         if(splitted.length>=3)
-        pathToCount = NBTUtils.getKeysList(splitted[2]);
+            pathToCount = NBTUtils.getKeysList(splitted[2]);
     }
     public List<ItemStack> getItemsFromContainer(ItemStack stack){
         List<ItemStack> output = new ArrayList<ItemStack>();
@@ -56,7 +57,7 @@ public class DisplaySlotEntryList extends DisplaySlotEntryBase {
         }
         return output;
     }
-    private ItemStack getSingleItem(Tag tag){
+    private @Nullable ItemStack getSingleItem(Tag tag){
         Tag itemTag = NBTUtils.getTagRecursive(tag, pathToItem);
         if(itemTag instanceof CompoundTag){
             ItemStack newStack = new ItemStack((ItemLike) itemTag);

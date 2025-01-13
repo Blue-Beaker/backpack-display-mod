@@ -2,16 +2,16 @@ package io.bluebeaker.backpackdisplay.utils;
 
 import io.bluebeaker.backpackdisplay.BPDConfig;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.material.Fluid;
 import dev.architectury.fluid.FluidStack;
 
 public class RenderUtils {
 
     static Minecraft client = Minecraft.getInstance();
-    public static FontRenderer fontRenderer = client.fontRenderer;
+    static Font font = client.font;
 
     /**
      * Draw a text in the Corner of slot. For count label.
@@ -20,18 +20,20 @@ public class RenderUtils {
      * @param y
      * @param text
      */
-    public static void drawLabelCorneredScaled(int x, int y, String text, float scale) {
-        GlStateManager.pushMatrix();
-        GlStateManager.scale(scale, scale, scale);
-        GlStateManager.disableLighting();
-        GlStateManager.disableDepth();
-        GlStateManager.disableBlend();
-        fontRenderer.drawStringWithShadow(text, (float) ((x + 15) / scale - fontRenderer.getStringWidth(text) + 2),
-                (float) ((y + 6 + fontRenderer.FONT_HEIGHT) / scale - fontRenderer.FONT_HEIGHT + 3), 16777215);
-        GlStateManager.enableLighting();
-        GlStateManager.enableDepth();
-        GlStateManager.enableBlend();
-        GlStateManager.popMatrix();
+    public static void drawLabelCorneredScaled(GuiGraphics graphics, int x, int y, String text, float scale) {
+
+        graphics.pose().pushPose();
+        graphics.pose().scale(scale, scale, scale);
+//        GlStateManager.disableLighting();
+//        GlStateManager.disableDepth();
+//        GlStateManager.disableBlend();
+        graphics.drawString(font, text, (int) ((x + 15) / scale - font.width(text) + 2),
+                (int) ((y + 6 + font.lineHeight) / scale - font.lineHeight + 3), 16777215);
+//        GlStateManager.enableLighting();
+//        GlStateManager.enableDepth();
+//        GlStateManager.enableBlend();
+//        GlStateManager.popMatrix();
+        graphics.pose().popPose();
     }
 
     /**
@@ -41,15 +43,15 @@ public class RenderUtils {
      * @param y
      * @param text
      */
-    public static void drawLabelCentered(int x, int y, String text) {
-        GlStateManager.disableLighting();
-        GlStateManager.disableDepth();
-        GlStateManager.disableBlend();
-        fontRenderer.drawStringWithShadow(text, (float) (x + 9 - fontRenderer.getStringWidth(text) / 2),
-                (float) (y + 9 - fontRenderer.FONT_HEIGHT / 2), 16777215);
-        GlStateManager.enableLighting();
-        GlStateManager.enableDepth();
-        GlStateManager.enableBlend();
+    public static void drawLabelCentered(GuiGraphics graphics,int x, int y, String text) {
+//        GlStateManager.disableLighting();
+//        GlStateManager.disableDepth();
+//        GlStateManager.disableBlend();
+        graphics.drawString(font,text, (x + 9 - font.width(text) / 2),
+                (y + 9 - font.lineHeight / 2), 16777215);
+//        GlStateManager.enableLighting();
+//        GlStateManager.enableDepth();
+//        GlStateManager.enableBlend();
     }
 
     /**
@@ -59,30 +61,30 @@ public class RenderUtils {
      * @param x
      * @param y
      */
-    public static void renderItemStack(ItemStack stack, int x, int y) {
+    public static void renderItemStack(GuiGraphics graphics,ItemStack stack, int x, int y) {
         client.getRenderItem().renderItemIntoGUI(stack, x, y);
         String numRep = null;
         if (stack.getCount() > 1)
             numRep = NumberUtils.getItemCountRepresentation(stack.getCount());
-        if (fontRenderer.getStringWidth(numRep) > 16) {
+        if (font.width(numRep) > 16) {
             float scale = BPDConfig.label_scale;
-            drawLabelCorneredScaled(x, y, numRep, scale);
+            drawLabelCorneredScaled(graphics,x, y, numRep, scale);
             client.getRenderItem().renderItemOverlayIntoGUI(client.fontRenderer, stack, x, y, "");
         } else {
             client.getRenderItem().renderItemOverlayIntoGUI(client.fontRenderer, stack, x, y, numRep);
         }
     }
 
-    public static void renderFluidStack(FluidStack stack, int x, int y) {
-        if (stack == null || stack.amount == 0)
+    public static void renderFluidStack(GuiGraphics graphics,FluidStack stack, int x, int y) {
+        if (stack == null || stack.getAmount() == 0)
             return;
         FluidRender.renderFluid(stack, x, y);
-        String numRep = NumberUtils.getFluidCountRepresentation(stack.amount);
-        if (fontRenderer.getStringWidth(numRep) > 16) {
+        String numRep = NumberUtils.getFluidCountRepresentation(stack.getAmount());
+        if (font.width(numRep) > 16) {
             float scale = BPDConfig.label_scale;
-            drawLabelCorneredScaled(x, y, numRep, scale);
+            drawLabelCorneredScaled(graphics,x, y, numRep, scale);
         } else {
-            drawLabelCorneredScaled(x, y, numRep, 1);
+            drawLabelCorneredScaled(graphics,x, y, numRep, 1);
         }
     }
 }

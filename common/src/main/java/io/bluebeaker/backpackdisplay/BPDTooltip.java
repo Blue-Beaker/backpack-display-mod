@@ -101,7 +101,7 @@ public class BPDTooltip {
         // Draw every display sections
         for (IDisplaySection section : sections) {
             if (section.isAvailable()) {
-                section.render(drawX, drawY);
+                section.render(guiGraphics,drawX, drawY);
                 drawY = drawY + section.getHeight();
             }
         }

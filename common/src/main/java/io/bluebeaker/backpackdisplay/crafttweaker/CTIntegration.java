@@ -12,7 +12,7 @@ import com.blamejared.crafttweaker.api.fluid.IFluidStack;
 public class CTIntegration {
     public static List<ItemStack> getItemsForCT(ItemStack stack){
         List<ItemStack> items = new ArrayList<ItemStack>();
-        DisplaySlotEntriesCT.getDisplayItems(IItemStack.of(stack))
+        BackpackDisplayItemsCT.getDisplayItems(IItemStack.of(stack))
                 .forEach((IItemStack stack1) -> {
                     items.add(stack1.getImmutableInternal());
                 });

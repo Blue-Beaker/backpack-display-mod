@@ -10,6 +10,7 @@ import io.bluebeaker.backpackdisplay.utils.EnvironmentUtils;
 import io.bluebeaker.backpackdisplay.utils.NumberUtils;
 import io.bluebeaker.backpackdisplay.utils.RenderUtils;
 import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
 
 
@@ -66,7 +67,8 @@ public class DisplaySectionFluid implements IDisplaySection {
     }
 
     private FluidStack getFluidStackBasic( ItemStack stack) {
-        FluidStack fluid = FluidUtil.getFluidContained(stack);
+//        FluidStack fluid = FluidStack.getFluidContained(stack);
+        FluidStack fluid = FluidStack.empty();
         return fluid;
     }
 
@@ -75,7 +77,7 @@ public class DisplaySectionFluid implements IDisplaySection {
             try {
                 return CTIntegration.getFluidsForCT(stack);
             } catch (Exception e) {
-                BackpackDisplayMod.getLogger().error("Exception when getting display fluids from crafttweaker: ", e);
+                BackpackDisplayMod.logError("Exception when getting display fluids from crafttweaker: ", e);
             }
         }
         return Collections.emptyList();
@@ -144,21 +146,22 @@ public class DisplaySectionFluid implements IDisplaySection {
     }
 
     @Override
-    public void render(int x, int y) {
+    public void render(GuiGraphics graphics, int x, int y) {
         int count = 0;
         List<FluidStack> fluids = this.fluidStacks;
 
-        GlStateManager.enableRescaleNormal();
-        GlStateManager.enableBlend();
-        GlStateManager.enableAlpha();
+//        GlStateManager.enableRescaleNormal();
+//        GlStateManager.enableBlend();
+//        GlStateManager.enableAlpha();
 //        RenderHelper.enableGUIStandardItemLighting();
-        GlStateManager.disableLighting();
-        GlStateManager.translate(0.0F, 0.0F, 512.0F);
+//        GlStateManager.disableLighting();
+        graphics.pose().pushPose();
+        graphics.pose().translate(0.0F, 0.0F, 512.0F);
 
         int totalCount = fluids.size() - overflowFluids;
 
         if (this.overflowFluids > 0) {
-            RenderUtils.drawLabelCentered(x + (BPDConfig.tooltipWidth - 1) * 18, y + (BPDConfig.tooltipHeight - 1) * 18,
+            RenderUtils.drawLabelCentered(graphics,x + (BPDConfig.tooltipWidth - 1) * 18, y + (BPDConfig.tooltipHeight - 1) * 18,
                     "+" + NumberUtils.getItemCountRepresentation(overflowFluids));
         }
 
@@ -168,12 +171,13 @@ public class DisplaySectionFluid implements IDisplaySection {
             int slotX = count % BPDConfig.tooltipWidth;
             int slotY = count / BPDConfig.tooltipWidth;
 
-            RenderUtils.renderFluidStack(stack2, x + (slotX) * 18, y + (slotY) * 18);
+            RenderUtils.renderFluidStack(graphics,stack2, x + (slotX) * 18, y + (slotY) * 18);
             count++;
         }
-        GlStateManager.disableAlpha();
-        GlStateManager.disableBlend();
+//        GlStateManager.disableAlpha();
+//        GlStateManager.disableBlend();
 //        RenderHelper.disableStandardItemLighting();
-        GlStateManager.disableRescaleNormal();
+//        GlStateManager.disableRescaleNormal();
+        graphics.pose().popPose();
     }
 }

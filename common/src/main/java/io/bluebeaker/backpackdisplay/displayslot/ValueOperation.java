@@ -2,7 +2,7 @@ package io.bluebeaker.backpackdisplay.displayslot;
 import io.bluebeaker.backpackdisplay.utils.NBTUtils;
 import io.bluebeaker.backpackdisplay.utils.ValueOperator;
 import net.minecraft.nbt.Tag;
-import net.minecraft.nbt.NBTPrimitive;
+import net.minecraft.nbt.NumericTag;
 import net.minecraft.nbt.CompoundTag;
 
 public class ValueOperation {
@@ -36,7 +36,7 @@ public class ValueOperation {
         }
         Tag tagNum = NBTUtils.getTagRecursive(tag, pathToValue);
         if(NBTUtils.isNumber(tagNum))
-        return this.operator.calc(num, ((NBTPrimitive)tagNum).getInt());
+        return this.operator.calc(num, ((NumericTag)tagNum).getAsInt());
         else return -1;
     }
 }

@@ -7,7 +7,7 @@ import io.bluebeaker.backpackdisplay.BPDConfig;
 
 public class NumberUtils {
 
-    public static String getItemCountRepresentation(int number) {
+    public static String getItemCountRepresentation(long number) {
         if (Math.log10(number) < BPDConfig.full_digits)
             return String.valueOf(number);
         if (number >= 1000000000) {
@@ -25,7 +25,7 @@ public class NumberUtils {
         }
     }
 
-    public static String getFluidCountRepresentation(int number) {
+    public static String getFluidCountRepresentation(long number) {
         if (number >= 100000) {
             return getItemCountRepresentation(number / 1000) + "B";
         } else if (number >= 1000) {

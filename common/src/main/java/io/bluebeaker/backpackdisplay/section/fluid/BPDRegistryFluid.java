@@ -10,6 +10,7 @@ import io.bluebeaker.backpackdisplay.BPDConfig;
 import io.bluebeaker.backpackdisplay.BackpackDisplayMod;
 import io.bluebeaker.backpackdisplay.displayslot.IItemMatcher;
 import io.bluebeaker.backpackdisplay.displayslot.MetadataMatcher;
+import io.bluebeaker.backpackdisplay.utils.ItemUtils;
 import io.bluebeaker.backpackdisplay.utils.NumberUtils;
 import net.minecraft.world.item.Item;
 import net.minecraft.resources.ResourceLocation;
@@ -35,9 +36,7 @@ public class BPDRegistryFluid {
         String resourceid = itemsplit[1];
 
         ResourceLocation itemID = new ResourceLocation(modid, resourceid);
-        if (!Item.REGISTRY.containsKey(itemID))
-            return;
-        Item item = Item.REGISTRY.getObject(itemID);
+        Item item = ItemUtils.getItemFromID(itemID);
         Set<Integer> metadataList;
 
         if (itemsplit.length >= 3)

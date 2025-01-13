@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import io.bluebeaker.backpackdisplay.api.IDisplaySection;
-import net.minecraftforge.common.config.ConfigManager;
-import net.minecraftforge.common.config.Config.Type;
 /**Sections manager for internal use. Plugins should use 
  * {@link io.bluebeaker.backpackdisplay.api.Sections} to register their sections instead.  */
 public class SectionsManager {
@@ -59,10 +57,10 @@ public class SectionsManager {
                     int priority = Integer.parseInt(split[1]);
                     sectionPriorities.put(id, priority);
                 } catch (Exception e) {
-                    BackpackDisplayMod.getLogger().error("Error when loading priority, please check it.", e);
+                    BackpackDisplayMod.logError("Error when loading priority, please check it.", e);
                 }
             } else {
-                BackpackDisplayMod.getLogger().error("Priority rule format error: must be 'id:priority'");
+                BackpackDisplayMod.logError("Priority rule format error: must be 'id:priority'");
             }
         }
     }
@@ -79,7 +77,8 @@ public class SectionsManager {
         }
         if(modified){
             BPDConfig.priorities = priorities.toArray(new String[0]);
-            ConfigManager.sync(BackpackDisplayMod.MODID, Type.INSTANCE);
+
+//            ConfigManager.sync(BackpackDisplayMod.MODID, Type.INSTANCE);
         }
     }
 }

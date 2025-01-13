@@ -2,10 +2,10 @@ package io.bluebeaker.backpackdisplay.crafttweaker;
 
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
 import com.blamejared.crafttweaker.api.item.IItemStack;
-import stanhebben.zenscript.annotations.ZenClass;
+import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenClass("mods.backpackdisplay.IContainerFunction")
+@ZenCodeType.Name("mods.backpackdisplay.IContainerFunction")
 public interface IContainerFunction {
     IItemStack[] process(IItemStack ingredient);
 }

@@ -2,6 +2,7 @@ package io.bluebeaker.backpackdisplay.api;
 
 
 
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
 
 /**Implement this class to add a new section of display for BackPackDisplay. */
@@ -19,5 +20,5 @@ public interface IDisplaySection {
     /**Returns whether the tooltip is available and non-empty. */
     public boolean isAvailable();
     /**Renders the tooltip */
-    public void render(int x,int y);
+    public void render(GuiGraphics graphics, int x, int y);
 }

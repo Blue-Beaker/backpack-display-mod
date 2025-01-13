@@ -4,6 +4,7 @@ package io.bluebeaker.backpackdisplay.section;
 
 import io.bluebeaker.backpackdisplay.api.IDisplaySection;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
 
 /**A dummy section with nothing in it, for testing purposes. */
@@ -46,8 +47,7 @@ public class DisplaySectionDummy implements IDisplaySection {
     }
 
     @Override
-    public void render(int x, int y) {
-        Minecraft.getInstance().fontRenderer.drawStringWithShadow(this.id, (float) x,
-                (float) y, 16777215);
+    public void render(GuiGraphics graphics, int x, int y) {
+        graphics.drawString(Minecraft.getInstance().font, this.id, x, y, 16777215);
     }
 }

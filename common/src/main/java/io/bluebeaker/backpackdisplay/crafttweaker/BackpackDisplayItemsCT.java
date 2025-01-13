@@ -1,25 +1,26 @@
 package io.bluebeaker.backpackdisplay.crafttweaker;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import com.blamejared.crafttweaker.api.CraftTweakerAPI;
-import com.blamejared.crafttweaker.api.action.base.IAction;
+import com.blamejared.crafttweaker.api.action.base.IUndoableAction;
 import com.blamejared.crafttweaker.api.annotation.ZenRegister;
 import com.blamejared.crafttweaker.api.ingredient.IIngredient;
 import com.blamejared.crafttweaker.api.item.IItemStack;
-import com.blamejared.crafttweaker.api.util.IngredientMap;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
+import io.bluebeaker.backpackdisplay.BackpackDisplayMod;
+import io.bluebeaker.backpackdisplay.utils.IngredientMap;
+import org.jetbrains.annotations.Nullable;
+import org.openzen.zencode.java.ZenCodeType;
+
 
 
 /**
  * @author Blue_Beaker
  */
-@ZenClass("mods.backpackdisplay.BackpackDisplay")
+@ZenCodeType.Name("mods.backpackdisplay.BackpackDisplay")
 @ZenRegister
 
-public class DisplaySlotEntriesCT {
+public class BackpackDisplayItemsCT {
     private static final IngredientMap<IContainerFunction> PREVIEW_FUNCTIONS = new IngredientMap<>();
 
     
@@ -27,7 +28,7 @@ public class DisplaySlotEntriesCT {
      * @param ingredient IIngredient representing items to add tooltip for
      * @param function Function to get displayed items from the container item: IItemStack->IItemStack[]
      */
-    @ZenMethod
+    @ZenCodeType.Method
     public static void addBackDisplay(IIngredient ingredient, IContainerFunction function) {
         CraftTweakerAPI.apply(new AddBackpackDisplayAction(ingredient, function));
     }
@@ -43,18 +44,17 @@ public class DisplaySlotEntriesCT {
     public static List<IItemStack> getDisplayItems(IItemStack item) {
         List<IItemStack> items = new ArrayList<IItemStack>();
         for(IContainerFunction func:getFunctions(item)){
-            for(IItemStack stack : func.process(item)){
-                items.add(stack);
-            }
+            items.addAll(Arrays.asList(func.process(item)));
         }
         return items;
     }
 
     
-    public static class AddBackpackDisplayAction implements IAction {
+    public static class AddBackpackDisplayAction implements IUndoableAction {
 
         private final IIngredient ingredient;
         private final IContainerFunction function;
+        @Nullable
         private IngredientMap.IngredientMapEntry<IContainerFunction> entry;
 
         public AddBackpackDisplayAction(IIngredient ingredient, IContainerFunction function) {
@@ -71,10 +71,20 @@ public class DisplaySlotEntriesCT {
         public void undo() {
             PREVIEW_FUNCTIONS.unregister(entry);
         }
-        
+
         @Override
         public String describe() {
-            return "Adding backpack display for " + ingredient;
+            return "Adding backpack display items for " + ingredient;
+        }
+
+        @Override
+        public String describeUndo() {
+            return "Removing backpack display item for " + ingredient;
+        }
+
+        @Override
+        public String systemName() {
+            return BackpackDisplayMod.MOD_ID+"-Item";
         }
     }
 }

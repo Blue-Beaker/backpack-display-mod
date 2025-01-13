@@ -13,6 +13,7 @@ import io.bluebeaker.backpackdisplay.utils.EnvironmentUtils;
 import io.bluebeaker.backpackdisplay.utils.NumberUtils;
 import io.bluebeaker.backpackdisplay.utils.RenderUtils;
 import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -103,7 +104,7 @@ public class DisplaySectionItem implements IDisplaySection {
     }
 
     @Override
-    public void render(int x, int y) {
+    public void render(GuiGraphics graphics, int x, int y) {
         int count = 0;
         List<ItemStack> items = this.itemsToRender;
 
@@ -115,7 +116,7 @@ public class DisplaySectionItem implements IDisplaySection {
         int totalCount = this.itemsToRender.size() - overflowItems;
 
         if (this.overflowItems > 0) {
-            RenderUtils.drawLabelCentered(x + (BPDConfig.tooltipWidth - 1) * 18, y + (BPDConfig.tooltipHeight - 1) * 18,
+            RenderUtils.drawLabelCentered( graphics,x + (BPDConfig.tooltipWidth - 1) * 18, y + (BPDConfig.tooltipHeight - 1) * 18,
                     "+" + NumberUtils.getItemCountRepresentation(overflowItems));
         }
 
@@ -124,10 +125,10 @@ public class DisplaySectionItem implements IDisplaySection {
             ItemStack stack2 = items.get(i);
             int slotX = count % BPDConfig.tooltipWidth;
             int slotY = count / BPDConfig.tooltipWidth;
-            RenderUtils.renderItemStack(stack2, x + (slotX) * 18, y + (slotY) * 18);
+            RenderUtils.renderItemStack(graphics,stack2, x + (slotX) * 18, y + (slotY) * 18);
             count++;
         }
-        
+
 // TODO replace this
 //        RenderHelper.disableStandardItemLighting();
 //        GlStateManager.disableRescaleNormal();
