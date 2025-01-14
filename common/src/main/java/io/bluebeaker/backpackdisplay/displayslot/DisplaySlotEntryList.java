@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import io.bluebeaker.backpackdisplay.utils.ComparatorWithNumbers;
+import io.bluebeaker.backpackdisplay.utils.ItemUtils;
 import io.bluebeaker.backpackdisplay.utils.NBTUtils;
 import net.minecraft.nbt.NumericTag;
 import net.minecraft.world.item.ItemStack;
@@ -60,7 +61,8 @@ public class DisplaySlotEntryList extends DisplaySlotEntryBase {
     private @Nullable ItemStack getSingleItem(Tag tag){
         Tag itemTag = NBTUtils.getTagRecursive(tag, pathToItem);
         if(itemTag instanceof CompoundTag){
-            ItemStack newStack = new ItemStack((ItemLike) itemTag);
+
+            ItemStack newStack = ItemUtils.createStackFromNBT((CompoundTag) itemTag);
             if(!newStack.isEmpty()){
                 if(pathToCount!=null){
                     Tag countTag = NBTUtils.getTagRecursive(tag, pathToCount);

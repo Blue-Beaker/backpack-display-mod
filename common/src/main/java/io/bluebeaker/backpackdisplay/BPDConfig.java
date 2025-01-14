@@ -3,6 +3,7 @@ package io.bluebeaker.backpackdisplay;
 public class BPDConfig {
     public static String[] displayRules = {
         //Vanilla Shulker Boxes
+        "minecraft:shulker_box#list#BlockEntityTag.Items",
         "minecraft:white_shulker_box#list#BlockEntityTag.Items",
         "minecraft:orange_shulker_box#list#BlockEntityTag.Items",
         "minecraft:magenta_shulker_box#list#BlockEntityTag.Items",

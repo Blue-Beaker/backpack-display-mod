@@ -62,16 +62,16 @@ public class RenderUtils {
      * @param y
      */
     public static void renderItemStack(GuiGraphics graphics,ItemStack stack, int x, int y) {
-        client.getRenderItem().renderItemIntoGUI(stack, x, y);
+        graphics.renderItem(stack, x, y);
         String numRep = null;
         if (stack.getCount() > 1)
             numRep = NumberUtils.getItemCountRepresentation(stack.getCount());
         if (font.width(numRep) > 16) {
             float scale = BPDConfig.label_scale;
             drawLabelCorneredScaled(graphics,x, y, numRep, scale);
-            client.getRenderItem().renderItemOverlayIntoGUI(client.fontRenderer, stack, x, y, "");
+            graphics.renderItemDecorations(client.font, stack, x, y, "");
         } else {
-            client.getRenderItem().renderItemOverlayIntoGUI(client.fontRenderer, stack, x, y, numRep);
+            graphics.renderItemDecorations(client.font, stack, x, y, numRep);
         }
     }
 

@@ -2,6 +2,8 @@ package io.bluebeaker.backpackdisplay;
 
 import com.google.common.base.Suppliers;
 import dev.architectury.registry.registries.RegistrarManager;
+import io.bluebeaker.backpackdisplay.section.fluid.DisplaySectionFluid;
+import io.bluebeaker.backpackdisplay.section.item.DisplaySectionItem;
 
 import java.util.function.Supplier;
 
@@ -12,6 +14,12 @@ public class BackpackDisplayMod {
 
     public static void init() {
         System.out.println(BPDExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
+
+        BPDConfigHelper.updateConfig();
+        SectionsManager.addSection(new DisplaySectionItem());
+        SectionsManager.addSection(new DisplaySectionFluid());
+        SectionsManager.updateConfig();
+        SectionsManager.sortSections();
     }
 
     public static void logError(String str,Throwable e){

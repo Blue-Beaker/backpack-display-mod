@@ -3,9 +3,12 @@ package io.bluebeaker.backpackdisplay.forge;
 import io.bluebeaker.backpackdisplay.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
+@Mod.EventBusSubscriber(modid = BackpackDisplayMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class BPDTooltipForge {
 
     static Minecraft client = Minecraft.getInstance();

@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class BPDTooltip {
 
-    private static ItemStack lastStack;
+    private static ItemStack lastStack = ItemStack.EMPTY;
 
     private static Minecraft client = Minecraft.getInstance();
 
