@@ -18,6 +18,8 @@ dependencies {
     architecturyTransformerClasspath(ctDep)
 
     annotationProcessor ctDep
+
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${rootProject.mixinextras_version}"))
 }
 
 publishing {

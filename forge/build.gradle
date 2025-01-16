@@ -38,6 +38,8 @@ dependencies {
     def ctDep = "com.blamejared.crafttweaker:CraftTweaker-forge-1.20.1:${rootProject.crafttweaker_version}"
     modImplementation(ctDep)
     architecturyTransformerClasspath(ctDep)
+
+    implementation(include("io.github.llamalad7:mixinextras-forge:${rootProject.mixinextras_version}"))
 }
 
 processResources {

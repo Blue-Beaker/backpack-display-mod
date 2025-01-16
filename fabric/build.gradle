@@ -40,6 +40,8 @@ dependencies {
     architecturyTransformerClasspath(ctDep)
 
     modImplementation("com.terraformersmc:modmenu:${rootProject.modmenu_version}")
+
+    include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${rootProject.mixinextras_version}")))
 }
 
 processResources {
