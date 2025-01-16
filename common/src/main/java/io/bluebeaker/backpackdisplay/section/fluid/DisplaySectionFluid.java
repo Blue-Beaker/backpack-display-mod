@@ -9,10 +9,8 @@ import io.bluebeaker.backpackdisplay.displayslot.IItemMatcher;
 import io.bluebeaker.backpackdisplay.utils.EnvironmentUtils;
 import io.bluebeaker.backpackdisplay.utils.NumberUtils;
 import io.bluebeaker.backpackdisplay.utils.RenderUtils;
-import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
-
 
 import java.util.ArrayList;
 import java.util.Collections;

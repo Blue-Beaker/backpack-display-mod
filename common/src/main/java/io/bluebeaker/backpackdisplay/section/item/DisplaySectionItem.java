@@ -1,9 +1,5 @@
 package io.bluebeaker.backpackdisplay.section.item;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import io.bluebeaker.backpackdisplay.BPDConfig;
 import io.bluebeaker.backpackdisplay.BackpackDisplayMod;
 import io.bluebeaker.backpackdisplay.api.IDisplaySection;
@@ -12,10 +8,13 @@ import io.bluebeaker.backpackdisplay.displayslot.IDisplaySlotEntry;
 import io.bluebeaker.backpackdisplay.utils.EnvironmentUtils;
 import io.bluebeaker.backpackdisplay.utils.NumberUtils;
 import io.bluebeaker.backpackdisplay.utils.RenderUtils;
-import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class DisplaySectionItem implements IDisplaySection {
 
@@ -108,11 +107,6 @@ public class DisplaySectionItem implements IDisplaySection {
         int count = 0;
         List<ItemStack> items = this.itemsToRender;
 
-// TODO replace this
-//        GlStateManager.enableRescaleNormal();
-//        RenderHelper.enableGUIStandardItemLighting();
-//        GlStateManager.translate(0.0F, 0.0F, 512.0F);
-
         int totalCount = this.itemsToRender.size() - overflowItems;
 
         if (this.overflowItems > 0) {
@@ -128,10 +122,6 @@ public class DisplaySectionItem implements IDisplaySection {
             RenderUtils.renderItemStack(graphics,stack2, x + (slotX) * 18, y + (slotY) * 18);
             count++;
         }
-
-// TODO replace this
-//        RenderHelper.disableStandardItemLighting();
-//        GlStateManager.disableRescaleNormal();
     }
 
     @Override
