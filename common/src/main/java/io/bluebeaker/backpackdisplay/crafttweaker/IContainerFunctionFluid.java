@@ -5,6 +5,7 @@ import com.blamejared.crafttweaker.api.item.IItemStack;
 import com.blamejared.crafttweaker.api.fluid.IFluidStack;
 import org.openzen.zencode.java.ZenCodeType;
 
+@FunctionalInterface
 @ZenRegister
 @ZenCodeType.Name("mods.backpackdisplay.IContainerFunctionFluid")
 public interface IContainerFunctionFluid {
