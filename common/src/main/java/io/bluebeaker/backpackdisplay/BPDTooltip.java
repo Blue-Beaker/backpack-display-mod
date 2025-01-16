@@ -85,7 +85,9 @@ public class BPDTooltip {
         }
         // Align to right end of tooltip when right out of screen, or tooltip is at left
         // of mouse
-        if (drawX + width + 4 > screenWidth || x + width < mouseX) {
+        if(drawX + width + 4 > screenWidth){
+            drawX = screenWidth - width - 4;
+        } else if (x + width < mouseX) {
             drawX = x + w - width;
         }
 
