@@ -20,6 +20,8 @@ public class BackpackDisplayMod {
         SectionsManager.addSection(new DisplaySectionFluid());
         SectionsManager.updateConfig();
         SectionsManager.sortSections();
+
+        BPDTooltipCommon.INSTANCE.register();
     }
 
     public static void logError(String str,Throwable e){

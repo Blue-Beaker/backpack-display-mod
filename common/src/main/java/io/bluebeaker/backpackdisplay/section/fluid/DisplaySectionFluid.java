@@ -155,8 +155,8 @@ public class DisplaySectionFluid implements IDisplaySection {
 //        GlStateManager.enableAlpha();
 //        RenderHelper.enableGUIStandardItemLighting();
 //        GlStateManager.disableLighting();
-        graphics.pose().pushPose();
-        graphics.pose().translate(0.0F, 0.0F, 512.0F);
+//        graphics.pose().pushPose();
+//        graphics.pose().translate(0.0F, 0.0F, 512.0F);
 
         int totalCount = fluids.size() - overflowFluids;
 
@@ -178,6 +178,6 @@ public class DisplaySectionFluid implements IDisplaySection {
 //        GlStateManager.disableBlend();
 //        RenderHelper.disableStandardItemLighting();
 //        GlStateManager.disableRescaleNormal();
-        graphics.pose().popPose();
+//        graphics.pose().popPose();
     }
 }

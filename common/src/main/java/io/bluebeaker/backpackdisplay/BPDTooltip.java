@@ -90,6 +90,7 @@ public class BPDTooltip {
 //            drawX = x + w - width;
 //        }
 
+        guiGraphics.pose().pushPose();
         // Set colors and positions
         int backgroundColor = BPDConfigHelper.backgroundColor;
         int borderColorStart = BPDConfigHelper.borderColorStart;
@@ -98,6 +99,7 @@ public class BPDTooltip {
         drawBackground(guiGraphics, drawX, drawY, width,
                 height, backgroundColor, borderColorStart, borderColorEnd);
 
+        guiGraphics.pose().translate(0,0,512.0F);
         // Draw every display sections
         for (IDisplaySection section : sections) {
             if (section.isAvailable()) {
@@ -105,6 +107,7 @@ public class BPDTooltip {
                 drawY = drawY + section.getHeight();
             }
         }
+        guiGraphics.pose().popPose();
     }
 
     /** Draws background for this tooltip */

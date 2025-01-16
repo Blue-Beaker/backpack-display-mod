@@ -27,10 +27,10 @@ public class BPDTooltipForge {
 
     @SubscribeEvent
     public static void render(RenderTooltipEvent.Pre event) {
-        if(!BPDTooltip.beforeRender())
-            return;
-
-        ItemStack stack = event.getItemStack();
-        BPDTooltip.render(stack,event.getGraphics(),event.getX(),event.getY(),100,100);
+//        if(!BPDTooltip.beforeRender())
+//            return;
+//
+//        ItemStack stack = event.getItemStack();
+//        BPDTooltip.render(stack,event.getGraphics(),event.getX(),event.getY(),100,100);
     }
 }
