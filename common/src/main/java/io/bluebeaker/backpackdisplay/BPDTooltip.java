@@ -113,18 +113,24 @@ public class BPDTooltip {
     public static void drawBackground(GuiGraphics guiGraphics, int x, int y, int width, int height, int bgColor, int borderColorStart,
                                       int borderColorEnd) {
         final int zLevel = 300;
-        guiGraphics.fillGradient(zLevel, x - 3, y - 4, x + width + 3, y - 3, bgColor, bgColor);
-        guiGraphics.fillGradient(zLevel, x - 3, y + height + 3, x + width + 3, y + height + 4, bgColor, bgColor);
-        guiGraphics.fillGradient(zLevel, x - 3, y - 3, x + width + 3, y + height + 3, bgColor, bgColor);
-        guiGraphics.fillGradient(zLevel, x - 4, y - 3, x - 3, y + height + 3, bgColor, bgColor);
-        guiGraphics.fillGradient(zLevel, x + width + 3, y - 3, x + width + 4, y + height + 3, bgColor, bgColor);
-        guiGraphics.fillGradient(zLevel, x - 3, y - 3 + 1, x - 3 + 1, y + height + 3 - 1, borderColorStart,
-                borderColorEnd);
-        guiGraphics.fillGradient(zLevel, x + width + 2, y - 3 + 1, x + width + 3, y + height + 3 - 1, borderColorStart,
-                borderColorEnd);
-        guiGraphics.fillGradient(zLevel, x - 3, y - 3, x + width + 3, y - 3 + 1, borderColorStart, borderColorStart);
-        guiGraphics.fillGradient(zLevel, x - 3, y + height + 2, x + width + 3, y + height + 3, borderColorEnd,
-                borderColorEnd);
+
+        int bgX = x - 3;
+        int bgY = y - 3;
+        int bgW = width + 6;
+        int bgH = height + 6;
+        int z = 400;
+
+        guiGraphics.fill(bgX, bgY - 1, bgX + bgW, bgY , z, bgColor);
+        guiGraphics.fill(bgX, bgY + bgH, bgX + bgW, bgY + bgH + 1, z, bgColor);
+        guiGraphics.fill(bgX, bgY, bgX + bgW, bgY + bgH, z, bgColor);
+        guiGraphics.fill(bgX - 1, bgY, bgX , bgY + bgH, z, bgColor);
+        guiGraphics.fill(bgX + bgW, bgY, bgX + bgW + 1, bgY + bgH, z, bgColor);
+
+        guiGraphics.fillGradient(bgX, bgY + 1, bgX + 1, bgY + 1 + bgH - 2, z, borderColorStart, borderColorEnd);
+        guiGraphics.fillGradient(bgX + bgW - 1, bgY + 1, bgX + bgW , bgY + 1 + bgH - 2, z, borderColorStart, borderColorEnd);
+        guiGraphics.fill(bgX, bgY , bgX + bgW, bgY  + 1, z, borderColorStart);
+        guiGraphics.fill(bgX, bgY  + bgH - 1, bgX + bgW, bgY  + bgH , z, borderColorEnd);
+
     }
 
     public static void updateParams(int screenWidth, int mouseX) {
