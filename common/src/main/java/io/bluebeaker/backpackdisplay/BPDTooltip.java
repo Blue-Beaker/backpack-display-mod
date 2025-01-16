@@ -9,6 +9,9 @@ import java.util.List;
 
 public class BPDTooltip {
 
+    private static int screenWidth;
+    private static int mouseX;
+
     private static ItemStack lastStack = ItemStack.EMPTY;
 
     private static Minecraft client = Minecraft.getInstance();
@@ -82,9 +85,9 @@ public class BPDTooltip {
         }
         // Align to right end of tooltip when right out of screen, or tooltip is at left
         // of mouse
-//        if (drawX + width + 4 > screenWidth || x + width < mouseX) {
-//            drawX = x + w - width;
-//        }
+        if (drawX + width + 4 > screenWidth || x + width < mouseX) {
+            drawX = x + w - width;
+        }
 
         guiGraphics.pose().pushPose();
         // Set colors and positions
@@ -124,4 +127,8 @@ public class BPDTooltip {
                 borderColorEnd);
     }
 
+    public static void updateParams(int screenWidth, int mouseX) {
+        BPDTooltip.screenWidth = screenWidth;
+        BPDTooltip.mouseX = mouseX;
+    }
 }

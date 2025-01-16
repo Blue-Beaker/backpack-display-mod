@@ -35,7 +35,7 @@ public class BPDTooltipCommon {
         ItemStack stack = this.stack;
 
         graphics.pose().pushPose();
-
+        BPDTooltip.updateParams(graphics.guiWidth(),x);
         BPDTooltip.render(stack,graphics, tooltipX, tooltipY, tooltipW,tooltipH);
 
         graphics.pose().popPose();
