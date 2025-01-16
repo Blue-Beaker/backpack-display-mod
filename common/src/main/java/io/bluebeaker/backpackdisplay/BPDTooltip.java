@@ -1,15 +1,11 @@
 package io.bluebeaker.backpackdisplay;
 
-import java.util.List;
-
-
-import com.mojang.blaze3d.platform.InputConstants;
 import io.bluebeaker.backpackdisplay.api.IDisplaySection;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.List;
 
 public class BPDTooltip {
 
@@ -44,7 +40,7 @@ public class BPDTooltip {
     }
 
     public static void updateSections(ItemStack stack) {
-        if(ItemStack.isSameItemSameTags(stack,lastStack)){
+        if(stack==null || lastStack==null || ItemStack.isSameItemSameTags(stack,lastStack)){
             return;
         }
         List<IDisplaySection> sections = SectionsManager.getSections();
