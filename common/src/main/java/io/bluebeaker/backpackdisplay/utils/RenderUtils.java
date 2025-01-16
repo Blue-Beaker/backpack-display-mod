@@ -1,12 +1,11 @@
 package io.bluebeaker.backpackdisplay.utils;
 
+import dev.architectury.fluid.FluidStack;
 import io.bluebeaker.backpackdisplay.BPDConfig;
 import net.minecraft.client.Minecraft;
-import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
-import dev.architectury.fluid.FluidStack;
 
 public class RenderUtils {
 
@@ -63,15 +62,15 @@ public class RenderUtils {
      */
     public static void renderItemStack(GuiGraphics graphics,ItemStack stack, int x, int y) {
         graphics.renderItem(stack, x, y);
-        String numRep = null;
+        String numRep = "";
         if (stack.getCount() > 1)
             numRep = NumberUtils.getItemCountRepresentation(stack.getCount());
         if (font.width(numRep) > 16) {
             float scale = BPDConfig.label_scale;
             drawLabelCorneredScaled(graphics,x, y, numRep, scale);
-            graphics.renderItemDecorations(client.font, stack, x, y, "");
+            graphics.renderItemDecorations(font, stack, x, y, "");
         } else {
-            graphics.renderItemDecorations(client.font, stack, x, y, numRep);
+            graphics.renderItemDecorations(font, stack, x, y, numRep);
         }
     }
 

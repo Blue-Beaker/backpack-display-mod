@@ -98,7 +98,7 @@ public class BPDTooltip {
         drawBackground(guiGraphics, drawX, drawY, width,
                 height, backgroundColor, borderColorStart, borderColorEnd);
 
-        guiGraphics.pose().translate(0,0,512.0F);
+        guiGraphics.pose().translate(0,0,399);
         // Draw every display sections
         for (IDisplaySection section : sections) {
             if (section.isAvailable()) {
@@ -112,8 +112,6 @@ public class BPDTooltip {
     /** Draws background for this tooltip */
     public static void drawBackground(GuiGraphics guiGraphics, int x, int y, int width, int height, int bgColor, int borderColorStart,
                                       int borderColorEnd) {
-        final int zLevel = 300;
-
         int bgX = x - 3;
         int bgY = y - 3;
         int bgW = width + 6;
