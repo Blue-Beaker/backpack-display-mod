@@ -13,6 +13,7 @@ public class BPDConfig implements ConfigData {
     public static class Visuals {
 
         public int tooltipWidth = 9;
+
         public int tooltipHeight = 4;
 
         public int full_digits = 4;
@@ -26,6 +27,7 @@ public class BPDConfig implements ConfigData {
         public Color backgroundColor = new Color(0xF0100010);
         @ConfigEntry.Gui.CollapsibleObject
         public Color borderColor = new Color(0x505000FF);
+
         public static class Color{
             public Color(int color){
                 alpha=color>>24&255;
@@ -33,9 +35,13 @@ public class BPDConfig implements ConfigData {
                 green=color>>8&255;
                 blue=color&255;
             }
+            @ConfigEntry.BoundedDiscrete(min = 0L,max = 255L)
             public int alpha = 255;
+            @ConfigEntry.BoundedDiscrete(min = 0L,max = 255L)
             public int red = 255;
+            @ConfigEntry.BoundedDiscrete(min = 0L,max = 255L)
             public int green = 255;
+            @ConfigEntry.BoundedDiscrete(min = 0L,max = 255L)
             public int blue = 255;
             public int getColor(){
                 return (alpha<<24)+(red<<16)+(green<<8)+blue;

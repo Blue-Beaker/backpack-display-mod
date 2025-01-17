@@ -1,4 +1,5 @@
 {
+  "text.autoconfig.backpackdisplay.title":"Backpack Display",
   "text.autoconfig.backpackdisplay.option.visuals":"Visuals",
   "text.autoconfig.backpackdisplay.option.visuals.tooltipWidth":"Tooltip width",
   "text.autoconfig.backpackdisplay.option.visuals.tooltipHeight":"Tooltip height",
@@ -8,7 +9,15 @@
   "text.autoconfig.backpackdisplay.option.visuals.label_scale":"Tooltip label scale",
 
   "text.autoconfig.backpackdisplay.option.visuals.backgroundColor":"Background Color",
+  "text.autoconfig.backpackdisplay.option.visuals.backgroundColor.alpha":"Alpha",
+  "text.autoconfig.backpackdisplay.option.visuals.backgroundColor.red":"Red",
+  "text.autoconfig.backpackdisplay.option.visuals.backgroundColor.green":"Green",
+  "text.autoconfig.backpackdisplay.option.visuals.backgroundColor.blue":"Blue",
   "text.autoconfig.backpackdisplay.option.visuals.borderColor":"Border Color",
+  "text.autoconfig.backpackdisplay.option.visuals.borderColor.alpha":"Alpha",
+  "text.autoconfig.backpackdisplay.option.visuals.borderColor.red":"Red",
+  "text.autoconfig.backpackdisplay.option.visuals.borderColor.green":"Green",
+  "text.autoconfig.backpackdisplay.option.visuals.borderColor.blue":"Blue",
 
   "text.autoconfig.backpackdisplay.option.itemSection":"Item Section",
   "text.autoconfig.backpackdisplay.option.itemSection.displayRules":"Display rules",
@@ -19,5 +28,5 @@
   "text.autoconfig.backpackdisplay.option.fluidSection.simpleContainers":"Containers for simple rule",
   "text.autoconfig.backpackdisplay.option.needs_keybind":"Keybind requirement",
   "text.autoconfig.backpackdisplay.option.priorities":"Priorities for sections",
-  "text.autoconfig.backpackdisplay.option.verbose info":"Show debug info"
+  "text.autoconfig.backpackdisplay.option.verbose_info":"Show debug info"
 }
