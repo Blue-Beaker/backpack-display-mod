@@ -1,7 +1,7 @@
 package io.bluebeaker.backpackdisplay.utils;
 
 import dev.architectury.fluid.FluidStack;
-import io.bluebeaker.backpackdisplay.BPDConfig;
+import io.bluebeaker.backpackdisplay.ConfigProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -66,7 +66,7 @@ public class RenderUtils {
         if (stack.getCount() > 1)
             numRep = NumberUtils.getItemCountRepresentation(stack.getCount());
         if (font.width(numRep) > 16) {
-            float scale = BPDConfig.getInstance().label_scale;
+            float scale = ConfigProvider.getInstance().label_scale;
             drawLabelCorneredScaled(graphics,x, y, numRep, scale);
             graphics.renderItemDecorations(font, stack, x, y, "");
         } else {
@@ -80,7 +80,7 @@ public class RenderUtils {
         FluidRender.renderFluid(stack, x, y);
         String numRep = NumberUtils.getFluidCountRepresentation(stack.getAmount());
         if (font.width(numRep) > 16) {
-            float scale = BPDConfig.getInstance().label_scale;
+            float scale = ConfigProvider.getInstance().label_scale;
             drawLabelCorneredScaled(graphics,x, y, numRep, scale);
         } else {
             drawLabelCorneredScaled(graphics,x, y, numRep, 1);

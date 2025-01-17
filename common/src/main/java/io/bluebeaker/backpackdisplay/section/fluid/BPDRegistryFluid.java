@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import io.bluebeaker.backpackdisplay.BPDConfig;
+import io.bluebeaker.backpackdisplay.ConfigProvider;
 import io.bluebeaker.backpackdisplay.BackpackDisplayMod;
 import io.bluebeaker.backpackdisplay.displayslot.IItemMatcher;
 import io.bluebeaker.backpackdisplay.displayslot.MetadataMatcher;
@@ -21,7 +21,7 @@ public class BPDRegistryFluid {
 
     public static void updateFromConfig() {
         registry.clear();
-        for (String rule : BPDConfig.getInstance().fluidSection.simpleContainers) {
+        for (String rule : ConfigProvider.getInstance().fluidSection.simpleContainers) {
             try {
                 addRule(rule);
             } catch (Exception e) {
@@ -48,7 +48,7 @@ public class BPDRegistryFluid {
 
         if (entry != null && item != null) {
             addEntry(item, entry);
-            if (BPDConfig.getInstance().verbose_info)
+            if (ConfigProvider.getInstance().verbose_info)
                 BackpackDisplayMod.logInfo("Adding simple fluid rule for " + item.toString());
         }
     }

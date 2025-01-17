@@ -1,6 +1,6 @@
 package io.bluebeaker.backpackdisplay.section.item;
 
-import io.bluebeaker.backpackdisplay.BPDConfig;
+import io.bluebeaker.backpackdisplay.ConfigProvider;
 import io.bluebeaker.backpackdisplay.BackpackDisplayMod;
 import io.bluebeaker.backpackdisplay.displayslot.DisplaySlotEntryBase;
 import io.bluebeaker.backpackdisplay.displayslot.DisplaySlotEntryList;
@@ -19,7 +19,7 @@ public class BPDRegistryItems {
 
     public static void updateFromConfig(){
         registry.clear();
-        for (String rule : BPDConfig.getInstance().displayRules){
+        for (String rule : ConfigProvider.getInstance().displayRules){
             try {
                 addRule(rule);
             } catch (Exception e) {
@@ -50,7 +50,7 @@ public class BPDRegistryItems {
         IDisplaySlotEntry entry = buildEntryFromStringRule(type, nbtRule, metadataList);
 
         addEntry(item, entry);
-        if(BPDConfig.getInstance().verbose_info)
+        if(ConfigProvider.getInstance().verbose_info)
             BackpackDisplayMod.logInfo("Adding entry with "+item.toString()+"type:"+type+", entry: "+entry.toString());
     }
     public static IDisplaySlotEntry buildEntryFromStringRule(String type, String nbtRule, Set<Integer> metadataList){

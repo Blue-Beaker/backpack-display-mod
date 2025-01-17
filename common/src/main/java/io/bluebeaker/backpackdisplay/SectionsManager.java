@@ -49,7 +49,7 @@ public class SectionsManager {
     }
     /**Update section priorities */
     public static void updateFromConfig() {
-        for (String rule : BPDConfig.getInstance().priorities) {
+        for (String rule : ConfigProvider.getInstance().priorities) {
             String[] split = rule.replaceAll(" ", "").split(":");
             if (split.length >= 2) {
                 String id = split[0];
@@ -66,7 +66,7 @@ public class SectionsManager {
     }
     /**Updates config file, add missing priorities */
     public static void updateConfig() {
-        List<String> priorities = new ArrayList<String>(Arrays.asList(BPDConfig.getInstance().priorities));
+        List<String> priorities = new ArrayList<String>(Arrays.asList(ConfigProvider.getInstance().priorities));
         boolean modified = false;
         for (IDisplaySection section : sections) {
             String id = section.getID();
@@ -76,7 +76,7 @@ public class SectionsManager {
             }
         }
         if(modified){
-            BPDConfig.getInstance().priorities = priorities.toArray(new String[0]);
+            ConfigProvider.getInstance().priorities = priorities.toArray(new String[0]);
 
 //            ConfigManager.sync(BackpackDisplayMod.MODID, Type.INSTANCE);
         }

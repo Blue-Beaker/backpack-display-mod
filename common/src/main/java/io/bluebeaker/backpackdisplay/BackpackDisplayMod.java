@@ -4,6 +4,8 @@ import com.google.common.base.Suppliers;
 import dev.architectury.registry.registries.RegistrarManager;
 import io.bluebeaker.backpackdisplay.section.fluid.DisplaySectionFluid;
 import io.bluebeaker.backpackdisplay.section.item.DisplaySectionItem;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 
 import java.util.function.Supplier;
 
@@ -13,7 +15,9 @@ public class BackpackDisplayMod {
     public static final Supplier<RegistrarManager> REGISTRIES = Suppliers.memoize(() -> RegistrarManager.get(MOD_ID));
 
     public static void init() {
-        System.out.println(BPDExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
+
+        AutoConfig.register(BPDConfig.class, Toml4jConfigSerializer::new);
+        ConfigProvider.setInstance(AutoConfig.getConfigHolder(BPDConfig.class).getConfig());
 
         BPDConfigHelper.updateConfig();
         SectionsManager.addSection(new DisplaySectionItem());

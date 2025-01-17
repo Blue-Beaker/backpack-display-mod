@@ -1,12 +1,11 @@
 package io.bluebeaker.backpackdisplay;
 
-public class BPDConfig {
-    private static final BPDConfig INSTANCE = new BPDConfig();
+import me.shedaniel.autoconfig.ConfigData;
+import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
-    public static BPDConfig getInstance(){
-        return INSTANCE;
-    }
-
+@Config(name = BackpackDisplayMod.MOD_ID)
+public class BPDConfig implements ConfigData {
     public String[] displayRules = {
         //Vanilla Shulker Boxes
         "minecraft:shulker_box#list#BlockEntityTag.Items",
@@ -66,7 +65,6 @@ public class BPDConfig {
         PRESSED,
         RELEASED
     }
-
     public KeybindType needs_keybind = KeybindType.NOT_NEEDED;
 
     public int offset_x = 0;
@@ -77,6 +75,7 @@ public class BPDConfig {
     public boolean verbose_info = false;
 
 
+    @ConfigEntry.Gui.CollapsibleObject
     public FluidSection fluidSection = new FluidSection();
     public static class FluidSection{
         public boolean simpleRule = true;
@@ -86,12 +85,15 @@ public class BPDConfig {
 
     public String[] priorities = {"items:0"};
 
+    @ConfigEntry.Gui.CollapsibleObject
     public Colors colors = new Colors();
 
     public static class Colors{
         // public static int backgroundColor = 0xF0100010;
         // public static int borderColorStart = 0x505000FF;
+        @ConfigEntry.Gui.CollapsibleObject
         public Color backgroundColor = new Color(0xF0100010);
+        @ConfigEntry.Gui.CollapsibleObject
         public Color borderColor = new Color(0x505000FF);
         public static class Color{
             public Color(int color){
