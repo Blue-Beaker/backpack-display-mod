@@ -1,7 +1,13 @@
 package io.bluebeaker.backpackdisplay;
 
 public class BPDConfig {
-    public static String[] displayRules = {
+    private static final BPDConfig INSTANCE = new BPDConfig();
+
+    public static BPDConfig getInstance(){
+        return INSTANCE;
+    }
+
+    public String[] displayRules = {
         //Vanilla Shulker Boxes
         "minecraft:shulker_box#list#BlockEntityTag.Items",
         "minecraft:white_shulker_box#list#BlockEntityTag.Items",
@@ -49,38 +55,38 @@ public class BPDConfig {
         "forestry:builder_bag_t2#list#Slots"
     };
 
-    public static int tooltipWidth = 9;
+    public int tooltipWidth = 9;
 
-    public static int tooltipHeight = 4;
+    public int tooltipHeight = 4;
 
-    public static int full_digits = 4;
+    public int full_digits = 4;
 
-    public enum KeybindType{
+    public static enum KeybindType{
         NOT_NEEDED,
         PRESSED,
         RELEASED
     }
 
-    public static KeybindType needs_keybind = KeybindType.NOT_NEEDED;
+    public KeybindType needs_keybind = KeybindType.NOT_NEEDED;
 
-    public static int offset_x = 0;
-    public static int offset_y = -8;
+    public int offset_x = 0;
+    public int offset_y = -8;
 
-    public static float label_scale = 0.5f;
+    public float label_scale = 0.5f;
 
-    public static boolean verbose_info = false;
+    public boolean verbose_info = false;
 
 
-    public static FluidSection fluidSection = new FluidSection();
+    public FluidSection fluidSection = new FluidSection();
     public static class FluidSection{
         public boolean simpleRule = true;
         public boolean simpleRuleBlacklist = false;
         public String[] simpleContainers = {};
     }
 
-    public static String[] priorities = {"items:0"};
+    public String[] priorities = {"items:0"};
 
-    public static Colors colors = new Colors();
+    public Colors colors = new Colors();
 
     public static class Colors{
         // public static int backgroundColor = 0xF0100010;

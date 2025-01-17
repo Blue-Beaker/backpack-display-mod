@@ -17,8 +17,8 @@ public class BPDTooltip {
     private static Minecraft client = Minecraft.getInstance();
 
     public static boolean beforeRender(){
-        if (BPDConfig.needs_keybind != BPDConfig.KeybindType.NOT_NEEDED) {
-            if (BPDConfig.needs_keybind == BPDConfig.KeybindType.PRESSED
+        if (BPDConfig.getInstance().needs_keybind != BPDConfig.KeybindType.NOT_NEEDED) {
+            if (BPDConfig.getInstance().needs_keybind == BPDConfig.KeybindType.PRESSED
                     ^ Keybind.keyShowContents.isDown()) {
                 return false;
             }
@@ -77,8 +77,8 @@ public class BPDTooltip {
             return;
 
         // Upper left corner of first item to draw
-        int drawX = x + BPDConfig.offset_x;
-        int drawY = y + BPDConfig.offset_y - height;
+        int drawX = x + BPDConfig.getInstance().offset_x;
+        int drawY = y + BPDConfig.getInstance().offset_y - height;
         // Move down when top out of screen
         if (drawY < 4) {
             drawY = y + h + 8;

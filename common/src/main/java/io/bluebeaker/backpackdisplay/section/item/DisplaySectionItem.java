@@ -72,12 +72,12 @@ public class DisplaySectionItem implements IDisplaySection {
             return;
         }
 
-        int maxCount = BPDConfig.tooltipWidth * BPDConfig.tooltipHeight;
+        int maxCount = BPDConfig.getInstance().tooltipWidth * BPDConfig.getInstance().tooltipHeight;
 
         int totalCount = items.size();
 
         // Get width of tooltip
-        int totalWidth = Math.min(items.size(), BPDConfig.tooltipWidth);
+        int totalWidth = Math.min(items.size(), BPDConfig.getInstance().tooltipWidth);
 
         // Draw label for overflowed items that takes a slot
         if (totalCount > maxCount) {
@@ -87,7 +87,7 @@ public class DisplaySectionItem implements IDisplaySection {
         }
 
         // Get height of tooltip
-        int totalHeight = Math.min((totalCount - 1) / BPDConfig.tooltipWidth + 1, BPDConfig.tooltipHeight);
+        int totalHeight = Math.min((totalCount - 1) / BPDConfig.getInstance().tooltipWidth + 1, BPDConfig.getInstance().tooltipHeight);
 
         int pixelWidth = totalWidth * 18;
         int pixelHeight = totalHeight * 18;
@@ -110,15 +110,15 @@ public class DisplaySectionItem implements IDisplaySection {
         int totalCount = this.itemsToRender.size() - overflowItems;
 
         if (this.overflowItems > 0) {
-            RenderUtils.drawLabelCentered( graphics,x + (BPDConfig.tooltipWidth - 1) * 18, y + (BPDConfig.tooltipHeight - 1) * 18,
+            RenderUtils.drawLabelCentered( graphics,x + (BPDConfig.getInstance().tooltipWidth - 1) * 18, y + (BPDConfig.getInstance().tooltipHeight - 1) * 18,
                     "+" + NumberUtils.getItemCountRepresentation(overflowItems));
         }
 
         // Render every item
         for (int i = 0; i < totalCount; i++) {
             ItemStack stack2 = items.get(i);
-            int slotX = count % BPDConfig.tooltipWidth;
-            int slotY = count / BPDConfig.tooltipWidth;
+            int slotX = count % BPDConfig.getInstance().tooltipWidth;
+            int slotY = count / BPDConfig.getInstance().tooltipWidth;
             RenderUtils.renderItemStack(graphics,stack2, x + (slotX) * 18, y + (slotY) * 18);
             count++;
         }

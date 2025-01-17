@@ -1,11 +1,5 @@
 package io.bluebeaker.backpackdisplay.section.item;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import io.bluebeaker.backpackdisplay.BPDConfig;
 import io.bluebeaker.backpackdisplay.BackpackDisplayMod;
 import io.bluebeaker.backpackdisplay.displayslot.DisplaySlotEntryBase;
@@ -14,16 +8,18 @@ import io.bluebeaker.backpackdisplay.displayslot.DisplaySlotEntrySingle;
 import io.bluebeaker.backpackdisplay.displayslot.IDisplaySlotEntry;
 import io.bluebeaker.backpackdisplay.utils.ItemUtils;
 import io.bluebeaker.backpackdisplay.utils.NumberUtils;
-import net.minecraft.world.item.Item;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+
+import java.util.*;
 
 public class BPDRegistryItems {
     public static HashMap<Item,List<IDisplaySlotEntry>> registry = new HashMap<Item,List<IDisplaySlotEntry>>();
 
     public static void updateFromConfig(){
         registry.clear();
-        for (String rule : BPDConfig.displayRules){
+        for (String rule : BPDConfig.getInstance().displayRules){
             try {
                 addRule(rule);
             } catch (Exception e) {
@@ -54,7 +50,7 @@ public class BPDRegistryItems {
         IDisplaySlotEntry entry = buildEntryFromStringRule(type, nbtRule, metadataList);
 
         addEntry(item, entry);
-        if(BPDConfig.verbose_info)
+        if(BPDConfig.getInstance().verbose_info)
             BackpackDisplayMod.logInfo("Adding entry with "+item.toString()+"type:"+type+", entry: "+entry.toString());
     }
     public static IDisplaySlotEntry buildEntryFromStringRule(String type, String nbtRule, Set<Integer> metadataList){

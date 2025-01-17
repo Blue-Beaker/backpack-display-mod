@@ -54,7 +54,7 @@ public class DisplaySectionFluid implements IDisplaySection {
         List<FluidStack> fluids = new ArrayList<FluidStack>();
         fluids.addAll(getFluidStacksCT(stack));
 
-        if (BPDConfig.fluidSection.simpleRule
+        if (BPDConfig.getInstance().fluidSection.simpleRule
                 && (isSimpleContainer(stack))) {
             FluidStack simpleFluid = getFluidStackBasic(stack);
             if (simpleFluid != null) {
@@ -82,7 +82,7 @@ public class DisplaySectionFluid implements IDisplaySection {
     }
 
     private boolean isSimpleContainer( ItemStack stack) {
-        boolean invert = BPDConfig.fluidSection.simpleRuleBlacklist;
+        boolean invert = BPDConfig.getInstance().fluidSection.simpleRuleBlacklist;
         List<IItemMatcher> rules = BPDRegistryFluid.registry.get(stack.getItem());
         if (rules == null)
             return invert;
@@ -104,12 +104,12 @@ public class DisplaySectionFluid implements IDisplaySection {
             return;
         }
 
-        int maxCount = BPDConfig.tooltipWidth * BPDConfig.tooltipHeight;
+        int maxCount = BPDConfig.getInstance().tooltipWidth * BPDConfig.getInstance().tooltipHeight;
 
         int totalCount = fluids.size();
 
         // Get width of tooltip
-        int totalWidth = Math.min(fluids.size(), BPDConfig.tooltipWidth);
+        int totalWidth = Math.min(fluids.size(), BPDConfig.getInstance().tooltipWidth);
 
         // Draw label for overflowed items that takes a slot
         if (totalCount > maxCount) {
@@ -119,7 +119,7 @@ public class DisplaySectionFluid implements IDisplaySection {
         }
 
         // Get height of tooltip
-        int totalHeight = Math.min((totalCount - 1) / BPDConfig.tooltipWidth + 1, BPDConfig.tooltipHeight);
+        int totalHeight = Math.min((totalCount - 1) / BPDConfig.getInstance().tooltipWidth + 1, BPDConfig.getInstance().tooltipHeight);
 
         int pixelWidth = totalWidth * 18;
         int pixelHeight = totalHeight * 18;
@@ -159,15 +159,15 @@ public class DisplaySectionFluid implements IDisplaySection {
         int totalCount = fluids.size() - overflowFluids;
 
         if (this.overflowFluids > 0) {
-            RenderUtils.drawLabelCentered(graphics,x + (BPDConfig.tooltipWidth - 1) * 18, y + (BPDConfig.tooltipHeight - 1) * 18,
+            RenderUtils.drawLabelCentered(graphics,x + (BPDConfig.getInstance().tooltipWidth - 1) * 18, y + (BPDConfig.getInstance().tooltipHeight - 1) * 18,
                     "+" + NumberUtils.getItemCountRepresentation(overflowFluids));
         }
 
         // Render every item
         for (int i = 0; i < totalCount; i++) {
             FluidStack stack2 = fluids.get(i);
-            int slotX = count % BPDConfig.tooltipWidth;
-            int slotY = count / BPDConfig.tooltipWidth;
+            int slotX = count % BPDConfig.getInstance().tooltipWidth;
+            int slotY = count / BPDConfig.getInstance().tooltipWidth;
 
             RenderUtils.renderFluidStack(graphics,stack2, x + (slotX) * 18, y + (slotY) * 18);
             count++;
