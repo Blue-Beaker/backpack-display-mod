@@ -6,91 +6,22 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 @Config(name = BackpackDisplayMod.MOD_ID)
 public class BPDConfig implements ConfigData {
-    public String[] displayRules = {
-        //Vanilla Shulker Boxes
-        "minecraft:shulker_box#list#BlockEntityTag.Items",
-        "minecraft:white_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:orange_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:magenta_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:light_blue_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:yellow_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:lime_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:pink_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:gray_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:silver_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:cyan_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:purple_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:blue_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:brown_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:green_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:red_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:black_shulker_box#list#BlockEntityTag.Items",
-        //Storage Drawers (Creative ctrl+pick block)
-        "storagedrawers:basicdrawers#list#BlockEntityTag.Drawers;Item;Count",
-        "storagedrawers:customdrawers#list#BlockEntityTag.Drawers;Item;Count",
-        "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.0.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.0.Conv",
-        "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.1.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.1.Conv",
-        "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.2.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.2.Conv",
-        //Storage Drawers (Digged)
-        "storagedrawers:basicdrawers#list#tile.Drawers;Item;Count",
-        "storagedrawers:customdrawers#list#tile.Drawers;Item;Count",
-        "storagedrawers:compdrawers#single#tile.Drawers.Items.0.Item;tile.Drawers.Count;/tile.Drawers.Items.0.Conv",
-        "storagedrawers:compdrawers#single#tile.Drawers.Items.1.Item;tile.Drawers.Count;/tile.Drawers.Items.1.Conv",
-        "storagedrawers:compdrawers#single#tile.Drawers.Items.2.Item;tile.Drawers.Count;/tile.Drawers.Items.2.Conv",
-        //Forestry Backpacks
-        "forestry:apiarist_bag#list#Slots",
-        "forestry:lepidopterist_bag#list#Slots",
-        "forestry:miner_bag#list#Slots",
-        "forestry:miner_bag_t2#list#Slots",
-        "forestry:digger_bag#list#Slots",
-        "forestry:digger_bag_t2#list#Slots",
-        "forestry:forester_bag#list#Slots",
-        "forestry:forester_bag_t2#list#Slots",
-        "forestry:hunter_bag#list#Slots",
-        "forestry:hunter_bag_t2#list#Slots",
-        "forestry:adventurer_bag#list#Slots",
-        "forestry:adventurer_bag_t2#list#Slots",
-        "forestry:builder_bag#list#Slots",
-        "forestry:builder_bag_t2#list#Slots"
-    };
-
-    public int tooltipWidth = 9;
-
-    public int tooltipHeight = 4;
-
-    public int full_digits = 4;
-
-    public static enum KeybindType{
-        NOT_NEEDED,
-        PRESSED,
-        RELEASED
-    }
-    public KeybindType needs_keybind = KeybindType.NOT_NEEDED;
-
-    public int offset_x = 0;
-    public int offset_y = -8;
-
-    public float label_scale = 0.5f;
-
-    public boolean verbose_info = false;
-
 
     @ConfigEntry.Gui.CollapsibleObject
-    public FluidSection fluidSection = new FluidSection();
-    public static class FluidSection{
-        public boolean simpleRule = true;
-        public boolean simpleRuleBlacklist = false;
-        public String[] simpleContainers = {};
-    }
+    public Visuals visuals = new Visuals();
 
-    public String[] priorities = {"items:0"};
+    public static class Visuals {
 
-    @ConfigEntry.Gui.CollapsibleObject
-    public Colors colors = new Colors();
+        public int tooltipWidth = 9;
+        public int tooltipHeight = 4;
 
-    public static class Colors{
-        // public static int backgroundColor = 0xF0100010;
-        // public static int borderColorStart = 0x505000FF;
+        public int full_digits = 4;
+
+        public int offset_x = 0;
+        public int offset_y = -8;
+
+        public float label_scale = 0.5f;
+
         @ConfigEntry.Gui.CollapsibleObject
         public Color backgroundColor = new Color(0xF0100010);
         @ConfigEntry.Gui.CollapsibleObject
@@ -111,4 +42,76 @@ public class BPDConfig implements ConfigData {
             }
         }
     }
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public ItemSection itemSection = new ItemSection();
+    public static class ItemSection{
+        public String[] displayRules = {
+                //Vanilla Shulker Boxes
+                "minecraft:shulker_box#list#BlockEntityTag.Items",
+                "minecraft:white_shulker_box#list#BlockEntityTag.Items",
+                "minecraft:orange_shulker_box#list#BlockEntityTag.Items",
+                "minecraft:magenta_shulker_box#list#BlockEntityTag.Items",
+                "minecraft:light_blue_shulker_box#list#BlockEntityTag.Items",
+                "minecraft:yellow_shulker_box#list#BlockEntityTag.Items",
+                "minecraft:lime_shulker_box#list#BlockEntityTag.Items",
+                "minecraft:pink_shulker_box#list#BlockEntityTag.Items",
+                "minecraft:gray_shulker_box#list#BlockEntityTag.Items",
+                "minecraft:silver_shulker_box#list#BlockEntityTag.Items",
+                "minecraft:cyan_shulker_box#list#BlockEntityTag.Items",
+                "minecraft:purple_shulker_box#list#BlockEntityTag.Items",
+                "minecraft:blue_shulker_box#list#BlockEntityTag.Items",
+                "minecraft:brown_shulker_box#list#BlockEntityTag.Items",
+                "minecraft:green_shulker_box#list#BlockEntityTag.Items",
+                "minecraft:red_shulker_box#list#BlockEntityTag.Items",
+                "minecraft:black_shulker_box#list#BlockEntityTag.Items",
+                //Storage Drawers (Creative ctrl+pick block)
+                "storagedrawers:basicdrawers#list#BlockEntityTag.Drawers;Item;Count",
+                "storagedrawers:customdrawers#list#BlockEntityTag.Drawers;Item;Count",
+                "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.0.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.0.Conv",
+                "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.1.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.1.Conv",
+                "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.2.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.2.Conv",
+                //Storage Drawers (Digged)
+                "storagedrawers:basicdrawers#list#tile.Drawers;Item;Count",
+                "storagedrawers:customdrawers#list#tile.Drawers;Item;Count",
+                "storagedrawers:compdrawers#single#tile.Drawers.Items.0.Item;tile.Drawers.Count;/tile.Drawers.Items.0.Conv",
+                "storagedrawers:compdrawers#single#tile.Drawers.Items.1.Item;tile.Drawers.Count;/tile.Drawers.Items.1.Conv",
+                "storagedrawers:compdrawers#single#tile.Drawers.Items.2.Item;tile.Drawers.Count;/tile.Drawers.Items.2.Conv",
+                //Forestry Backpacks
+                "forestry:apiarist_bag#list#Slots",
+                "forestry:lepidopterist_bag#list#Slots",
+                "forestry:miner_bag#list#Slots",
+                "forestry:miner_bag_t2#list#Slots",
+                "forestry:digger_bag#list#Slots",
+                "forestry:digger_bag_t2#list#Slots",
+                "forestry:forester_bag#list#Slots",
+                "forestry:forester_bag_t2#list#Slots",
+                "forestry:hunter_bag#list#Slots",
+                "forestry:hunter_bag_t2#list#Slots",
+                "forestry:adventurer_bag#list#Slots",
+                "forestry:adventurer_bag_t2#list#Slots",
+                "forestry:builder_bag#list#Slots",
+                "forestry:builder_bag_t2#list#Slots"
+        };
+    }
+
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public FluidSection fluidSection = new FluidSection();
+    public static class FluidSection{
+        public boolean simpleRule = true;
+        public boolean simpleRuleBlacklist = false;
+        public String[] simpleContainers = {};
+    }
+
+    public KeybindType needs_keybind = KeybindType.NOT_NEEDED;
+    public static enum KeybindType{
+        NOT_NEEDED,
+        PRESSED,
+        RELEASED
+    }
+    public String[] priorities = {"items:0"};
+
+    public boolean verbose_info = false;
+
 }

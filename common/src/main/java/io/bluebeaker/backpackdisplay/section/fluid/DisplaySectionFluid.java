@@ -104,12 +104,12 @@ public class DisplaySectionFluid implements IDisplaySection {
             return;
         }
 
-        int maxCount = ConfigProvider.getInstance().tooltipWidth * ConfigProvider.getInstance().tooltipHeight;
+        int maxCount = ConfigProvider.getInstance().visuals.tooltipWidth * ConfigProvider.getInstance().visuals.tooltipHeight;
 
         int totalCount = fluids.size();
 
         // Get width of tooltip
-        int totalWidth = Math.min(fluids.size(), ConfigProvider.getInstance().tooltipWidth);
+        int totalWidth = Math.min(fluids.size(), ConfigProvider.getInstance().visuals.tooltipWidth);
 
         // Draw label for overflowed items that takes a slot
         if (totalCount > maxCount) {
@@ -119,7 +119,7 @@ public class DisplaySectionFluid implements IDisplaySection {
         }
 
         // Get height of tooltip
-        int totalHeight = Math.min((totalCount - 1) / ConfigProvider.getInstance().tooltipWidth + 1, ConfigProvider.getInstance().tooltipHeight);
+        int totalHeight = Math.min((totalCount - 1) / ConfigProvider.getInstance().visuals.tooltipWidth + 1, ConfigProvider.getInstance().visuals.tooltipHeight);
 
         int pixelWidth = totalWidth * 18;
         int pixelHeight = totalHeight * 18;
@@ -159,15 +159,15 @@ public class DisplaySectionFluid implements IDisplaySection {
         int totalCount = fluids.size() - overflowFluids;
 
         if (this.overflowFluids > 0) {
-            RenderUtils.drawLabelCentered(graphics,x + (ConfigProvider.getInstance().tooltipWidth - 1) * 18, y + (ConfigProvider.getInstance().tooltipHeight - 1) * 18,
+            RenderUtils.drawLabelCentered(graphics,x + (ConfigProvider.getInstance().visuals.tooltipWidth - 1) * 18, y + (ConfigProvider.getInstance().visuals.tooltipHeight - 1) * 18,
                     "+" + NumberUtils.getItemCountRepresentation(overflowFluids));
         }
 
         // Render every item
         for (int i = 0; i < totalCount; i++) {
             FluidStack stack2 = fluids.get(i);
-            int slotX = count % ConfigProvider.getInstance().tooltipWidth;
-            int slotY = count / ConfigProvider.getInstance().tooltipWidth;
+            int slotX = count % ConfigProvider.getInstance().visuals.tooltipWidth;
+            int slotY = count / ConfigProvider.getInstance().visuals.tooltipWidth;
 
             RenderUtils.renderFluidStack(graphics,stack2, x + (slotX) * 18, y + (slotY) * 18);
             count++;

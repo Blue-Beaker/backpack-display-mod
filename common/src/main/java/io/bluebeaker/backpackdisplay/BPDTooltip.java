@@ -77,8 +77,8 @@ public class BPDTooltip {
             return;
 
         // Upper left corner of first item to draw
-        int drawX = x + ConfigProvider.getInstance().offset_x;
-        int drawY = y + ConfigProvider.getInstance().offset_y - height;
+        int drawX = x + ConfigProvider.getInstance().visuals.offset_x;
+        int drawY = y + ConfigProvider.getInstance().visuals.offset_y - height;
         // Move down when top out of screen
         if (drawY < 4) {
             drawY = y + h + 8;

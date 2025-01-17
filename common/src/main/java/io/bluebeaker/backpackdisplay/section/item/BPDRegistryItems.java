@@ -19,7 +19,7 @@ public class BPDRegistryItems {
 
     public static void updateFromConfig(){
         registry.clear();
-        for (String rule : ConfigProvider.getInstance().displayRules){
+        for (String rule : ConfigProvider.getInstance().itemSection.displayRules){
             try {
                 addRule(rule);
             } catch (Exception e) {

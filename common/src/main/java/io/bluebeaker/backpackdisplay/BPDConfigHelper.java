@@ -1,6 +1,6 @@
 package io.bluebeaker.backpackdisplay;
 
-import io.bluebeaker.backpackdisplay.BPDConfig.Colors;
+import io.bluebeaker.backpackdisplay.BPDConfig.Visuals;
 import io.bluebeaker.backpackdisplay.section.fluid.BPDRegistryFluid;
 import io.bluebeaker.backpackdisplay.section.item.BPDRegistryItems;
 
@@ -17,8 +17,8 @@ public class BPDConfigHelper {
     }
 
     public static void updateColor(){
-        Colors colors = ConfigProvider.getInstance().colors;
-        backgroundColor=colors.backgroundColor.getColor();
-        borderColorStart=colors.borderColor.getColor();
+        Visuals visuals = ConfigProvider.getInstance().visuals;
+        backgroundColor= visuals.backgroundColor.getColor();
+        borderColorStart= visuals.borderColor.getColor();
     }
 }
