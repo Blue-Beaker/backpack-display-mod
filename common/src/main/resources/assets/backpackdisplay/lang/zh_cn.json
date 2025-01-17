@@ -1,0 +1,32 @@
+{
+  "text.autoconfig.backpackdisplay.title":"Backpack Display",
+  "text.autoconfig.backpackdisplay.option.appearance":"外观",
+  "text.autoconfig.backpackdisplay.option.appearance.tooltipWidth":"宽度(行)",
+  "text.autoconfig.backpackdisplay.option.appearance.tooltipHeight":"高度(列)",
+  "text.autoconfig.backpackdisplay.option.appearance.full_digits":"完整显示的数字位数",
+  "text.autoconfig.backpackdisplay.option.appearance.offset_x":"偏移 X",
+  "text.autoconfig.backpackdisplay.option.appearance.offset_y":"偏移 Y",
+  "text.autoconfig.backpackdisplay.option.appearance.label_scale":"标签尺寸",
+
+  "text.autoconfig.backpackdisplay.option.appearance.backgroundColor":"背景颜色",
+  "text.autoconfig.backpackdisplay.option.appearance.backgroundColor.alpha":"不透明度",
+  "text.autoconfig.backpackdisplay.option.appearance.backgroundColor.red":"红",
+  "text.autoconfig.backpackdisplay.option.appearance.backgroundColor.green":"绿",
+  "text.autoconfig.backpackdisplay.option.appearance.backgroundColor.blue":"蓝",
+  "text.autoconfig.backpackdisplay.option.appearance.borderColor":"边框颜色",
+  "text.autoconfig.backpackdisplay.option.appearance.borderColor.alpha":"不透明度",
+  "text.autoconfig.backpackdisplay.option.appearance.borderColor.red":"红",
+  "text.autoconfig.backpackdisplay.option.appearance.borderColor.green":"绿",
+  "text.autoconfig.backpackdisplay.option.appearance.borderColor.blue":"蓝",
+
+  "text.autoconfig.backpackdisplay.option.itemSection":"物品部分",
+  "text.autoconfig.backpackdisplay.option.itemSection.displayRules":"显示规则",
+
+  "text.autoconfig.backpackdisplay.option.fluidSection":"流体部分",
+  "text.autoconfig.backpackdisplay.option.fluidSection.simpleRule":"启用简易规则",
+  "text.autoconfig.backpackdisplay.option.fluidSection.simpleContainerListIsBlacklist":"为简易容器名单使用黑名单",
+  "text.autoconfig.backpackdisplay.option.fluidSection.simpleContainerList":"简易容器名单",
+  "text.autoconfig.backpackdisplay.option.keybindRequirement":"键位需求",
+  "text.autoconfig.backpackdisplay.option.priorities":"优先级",
+  "text.autoconfig.backpackdisplay.option.verbose_info":"显示调试信息"
+}

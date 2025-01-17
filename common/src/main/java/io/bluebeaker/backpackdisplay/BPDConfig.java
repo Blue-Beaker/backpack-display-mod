@@ -8,9 +8,9 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 public class BPDConfig implements ConfigData {
 
     @ConfigEntry.Gui.CollapsibleObject
-    public Visuals visuals = new Visuals();
+    public Appearance appearance = new Appearance();
 
-    public static class Visuals {
+    public static class Appearance {
 
         public int tooltipWidth = 9;
 
@@ -106,11 +106,11 @@ public class BPDConfig implements ConfigData {
     public FluidSection fluidSection = new FluidSection();
     public static class FluidSection{
         public boolean simpleRule = true;
-        public boolean simpleRuleBlacklist = false;
-        public String[] simpleContainers = {};
+        public boolean simpleContainerListIsBlacklist = false;
+        public String[] simpleContainerList = {};
     }
 
-    public KeybindType needs_keybind = KeybindType.NOT_NEEDED;
+    public KeybindType keybindRequirement = KeybindType.NOT_NEEDED;
     public static enum KeybindType{
         NOT_NEEDED,
         PRESSED,

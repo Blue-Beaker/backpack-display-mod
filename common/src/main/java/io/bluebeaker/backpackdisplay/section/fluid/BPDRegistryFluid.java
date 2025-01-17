@@ -21,7 +21,7 @@ public class BPDRegistryFluid {
 
     public static void updateFromConfig() {
         registry.clear();
-        for (String rule : ConfigProvider.getInstance().fluidSection.simpleContainers) {
+        for (String rule : ConfigProvider.getInstance().fluidSection.simpleContainerList) {
             try {
                 addRule(rule);
             } catch (Exception e) {

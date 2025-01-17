@@ -8,7 +8,7 @@ import io.bluebeaker.backpackdisplay.ConfigProvider;
 public class NumberUtils {
 
     public static String getItemCountRepresentation(long number) {
-        if (Math.log10(number) < ConfigProvider.getInstance().visuals.full_digits)
+        if (Math.log10(number) < ConfigProvider.getInstance().appearance.full_digits)
             return String.valueOf(number);
         if (number >= 1000000000) {
             return String.format("%.1fG", number / 100000000 / 10.0);
