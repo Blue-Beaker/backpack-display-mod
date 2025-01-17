@@ -116,7 +116,7 @@ public class BPDConfig implements ConfigData {
         PRESSED,
         RELEASED
     }
-    public String[] priorities = {"items:0"};
+    public String[] priorities = {"items:0","fluids:-1"};
 
     public boolean verbose_info = false;
 
