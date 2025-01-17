@@ -40,6 +40,8 @@ dependencies {
     architecturyTransformerClasspath(ctDep)
 
     implementation(include("io.github.llamalad7:mixinextras-forge:${rootProject.mixinextras_version}"))
+
+    modApi "me.shedaniel.cloth:cloth-config-forge:${rootProject.clothconfig_version}"
 }
 
 processResources {

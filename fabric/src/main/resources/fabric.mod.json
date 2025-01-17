@@ -17,6 +17,9 @@
   "entrypoints": {
     "main": [
       "io.bluebeaker.backpackdisplay.fabric.BackpackDisplayFabric"
+    ],
+    "modmenu": [
+      "io.bluebeaker.backpackdisplay.fabric.ModMenuIntegration"
     ]
   },
   "mixins": [

@@ -20,6 +20,11 @@ dependencies {
     annotationProcessor ctDep
 
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${rootProject.mixinextras_version}"))
+
+    // Only use the common classes from cloth config. Don't use fabric-only classes in common
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${rootProject.clothconfig_version}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
 }
 
 publishing {
