@@ -18,7 +18,7 @@ import java.util.List;
 
 public class DisplaySectionFluid implements IDisplaySection {
 
-    private ItemStack itemStack;
+    private ItemStack itemStack = ItemStack.EMPTY;
     private List<FluidStack> fluidStacks = Collections.emptyList();
     /** Amount of fluids hidden by overflow */
     private int overflowFluids = 0;

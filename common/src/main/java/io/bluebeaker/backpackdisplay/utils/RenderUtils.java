@@ -22,16 +22,10 @@ public class RenderUtils {
     public static void drawLabelCorneredScaled(GuiGraphics graphics, int x, int y, String text, float scale) {
 
         graphics.pose().pushPose();
-        graphics.pose().scale(scale, scale, scale);
-//        GlStateManager.disableLighting();
-//        GlStateManager.disableDepth();
-//        GlStateManager.disableBlend();
+        graphics.pose().scale(scale, scale, 1);
+        graphics.pose().translate(0,0,200);
         graphics.drawString(font, text, (int) ((x + 15) / scale - font.width(text) + 2),
-                (int) ((y + 6 + font.lineHeight) / scale - font.lineHeight + 3), 16777215);
-//        GlStateManager.enableLighting();
-//        GlStateManager.enableDepth();
-//        GlStateManager.enableBlend();
-//        GlStateManager.popMatrix();
+                (int) ((y + 6 + font.lineHeight) / scale - font.lineHeight + 3), 16777215,true);
         graphics.pose().popPose();
     }
 
@@ -43,14 +37,11 @@ public class RenderUtils {
      * @param text
      */
     public static void drawLabelCentered(GuiGraphics graphics,int x, int y, String text) {
-//        GlStateManager.disableLighting();
-//        GlStateManager.disableDepth();
-//        GlStateManager.disableBlend();
+        graphics.pose().pushPose();
+        graphics.pose().translate(0,0,200);
         graphics.drawString(font,text, (x + 9 - font.width(text) / 2),
                 (y + 9 - font.lineHeight / 2), 16777215);
-//        GlStateManager.enableLighting();
-//        GlStateManager.enableDepth();
-//        GlStateManager.enableBlend();
+        graphics.pose().popPose();
     }
 
     /**
@@ -77,7 +68,7 @@ public class RenderUtils {
     public static void renderFluidStack(GuiGraphics graphics,FluidStack stack, int x, int y) {
         if (stack == null || stack.getAmount() == 0)
             return;
-        FluidRender.renderFluid(stack, x, y);
+        FluidRender.renderFluid(graphics,stack, x, y);
         String numRep = NumberUtils.getFluidCountRepresentation(stack.getAmount());
         if (font.width(numRep) > 16) {
             float scale = ConfigProvider.getConfig().appearance.label_scale;
