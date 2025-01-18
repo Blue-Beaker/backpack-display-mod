@@ -7,6 +7,7 @@ import io.bluebeaker.backpackdisplay.displayslot.DisplaySlotEntryList;
 import io.bluebeaker.backpackdisplay.displayslot.DisplaySlotEntrySingle;
 import io.bluebeaker.backpackdisplay.displayslot.IDisplaySlotEntry;
 import io.bluebeaker.backpackdisplay.utils.ItemUtils;
+import io.bluebeaker.backpackdisplay.utils.StringUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -21,10 +22,13 @@ public class BPDRegistryItems {
     public static void updateFromConfig(){
         registry.clear();
         for (String rule : ConfigProvider.getConfig().itemSection.displayRules){
-            try {
-                addRule(rule);
-            } catch (Exception e) {
-                BackpackDisplayMod.logError("Error when processing rule '"+rule+"': \n"+e.toString());
+            List<String> filledRules = StringUtils.fillInTemplates(rule);
+            for (String filledRule : filledRules) {
+                try {
+                    addRule(filledRule);
+                } catch (Exception e) {
+                    BackpackDisplayMod.logError("Error when processing rule '"+filledRule+"': \n"+e.toString());
+                }
             }
         }
     }
