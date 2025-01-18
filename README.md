@@ -9,14 +9,24 @@ Configurable options(See the mod's config):
 - Position and color of the tooltip  
 - Optional hold or release a keybind to show the tooltip  
 
+## Versions
+For now:  
+BackpackDisplay 1.x is for MC1.12.2 with Forge.  
+BackpackDisplay 2.x is for MC1.20.1, Forge or Fabric, and depends on Architectury API.  
+
 ## Downloads
 [CurseForge](https://www.curseforge.com/minecraft/mc-mods/backpack-display) [Modrinth](https://modrinth.com/mod/backpack-display)  
 
 ## Config Format
 `displayRules` is the main config of the mod. It lets you to add new container  items to display the backpack tooltip, with the following format:  
-Format: `<modID>:<itemID>#<rule type>#<rule definition>`  
+Format: `<modID>:<itemID>[:meta]#<rule type>#<rule definition>`  
 
-meta value is deprecated on mc1.13+.
+### [pre-MC1.13] Metadata values
+Metadata value is a comma-separated list for meta-values to match.  
+For example,`1,2,5-8` allows tooltip to show on the item with metadata 1,2,5,6,7,8.  
+When meta is absent, tooltip to show on the item ignoring meta.  
+Metedata doesn't present, and wont have effects in MC1.13+.
+
 Rule definition is according to the rule type selected.  
 
 ### Paths
@@ -30,7 +40,7 @@ The path `list.1.key2` will get the tag "item" from it.
 ### List rule
 Rule type: `list`  
 
-In this rule, items are all under a ListTag or a CompoundTag.  
+In this rule, items are all under a NBTTagList or a NBTTagCompound.  
 
 Rule definition:`path.to.the.list[;path.to.the.itemstack[;path.to.the.counts]]`  
 The last 2 paths is relative to the tag item in the list. 
@@ -85,7 +95,7 @@ import mods.backpackdisplay.BackpackDisplay;
 // IIngredient to match items to add the tooltip, function to return an array of items from a given itemstack
 BackpackDisplay.addBackDisplay( IIngredient, (IItemStack) -> IItemStack[] );
 ```
-Example: show a crafting table and the crafting result for every wood log in `<ore:logWood>`
+Example for MC1.12.2: show a crafting table and the crafting result for every wood log in `<ore:logWood>`  
 ```
 #sideonly client
 import mods.backpackdisplay.BackpackDisplay;
@@ -96,6 +106,18 @@ BackpackDisplay.addBackDisplay(<ore:logWood>,function(item){
 });
 ```
 ![ct_support](ct_support.png)  
+
+Example for MC1.20.1: show the log itself for every wood log in `<tag:items:minecraft:logs>`  
+```
+#sideonly client
+import mods.backpackdisplay.BackpackDisplay;
+import crafttweaker.api.item.IItemStack;
+
+BackpackDisplay.addBackDisplay(<tag:items:minecraft:logs>,(item as IItemStack)=>{
+    var items = [item] as IItemStack[];
+    return items;
+});
+```
 
 With both crafttweaker rules and normal rules present on an item, items from crafttweaker support will appear before items from normal rules.  
 
@@ -108,14 +130,26 @@ Example: (water bucket shows water in it)
 minecraft:water_bucket
 ```
 ### Crafttweaker
-Same as Items, except the class is `mods.backpackdisplay.BackpackDisplayFluid` and the output is `IFluidStack[]`  
+Same as Items, except the class is `mods.backpackdisplay.BackpackDisplayFluid` and the output is `ILiquidStack[]`  
 Example: (ice block shows 1000mB water in it)  
+For MC1.12.2:  
 ```
 #sideonly client
 import mods.backpackdisplay.BackpackDisplayFluid;
-import crafttweaker.fluid.IFluidStack;
+import crafttweaker.liquid.ILiquidStack;
 BackpackDisplayFluid.addBackDisplay(<minecraft:ice>,function(item){
-    var fluids = [<liquid:water>*1000] as IFluidStack[];
+    var fluids = [<liquid:water>*1000] as ILiquidStack[];
+    return fluids;
+});
+```
+For MC1.20.1:  
+```
+import mods.backpackdisplay.BackpackDisplayFluid;
+import crafttweaker.api.item.IItemStack;
+import crafttweaker.api.fluid.IFluidStack;
+
+BackpackDisplayFluid.addBackDisplay(<item:minecraft:ice>,(item as IItemStack)=>{
+    var fluids = [<fluid:water>*1000] as IFluidStack[];
     return fluids;
 });
 ```
