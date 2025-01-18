@@ -1,16 +1,13 @@
 package io.bluebeaker.backpackdisplay;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import io.bluebeaker.backpackdisplay.displayslot.IItemMatcher;
 import io.bluebeaker.backpackdisplay.displayslot.MetadataMatcher;
 import io.bluebeaker.backpackdisplay.utils.NumberUtils;
+import io.bluebeaker.backpackdisplay.utils.StringUtils;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.*;
 
 public class BPDRegistryFluid {
 
@@ -19,10 +16,12 @@ public class BPDRegistryFluid {
     public static void updateFromConfig() {
         registry.clear();
         for (String rule : BPDConfig.fluidSection.simpleContainers) {
-            try {
-                addRule(rule);
-            } catch (Exception e) {
-                BackpackDisplayMod.logError("Error when processing rule '" + rule + "': \n" + e.toString());
+            for (String filledRule : StringUtils.fillInTemplates(rule)) {
+                try {
+                    addRule(filledRule);
+                } catch (Exception e) {
+                    BackpackDisplayMod.logError("Error when processing rule '" + filledRule + "': \n" + e.toString());
+                }
             }
         }
     }

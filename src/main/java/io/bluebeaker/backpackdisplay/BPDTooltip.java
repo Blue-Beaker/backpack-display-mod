@@ -1,11 +1,5 @@
 package io.bluebeaker.backpackdisplay;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import org.lwjgl.input.Keyboard;
-
 import io.bluebeaker.backpackdisplay.api.IDisplaySection;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -15,6 +9,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.lwjgl.input.Keyboard;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public class BPDTooltip {
     static Minecraft client = Minecraft.getMinecraft();
@@ -98,7 +96,9 @@ public class BPDTooltip {
         }
         // Align to right end of tooltip when right out of screen, or tooltip is at left
         // of mouse
-        if (drawX + width + 4 > screenWidth || x + width < mouseX) {
+        if(drawX + width + 4 > screenWidth){
+            drawX = screenWidth - 4 - width;
+        } else if (x + width < mouseX) {
             drawX = x + w - width;
         }
 

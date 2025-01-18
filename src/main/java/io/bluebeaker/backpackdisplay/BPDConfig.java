@@ -13,53 +13,24 @@ public class BPDConfig {
     "rule type 'single': single item stored in certain path of NBT;",
     "rule type 'list': a list of items stored under a NBTTagList",
     "rule type 'dummy': fixed items intended for testing the display",
+    "Replacement templates can be used for simplification, see README for details.",
     "For more complex rules, see the CraftTweaker support. "})
     @LangKey("config.backpackdisplay.displayrules.name")
     public static String[] displayRules = {
         //Vanilla Shulker Boxes
-        "minecraft:white_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:orange_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:magenta_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:light_blue_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:yellow_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:lime_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:pink_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:gray_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:silver_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:cyan_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:purple_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:blue_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:brown_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:green_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:red_shulker_box#list#BlockEntityTag.Items",
-        "minecraft:black_shulker_box#list#BlockEntityTag.Items",
-        //Storage Drawers (Creative ctrl+pick block)
-        "storagedrawers:basicdrawers#list#BlockEntityTag.Drawers;Item;Count",
-        "storagedrawers:customdrawers#list#BlockEntityTag.Drawers;Item;Count",
+        "minecraft:{white,orange,magenta,light_blue,yellow,lime,pink,gray,silver,cyan,purple,blue,brown,green,red,black}_shulker_box#list#BlockEntityTag.Items",
+        //Storage Drawers (Normal)
+        "storagedrawers:{basicdrawers,customdrawers}#list#{BlockEntityTag,tile}.Drawers",
+        //Storage Drawers (Compacting)
         "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.0.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.0.Conv",
         "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.1.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.1.Conv",
         "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.2.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.2.Conv",
-        //Storage Drawers (Digged)
-        "storagedrawers:basicdrawers#list#tile.Drawers;Item;Count",
-        "storagedrawers:customdrawers#list#tile.Drawers;Item;Count",
         "storagedrawers:compdrawers#single#tile.Drawers.Items.0.Item;tile.Drawers.Count;/tile.Drawers.Items.0.Conv",
         "storagedrawers:compdrawers#single#tile.Drawers.Items.1.Item;tile.Drawers.Count;/tile.Drawers.Items.1.Conv",
         "storagedrawers:compdrawers#single#tile.Drawers.Items.2.Item;tile.Drawers.Count;/tile.Drawers.Items.2.Conv",
         //Forestry Backpacks
-        "forestry:apiarist_bag#list#Slots",
-        "forestry:lepidopterist_bag#list#Slots",
-        "forestry:miner_bag#list#Slots",
-        "forestry:miner_bag_t2#list#Slots",
-        "forestry:digger_bag#list#Slots",
-        "forestry:digger_bag_t2#list#Slots",
-        "forestry:forester_bag#list#Slots",
-        "forestry:forester_bag_t2#list#Slots",
-        "forestry:hunter_bag#list#Slots",
-        "forestry:hunter_bag_t2#list#Slots",
-        "forestry:adventurer_bag#list#Slots",
-        "forestry:adventurer_bag_t2#list#Slots",
-        "forestry:builder_bag#list#Slots",
-        "forestry:builder_bag_t2#list#Slots"
+        "forestry:{apiarist,lepidopterist}_bag#list#Slots",
+        "forestry:{miner,digger,forester,hunter,adventurer,builder}_bag{,_t2}#list#Slots"
     };
 
     @Comment("Max width of the backpack tooltip, in slots")
