@@ -3,7 +3,9 @@ package io.bluebeaker.backpackdisplay;
 import io.bluebeaker.backpackdisplay.section.fluid.DisplaySectionFluid;
 import io.bluebeaker.backpackdisplay.section.item.DisplaySectionItem;
 import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
+import net.minecraft.world.InteractionResult;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -14,7 +16,9 @@ public class BackpackDisplayMod {
     public static void init() {
 
         AutoConfig.register(BPDConfig.class, Toml4jConfigSerializer::new);
-        ConfigProvider.setConfig(AutoConfig.getConfigHolder(BPDConfig.class).getConfig());
+        ConfigHolder<BPDConfig> configHolder = AutoConfig.getConfigHolder(BPDConfig.class);
+        configHolder.registerSaveListener(BackpackDisplayMod::onSave);
+        ConfigProvider.setConfig(configHolder.getConfig());
 
         SectionsManager.addSection(new DisplaySectionItem());
         SectionsManager.addSection(new DisplaySectionFluid());
@@ -24,6 +28,11 @@ public class BackpackDisplayMod {
         SectionsManager.sortSections();
 
         BPDTooltipCommon.INSTANCE.register();
+    }
+
+    private static InteractionResult onSave(ConfigHolder<BPDConfig> bpdConfigConfigHolder, BPDConfig bpdConfig) {
+        onConfigReload();
+        return InteractionResult.PASS;
     }
 
     public static void onConfigReload(){
