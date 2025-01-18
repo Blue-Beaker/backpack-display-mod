@@ -17,7 +17,7 @@ public class BPDConfigHelper {
     }
 
     public static void updateColor(){
-        Appearance appearance = ConfigProvider.getInstance().appearance;
+        Appearance appearance = ConfigProvider.getConfig().appearance;
         backgroundColor= appearance.backgroundColor.getColor();
         borderColorStart= appearance.borderColor.getColor();
     }

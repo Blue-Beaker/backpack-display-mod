@@ -17,15 +17,24 @@ public class BackpackDisplayMod {
     public static void init() {
 
         AutoConfig.register(BPDConfig.class, Toml4jConfigSerializer::new);
-        ConfigProvider.setInstance(AutoConfig.getConfigHolder(BPDConfig.class).getConfig());
+        ConfigProvider.setConfig(AutoConfig.getConfigHolder(BPDConfig.class).getConfig());
 
-        BPDConfigHelper.updateConfig();
         SectionsManager.addSection(new DisplaySectionItem());
         SectionsManager.addSection(new DisplaySectionFluid());
-        SectionsManager.updateConfig();
+
+        BPDConfigHelper.updateConfig();
+        SectionsManager.updateToConfig();
         SectionsManager.sortSections();
 
         BPDTooltipCommon.INSTANCE.register();
+    }
+
+    public static void onConfigReload(){
+        if(!ConfigProvider.isConfigLoaded())
+            return;
+        BPDConfigHelper.updateConfig();
+        SectionsManager.updateToConfig();
+        SectionsManager.sortSections();
     }
 
     public static void logError(String str,Throwable e){

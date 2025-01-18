@@ -72,12 +72,12 @@ public class DisplaySectionItem implements IDisplaySection {
             return;
         }
 
-        int maxCount = ConfigProvider.getInstance().appearance.tooltipWidth * ConfigProvider.getInstance().appearance.tooltipHeight;
+        int maxCount = ConfigProvider.getConfig().appearance.tooltipWidth * ConfigProvider.getConfig().appearance.tooltipHeight;
 
         int totalCount = items.size();
 
         // Get width of tooltip
-        int totalWidth = Math.min(items.size(), ConfigProvider.getInstance().appearance.tooltipWidth);
+        int totalWidth = Math.min(items.size(), ConfigProvider.getConfig().appearance.tooltipWidth);
 
         // Draw label for overflowed items that takes a slot
         if (totalCount > maxCount) {
@@ -87,7 +87,7 @@ public class DisplaySectionItem implements IDisplaySection {
         }
 
         // Get height of tooltip
-        int totalHeight = Math.min((totalCount - 1) / ConfigProvider.getInstance().appearance.tooltipWidth + 1, ConfigProvider.getInstance().appearance.tooltipHeight);
+        int totalHeight = Math.min((totalCount - 1) / ConfigProvider.getConfig().appearance.tooltipWidth + 1, ConfigProvider.getConfig().appearance.tooltipHeight);
 
         int pixelWidth = totalWidth * 18;
         int pixelHeight = totalHeight * 18;
@@ -110,15 +110,15 @@ public class DisplaySectionItem implements IDisplaySection {
         int totalCount = this.itemsToRender.size() - overflowItems;
 
         if (this.overflowItems > 0) {
-            RenderUtils.drawLabelCentered( graphics,x + (ConfigProvider.getInstance().appearance.tooltipWidth - 1) * 18, y + (ConfigProvider.getInstance().appearance.tooltipHeight - 1) * 18,
+            RenderUtils.drawLabelCentered( graphics,x + (ConfigProvider.getConfig().appearance.tooltipWidth - 1) * 18, y + (ConfigProvider.getConfig().appearance.tooltipHeight - 1) * 18,
                     "+" + NumberUtils.getItemCountRepresentation(overflowItems));
         }
 
         // Render every item
         for (int i = 0; i < totalCount; i++) {
             ItemStack stack2 = items.get(i);
-            int slotX = count % ConfigProvider.getInstance().appearance.tooltipWidth;
-            int slotY = count / ConfigProvider.getInstance().appearance.tooltipWidth;
+            int slotX = count % ConfigProvider.getConfig().appearance.tooltipWidth;
+            int slotY = count / ConfigProvider.getConfig().appearance.tooltipWidth;
             RenderUtils.renderItemStack(graphics,stack2, x + (slotX) * 18, y + (slotY) * 18);
             count++;
         }

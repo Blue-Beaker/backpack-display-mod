@@ -21,7 +21,7 @@ public class BPDRegistryFluid {
 
     public static void updateFromConfig() {
         registry.clear();
-        for (String rule : ConfigProvider.getInstance().fluidSection.simpleContainerList) {
+        for (String rule : ConfigProvider.getConfig().fluidSection.simpleContainerList) {
             try {
                 addRule(rule);
             } catch (Exception e) {
@@ -48,7 +48,7 @@ public class BPDRegistryFluid {
 
         if (entry != null && item != null) {
             addEntry(item, entry);
-            if (ConfigProvider.getInstance().verbose_info)
+            if (ConfigProvider.getConfig().verbose_info)
                 BackpackDisplayMod.logInfo("Adding simple fluid rule for " + item.toString());
         }
     }

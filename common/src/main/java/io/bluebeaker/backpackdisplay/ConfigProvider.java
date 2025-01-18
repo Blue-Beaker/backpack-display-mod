@@ -6,13 +6,17 @@ public class ConfigProvider {
     @Nullable
     private static BPDConfig INSTANCE = null;
 
-    public static BPDConfig getInstance(){
+    public static boolean isConfigLoaded(){
+        return INSTANCE!=null;
+    }
+
+    public static BPDConfig getConfig(){
         if(INSTANCE==null)
-            throw new AssertionError();
+            throw new NullPointerException();
         return INSTANCE;
     }
 
-    public static void setInstance(BPDConfig config){
+    public static void setConfig(BPDConfig config){
         INSTANCE = config;
     }
 }

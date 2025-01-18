@@ -19,7 +19,7 @@ public class BPDRegistryItems {
 
     public static void updateFromConfig(){
         registry.clear();
-        for (String rule : ConfigProvider.getInstance().itemSection.displayRules){
+        for (String rule : ConfigProvider.getConfig().itemSection.displayRules){
             try {
                 addRule(rule);
             } catch (Exception e) {
@@ -50,7 +50,7 @@ public class BPDRegistryItems {
         IDisplaySlotEntry entry = buildEntryFromStringRule(type, nbtRule, metadataList);
 
         addEntry(item, entry);
-        if(ConfigProvider.getInstance().verbose_info)
+        if(ConfigProvider.getConfig().verbose_info)
             BackpackDisplayMod.logInfo("Adding entry with "+item.toString()+"type:"+type+", entry: "+entry.toString());
     }
     public static IDisplaySlotEntry buildEntryFromStringRule(String type, String nbtRule, Set<Integer> metadataList){

@@ -1,12 +1,8 @@
 package io.bluebeaker.backpackdisplay;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-
 import io.bluebeaker.backpackdisplay.api.IDisplaySection;
+
+import java.util.*;
 /**Sections manager for internal use. Plugins should use 
  * {@link io.bluebeaker.backpackdisplay.api.Sections} to register their sections instead.  */
 public class SectionsManager {
@@ -49,7 +45,7 @@ public class SectionsManager {
     }
     /**Update section priorities */
     public static void updateFromConfig() {
-        for (String rule : ConfigProvider.getInstance().priorities) {
+        for (String rule : ConfigProvider.getConfig().priorities) {
             String[] split = rule.replaceAll(" ", "").split(":");
             if (split.length >= 2) {
                 String id = split[0];
@@ -65,8 +61,8 @@ public class SectionsManager {
         }
     }
     /**Updates config file, add missing priorities */
-    public static void updateConfig() {
-        List<String> priorities = new ArrayList<String>(Arrays.asList(ConfigProvider.getInstance().priorities));
+    public static void updateToConfig() {
+        List<String> priorities = new ArrayList<String>(Arrays.asList(ConfigProvider.getConfig().priorities));
         boolean modified = false;
         for (IDisplaySection section : sections) {
             String id = section.getID();
@@ -76,7 +72,7 @@ public class SectionsManager {
             }
         }
         if(modified){
-            ConfigProvider.getInstance().priorities = priorities.toArray(new String[0]);
+            ConfigProvider.getConfig().priorities = priorities.toArray(new String[0]);
 
 //            ConfigManager.sync(BackpackDisplayMod.MODID, Type.INSTANCE);
         }
