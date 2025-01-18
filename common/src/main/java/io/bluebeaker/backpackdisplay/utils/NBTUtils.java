@@ -3,6 +3,7 @@ package io.bluebeaker.backpackdisplay.utils;
 import net.minecraft.nbt.Tag;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import org.jetbrains.annotations.Nullable;
 
 public class NBTUtils {
 
@@ -19,7 +20,7 @@ public class NBTUtils {
      * @param path The path to the value in a list
      * @return     The value
      */
-    public static Tag getTagRecursive(Tag root, String[] path){
+    public static @Nullable Tag getTagRecursive(Tag root, String[] path){
         Tag tag = root;
         for(String key:path){
             if(!key.isEmpty()) {

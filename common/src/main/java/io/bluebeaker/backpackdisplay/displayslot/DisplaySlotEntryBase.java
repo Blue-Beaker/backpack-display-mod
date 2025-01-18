@@ -1,22 +1,16 @@
 package io.bluebeaker.backpackdisplay.displayslot;
 
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.ItemStack;
 
 public class DisplaySlotEntryBase implements IDisplaySlotEntry {
-    Set<Integer> metadataList;
     String rule;
-    public DisplaySlotEntryBase(Set<Integer> metadataList,String rule){
-        this.metadataList=metadataList;
+    public DisplaySlotEntryBase(String rule){
         this.rule=rule;
-    }
-    public boolean isItemMatches(ItemStack stack){
-        return true;
     }
     public List<ItemStack> getItemsFromContainer(ItemStack stack){
         List<ItemStack> output = new ArrayList<ItemStack>();

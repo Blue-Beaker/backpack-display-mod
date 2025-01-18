@@ -12,7 +12,7 @@ import java.util.List;
 
 public class BPDTooltipCommon {
     public static final BPDTooltipCommon INSTANCE = new BPDTooltipCommon();
-    private ItemStack stack;
+    private ItemStack stack = ItemStack.EMPTY;
     private int tooltipX = 0;
     private int tooltipY = 0;
     private int tooltipW = 0;

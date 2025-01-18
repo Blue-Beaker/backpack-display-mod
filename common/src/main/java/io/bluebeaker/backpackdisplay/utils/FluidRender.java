@@ -15,9 +15,6 @@ import net.minecraft.world.inventory.InventoryMenu;
 import org.joml.Matrix4f;
 
 public class FluidRender {
-
-    static Minecraft client = Minecraft.getInstance();
-    
     public static void renderFluid(GuiGraphics graphics, FluidStack fluidStack, int x, int y){
 		int color = getColorTint(fluidStack);
 

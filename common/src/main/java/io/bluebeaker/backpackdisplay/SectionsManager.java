@@ -6,7 +6,7 @@ import java.util.*;
 /**Sections manager for internal use. Plugins should use 
  * {@link io.bluebeaker.backpackdisplay.api.Sections} to register their sections instead.  */
 public class SectionsManager {
-    private static List<IDisplaySection> sections = new ArrayList<IDisplaySection>();
+    private static final List<IDisplaySection> sections = new ArrayList<IDisplaySection>();
     protected static HashMap<String, Integer> sectionPriorities = new HashMap<String, Integer>();
     protected static SectionSorter sectionSorter = new SectionSorter();
 
@@ -37,7 +37,7 @@ public class SectionsManager {
     /**Get priority of the section. */
     public static int getPriority(IDisplaySection section) {
         String id = section.getID();
-        if (sectionPriorities.keySet().contains(id)) {
+        if (sectionPriorities.containsKey(id)) {
             return sectionPriorities.get(id);
         } else {
             return section.defaultPriority();
@@ -66,7 +66,7 @@ public class SectionsManager {
         boolean modified = false;
         for (IDisplaySection section : sections) {
             String id = section.getID();
-            if (!sectionPriorities.keySet().contains(id)) {
+            if (!sectionPriorities.containsKey(id)) {
                 priorities.add(id + ":" + section.defaultPriority());
                 modified = true;
             }

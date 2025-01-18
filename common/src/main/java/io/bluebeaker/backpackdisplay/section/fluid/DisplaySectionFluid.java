@@ -1,11 +1,10 @@
 package io.bluebeaker.backpackdisplay.section.fluid;
 
 import dev.architectury.fluid.FluidStack;
-import io.bluebeaker.backpackdisplay.ConfigProvider;
 import io.bluebeaker.backpackdisplay.BackpackDisplayMod;
+import io.bluebeaker.backpackdisplay.ConfigProvider;
 import io.bluebeaker.backpackdisplay.api.IDisplaySection;
 import io.bluebeaker.backpackdisplay.crafttweaker.CTIntegration;
-import io.bluebeaker.backpackdisplay.displayslot.IItemMatcher;
 import io.bluebeaker.backpackdisplay.utils.EnvironmentUtils;
 import io.bluebeaker.backpackdisplay.utils.NumberUtils;
 import io.bluebeaker.backpackdisplay.utils.RenderUtils;
@@ -40,7 +39,7 @@ public class DisplaySectionFluid implements IDisplaySection {
     @Override
     public void update( ItemStack stack) {
         // If stack is unchanged, skip updating
-        if (this.itemStack != null && ItemStack.isSameItemSameTags(stack, this.itemStack))
+        if (ItemStack.isSameItemSameTags(stack, this.itemStack))
             return;
         this.itemStack = stack.copy();
         this.fluidStacks = getFluidStacks(stack);
@@ -83,14 +82,11 @@ public class DisplaySectionFluid implements IDisplaySection {
 
     private boolean isSimpleContainer( ItemStack stack) {
         boolean invert = ConfigProvider.getConfig().fluidSection.simpleContainerListIsBlacklist;
-        List<IItemMatcher> rules = BPDRegistryFluid.registry.get(stack.getItem());
-        if (rules == null)
-            return invert;
-        for (IItemMatcher rule : rules) {
-            if (rule.isItemMatches(stack)) {
-                return !invert;
-            }
+
+        if (BPDRegistryFluid.registry.contains(stack.getItem())) {
+            return !invert;
         }
+
         return invert;
     }
 

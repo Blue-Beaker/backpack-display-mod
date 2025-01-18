@@ -43,7 +43,7 @@ public class BPDTooltip {
     }
 
     public static void updateSections(ItemStack stack) {
-        if(stack==null || lastStack==null || ItemStack.isSameItemSameTags(stack,lastStack)){
+        if(stack == null || ItemStack.isSameItemSameTags(stack, lastStack)){
             return;
         }
         List<IDisplaySection> sections = SectionsManager.getSections();
@@ -56,9 +56,9 @@ public class BPDTooltip {
     private static void renderTooltip(ItemStack stack,GuiGraphics guiGraphics, int x, int y, int w, int h) {
         List<IDisplaySection> sections = SectionsManager.getSections();
 
-        /** Height of this tooltip */
+        // Height of this tooltip
         int height = 0;
-        /** Width of this tooltip */
+        // Width of this tooltip
         int width = 0;
 
         int availaleSections = 0;

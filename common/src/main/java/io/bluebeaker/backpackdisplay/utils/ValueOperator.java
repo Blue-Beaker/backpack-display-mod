@@ -42,4 +42,10 @@ public interface ValueOperator {
             return a%b;
         }
     }
+    public class NUL implements ValueOperator{
+        @Override
+        public int calc(int a, int b) {
+            return -1;
+        }
+    }
 }

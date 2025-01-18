@@ -1,7 +1,7 @@
 package io.bluebeaker.backpackdisplay.section.item;
 
-import io.bluebeaker.backpackdisplay.ConfigProvider;
 import io.bluebeaker.backpackdisplay.BackpackDisplayMod;
+import io.bluebeaker.backpackdisplay.ConfigProvider;
 import io.bluebeaker.backpackdisplay.api.IDisplaySection;
 import io.bluebeaker.backpackdisplay.crafttweaker.CTIntegration;
 import io.bluebeaker.backpackdisplay.displayslot.IDisplaySlotEntry;
@@ -18,8 +18,8 @@ import java.util.List;
 
 public class DisplaySectionItem implements IDisplaySection {
 
-    private ItemStack itemStack;
-    private List<ItemStack> itemsToRender;
+     private ItemStack itemStack = ItemStack.EMPTY;
+    private List<ItemStack> itemsToRender = Collections.emptyList();
     /** Amount of items hidden by overflow */
     private int overflowItems = 0;
     /** Width in pixels */
@@ -33,7 +33,7 @@ public class DisplaySectionItem implements IDisplaySection {
     /** Update the tooltip with a new ItemStack. */
     public void update( ItemStack stack) {
         // If stack is unchanged, skip updating
-        if (this.itemStack != null && ItemStack.isSameItemSameTags(stack, this.itemStack))
+        if (ItemStack.isSameItemSameTags(stack, this.itemStack))
             return;
         this.itemStack = stack.copy();
         this.itemsToRender = this.getItemsForItem(this.itemStack);
@@ -53,12 +53,8 @@ public class DisplaySectionItem implements IDisplaySection {
         }
 
         List<IDisplaySlotEntry> entries = getRenderRules(stack);
-        if (entries != null) {
-            for (IDisplaySlotEntry rule : entries) {
-                if (rule.isItemMatches(stack)) {
-                    items.addAll(rule.getItemsFromContainer(stack));
-                }
-            }
+        for (IDisplaySlotEntry rule : entries) {
+            items.addAll(rule.getItemsFromContainer(stack));
         }
         return items;
     }
@@ -66,7 +62,7 @@ public class DisplaySectionItem implements IDisplaySection {
     private void updateGeometry() {
         List<ItemStack> items = this.itemsToRender;
 
-        if (items == null || items.isEmpty()) {
+        if (items.isEmpty()) {
             this.width = 0;
             this.height = 0;
             return;
@@ -99,7 +95,7 @@ public class DisplaySectionItem implements IDisplaySection {
     private static List<IDisplaySlotEntry> getRenderRules(ItemStack stack) {
         Item item = stack.getItem();
         List<IDisplaySlotEntry> entries = BPDRegistryItems.registry.get(item);
-        return entries;
+        return entries!=null ? entries:Collections.emptyList();
     }
 
     @Override
@@ -141,7 +137,7 @@ public class DisplaySectionItem implements IDisplaySection {
 
     @Override
     public boolean isAvailable() {
-        return this.itemsToRender != null && this.itemsToRender.size() > 0;
+        return !this.itemsToRender.isEmpty();
     }
 
     @Override

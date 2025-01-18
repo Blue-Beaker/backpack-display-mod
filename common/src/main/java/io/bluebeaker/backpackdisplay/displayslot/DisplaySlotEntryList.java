@@ -1,20 +1,19 @@
 package io.bluebeaker.backpackdisplay.displayslot;
 
+import io.bluebeaker.backpackdisplay.utils.ComparatorWithNumbers;
+import io.bluebeaker.backpackdisplay.utils.ItemUtils;
+import io.bluebeaker.backpackdisplay.utils.NBTUtils;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NumericTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import io.bluebeaker.backpackdisplay.utils.ComparatorWithNumbers;
-import io.bluebeaker.backpackdisplay.utils.ItemUtils;
-import io.bluebeaker.backpackdisplay.utils.NBTUtils;
-import net.minecraft.nbt.NumericTag;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.nbt.Tag;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.world.level.ItemLike;
-import org.jetbrains.annotations.Nullable;
 
 public class DisplaySlotEntryList extends DisplaySlotEntryBase {
 
@@ -23,9 +22,9 @@ public class DisplaySlotEntryList extends DisplaySlotEntryBase {
     /**The path from the list to the item.     */
     String[] pathToItem = {};
     /**The path from the list to the count of the item.     */
-    @Nullable String[] pathToCount = null;
-    public DisplaySlotEntryList(Set<Integer> metadataList,String nbtRule){
-        super(metadataList,nbtRule);
+    String[] pathToCount = {};
+    public DisplaySlotEntryList(String nbtRule){
+        super(nbtRule);
         String[] splitted = nbtRule.split("(?<!\\\\);");
             pathToList = NBTUtils.getKeysList(splitted[0]);
         if(splitted.length>=2)
@@ -36,16 +35,14 @@ public class DisplaySlotEntryList extends DisplaySlotEntryBase {
     public List<ItemStack> getItemsFromContainer(ItemStack stack){
         List<ItemStack> output = new ArrayList<ItemStack>();
         Tag listRoot = NBTUtils.getTagRecursive(stack.getTag(), pathToList);
-        if(listRoot instanceof ListTag){
-            ListTag list = ((ListTag)listRoot);
+        if(listRoot instanceof ListTag list){
             for(Tag tag:list){
                 ItemStack newStack = getSingleItem(tag);
                 if(newStack!=null && !newStack.isEmpty()){
                     output.add(newStack);
                 }
             }
-        }else if(listRoot instanceof CompoundTag){
-            CompoundTag comp = ((CompoundTag)listRoot);
+        }else if(listRoot instanceof CompoundTag comp){
             Set<String> keys =comp.getAllKeys();
             List<String> sortedKeys = keys.stream().sorted(new ComparatorWithNumbers()).collect(Collectors.toList());
             for(String key:sortedKeys){
@@ -64,7 +61,7 @@ public class DisplaySlotEntryList extends DisplaySlotEntryBase {
 
             ItemStack newStack = ItemUtils.createStackFromNBT((CompoundTag) itemTag);
             if(!newStack.isEmpty()){
-                if(pathToCount!=null){
+                if(pathToCount.length>0){
                     Tag countTag = NBTUtils.getTagRecursive(tag, pathToCount);
                     if(countTag instanceof NumericTag)
                         newStack.setCount(((NumericTag)countTag).getAsInt());
