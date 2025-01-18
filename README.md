@@ -14,12 +14,9 @@ Configurable options(See the mod's config):
 
 ## Config Format
 `displayRules` is the main config of the mod. It lets you to add new container  items to display the backpack tooltip, with the following format:  
-Format: `<modID>:<itemID>[:meta]#<rule type>#<rule definition>`  
+Format: `<modID>:<itemID>#<rule type>#<rule definition>`  
 
-meta is a comma-separated list for meta-values to match.  
-For example,`1,2,5-8` allows tooltip to show on the item with metadata 1,2,5,6,7,8.  
-When meta is absent, tooltip to show on the item ignoring meta.  
-
+meta value is deprecated on mc1.13+.
 Rule definition is according to the rule type selected.  
 
 ### Paths
