@@ -7,6 +7,8 @@ import io.bluebeaker.backpackdisplay.section.item.DisplaySectionItem;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.function.Supplier;
 
 public class BackpackDisplayMod {
@@ -38,7 +40,10 @@ public class BackpackDisplayMod {
     }
 
     public static void logError(String str,Throwable e){
-        logError(str+e.toString());
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        e.printStackTrace(pw);
+        logError(str+"\n"+sw);
     }
     public static void logError(String str){
         System.out.println("[ERROR][BackpackDisplay]"+str);

@@ -1,13 +1,13 @@
 package io.bluebeaker.backpackdisplay.crafttweaker;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.blamejared.crafttweaker.api.fluid.IFluidStack;
+import com.blamejared.crafttweaker.api.item.IItemStack;
 import dev.architectury.fluid.FluidStack;
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.world.item.ItemStack;
 
-import com.blamejared.crafttweaker.api.item.IItemStack;
-import com.blamejared.crafttweaker.api.fluid.IFluidStack;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CTIntegration {
     public static List<ItemStack> getItemsForCT(ItemStack stack){
@@ -21,9 +21,14 @@ public class CTIntegration {
     public static List<FluidStack> getFluidsForCT(ItemStack stack){
         List<FluidStack> items = new ArrayList<FluidStack>();
         BackpackDisplayFluidCT.getDisplayFluids(IItemStack.of(stack))
-                .forEach((IFluidStack stack1) -> {
-                    items.add((FluidStack)stack1.getImmutableInternal());
+                .forEach((IFluidStack iFluidStack) -> {
+                    items.add(getFluidstackFromIFluidStack(iFluidStack));
                 });
         return items;
+    }
+
+    @ExpectPlatform
+    public static FluidStack getFluidstackFromIFluidStack(IFluidStack iFluidStack){
+        throw new AssertionError();
     }
 }
