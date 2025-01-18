@@ -6,6 +6,7 @@ import io.bluebeaker.backpackdisplay.ConfigProvider;
 import io.bluebeaker.backpackdisplay.api.IDisplaySection;
 import io.bluebeaker.backpackdisplay.crafttweaker.CTIntegration;
 import io.bluebeaker.backpackdisplay.utils.EnvironmentUtils;
+import io.bluebeaker.backpackdisplay.utils.FluidUtils;
 import io.bluebeaker.backpackdisplay.utils.NumberUtils;
 import io.bluebeaker.backpackdisplay.utils.RenderUtils;
 import net.minecraft.client.gui.GuiGraphics;
@@ -55,18 +56,10 @@ public class DisplaySectionFluid implements IDisplaySection {
 
         if (ConfigProvider.getConfig().fluidSection.simpleRule
                 && (isSimpleContainer(stack))) {
-            FluidStack simpleFluid = getFluidStackBasic(stack);
-            if (simpleFluid != null) {
-                fluids.add(simpleFluid);
-            }
+            List<FluidStack> fluidInItem = FluidUtils.getFluidInItem(stack);
+            fluids.addAll(fluidInItem);
         }
         return fluids;
-    }
-
-    private FluidStack getFluidStackBasic( ItemStack stack) {
-//        FluidStack fluid = FluidStack.getFluidContained(stack);
-        FluidStack fluid = FluidStack.empty();
-        return fluid;
     }
 
     private List<FluidStack> getFluidStacksCT( ItemStack stack) {
