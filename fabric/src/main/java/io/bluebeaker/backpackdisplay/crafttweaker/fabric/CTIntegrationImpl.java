@@ -9,10 +9,10 @@ import net.minecraft.world.level.material.Fluid;
 public class CTIntegrationImpl {
 
     public static FluidStack getFluidstackFromIFluidStack(IFluidStack iFluidStack){
-        SimpleFluidStack immutableInternal = iFluidStack.<SimpleFluidStack>getImmutableInternal();
-        Fluid fluid = immutableInternal.fluid();
-        long amount = immutableInternal.amount();
-        CompoundTag tag = immutableInternal.tag();
+        SimpleFluidStack internal = iFluidStack.<SimpleFluidStack>getInternal();
+        Fluid fluid = internal.fluid();
+        long amount = internal.amount();
+        CompoundTag tag = internal.tag();
 
         return FluidStack.create(fluid,amount,tag);
     }

@@ -8,10 +8,10 @@ import net.minecraft.world.level.material.Fluid;
 public class CTIntegrationImpl {
 
     public static FluidStack getFluidstackFromIFluidStack(IFluidStack iFluidStack){
-        net.minecraftforge.fluids.FluidStack immutableInternal = iFluidStack.<net.minecraftforge.fluids.FluidStack>getImmutableInternal();
-        Fluid fluid = immutableInternal.getFluid();
-        long amount = immutableInternal.getAmount();
-        CompoundTag tag = immutableInternal.getTag();
+        net.minecraftforge.fluids.FluidStack internal = iFluidStack.<net.minecraftforge.fluids.FluidStack>getInternal();
+        Fluid fluid = internal.getFluid();
+        long amount = internal.getAmount();
+        CompoundTag tag = internal.getTag();
         return FluidStack.create(fluid,amount,tag);
     }
 }
