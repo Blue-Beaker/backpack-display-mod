@@ -1,8 +1,5 @@
 package io.bluebeaker.backpackdisplay.crafttweaker;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
@@ -12,6 +9,10 @@ import crafttweaker.api.util.IngredientMap;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 import youyihj.zenutils.api.reload.Reloadable;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Blue_Beaker
@@ -43,9 +44,7 @@ public class DisplaySlotEntriesCT {
     public static List<IItemStack> getDisplayItems(IItemStack item) {
         List<IItemStack> items = new ArrayList<IItemStack>();
         for(IContainerFunction func:getFunctions(item)){
-            for(IItemStack stack : func.process(item)){
-                items.add(stack);
-            }
+            items.addAll(Arrays.asList(func.process(item)));
         }
         return items;
     }

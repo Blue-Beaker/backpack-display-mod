@@ -15,13 +15,14 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fml.common.Loader;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class DisplaySectionFluid implements IDisplaySection {
 
-    private ItemStack itemStack;
+    private ItemStack itemStack = ItemStack.EMPTY;
     private List<FluidStack> fluidStacks = Collections.emptyList();
     /** Amount of fluids hidden by overflow */
     private int overflowFluids = 0;
@@ -43,7 +44,7 @@ public class DisplaySectionFluid implements IDisplaySection {
     @Override
     public void update(@Nonnull ItemStack stack) {
         // If stack is unchanged, skip updating
-        if (this.itemStack != null && ItemStack.areItemStacksEqual(stack, this.itemStack))
+        if (ItemStack.areItemStacksEqual(stack, this.itemStack))
             return;
         this.itemStack = stack.copy();
         this.fluidStacks = getFluidStacks(stack);
@@ -51,11 +52,10 @@ public class DisplaySectionFluid implements IDisplaySection {
     }
 
     private List<FluidStack> getFluidStacks(@Nonnull ItemStack stack) {
-        if (stack == null || stack.isEmpty())
+        if (stack.isEmpty())
             return Collections.emptyList();
 
-        List<FluidStack> fluids = new ArrayList<FluidStack>();
-        fluids.addAll(getFluidStacksCT(stack));
+        List<FluidStack> fluids = new ArrayList<FluidStack>(getFluidStacksCT(stack));
 
         if (BPDConfig.fluidSection.simpleRule
                 && (isSimpleContainer(stack))) {
@@ -67,7 +67,7 @@ public class DisplaySectionFluid implements IDisplaySection {
         return fluids;
     }
 
-    private FluidStack getFluidStackBasic(@Nonnull ItemStack stack) {
+    private @Nullable FluidStack getFluidStackBasic(@Nonnull ItemStack stack) {
         FluidStack fluid = FluidUtil.getFluidContained(stack);
         return fluid;
     }
@@ -147,7 +147,6 @@ public class DisplaySectionFluid implements IDisplaySection {
 
     @Override
     public void render(int x, int y) {
-        int count = 0;
         List<FluidStack> fluids = this.fluidStacks;
 
         GlStateManager.enableRescaleNormal();
@@ -167,11 +166,9 @@ public class DisplaySectionFluid implements IDisplaySection {
         // Render every item
         for (int i = 0; i < totalCount; i++) {
             FluidStack stack2 = fluids.get(i);
-            int slotX = count % BPDConfig.tooltipWidth;
-            int slotY = count / BPDConfig.tooltipWidth;
-
+            int slotX = i % BPDConfig.tooltipWidth;
+            int slotY = i / BPDConfig.tooltipWidth;
             RenderUtils.renderFluidStack(stack2, x + (slotX) * 18, y + (slotY) * 18);
-            count++;
         }
         GlStateManager.disableAlpha();
         GlStateManager.disableBlend();

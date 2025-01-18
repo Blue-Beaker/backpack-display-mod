@@ -1,10 +1,10 @@
 package io.bluebeaker.backpackdisplay.section;
 
-import javax.annotation.Nonnull;
-
 import io.bluebeaker.backpackdisplay.api.IDisplaySection;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 /**A dummy section with nothing in it, for testing purposes. */
 public class DisplaySectionDummy implements IDisplaySection {
@@ -13,7 +13,7 @@ public class DisplaySectionDummy implements IDisplaySection {
         this.id=id;
     }
 
-    private String id;
+    private final String id;
     private boolean available;
     @Override
     public int defaultPriority() {

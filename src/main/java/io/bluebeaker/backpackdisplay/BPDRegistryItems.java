@@ -41,6 +41,8 @@ public class BPDRegistryItems {
         ResourceLocation itemID = new ResourceLocation(modid, resourceid);
         if(!Item.REGISTRY.containsKey(itemID)) return;
         Item item = Item.REGISTRY.getObject(itemID);
+        if(item==null)
+            return;
         Set<Integer> metadataList;
 
         if(itemsplit.length>=3) metadataList=NumberUtils.parseMeta(itemsplit[2]);
@@ -48,14 +50,12 @@ public class BPDRegistryItems {
 
         IDisplaySlotEntry entry = buildEntryFromStringRule(type, nbtRule, metadataList);
 
-        if (entry!=null && item!=null){
-            addEntry(item, entry);
-            if(BPDConfig.verbose_info)
+        addEntry(item, entry);
+        if(BPDConfig.verbose_info)
             BackpackDisplayMod.logInfo("Adding entry with "+item.toString()+"type:"+type+", entry: "+entry.toString());
-        }
     }
     public static IDisplaySlotEntry buildEntryFromStringRule(String type,String nbtRule,Set<Integer> metadataList){
-        IDisplaySlotEntry entry = null;
+        IDisplaySlotEntry entry;
         switch (type) {
             case "dummy":
                 entry=new DisplaySlotEntryBase(metadataList,nbtRule);
@@ -68,6 +68,7 @@ public class BPDRegistryItems {
                 break;
             default:
                 BackpackDisplayMod.logInfo("Unknown item entry type '"+type+"'.");
+                entry=new DisplaySlotEntryBase(metadataList,nbtRule);
                 break;
         }
 

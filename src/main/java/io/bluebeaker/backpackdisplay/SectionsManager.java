@@ -1,18 +1,14 @@
 package io.bluebeaker.backpackdisplay;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-
 import io.bluebeaker.backpackdisplay.api.IDisplaySection;
-import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.common.config.Config.Type;
+import net.minecraftforge.common.config.ConfigManager;
+
+import java.util.*;
 /**Sections manager for internal use. Plugins should use 
  * {@link io.bluebeaker.backpackdisplay.api.Sections} to register their sections instead.  */
 public class SectionsManager {
-    private static List<IDisplaySection> sections = new ArrayList<IDisplaySection>();
+    private static final List<IDisplaySection> sections = new ArrayList<IDisplaySection>();
     protected static HashMap<String, Integer> sectionPriorities = new HashMap<String, Integer>();
     protected static SectionSorter sectionSorter = new SectionSorter();
 

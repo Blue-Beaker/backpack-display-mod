@@ -46,8 +46,6 @@ public class BPDTooltip {
             if (slot != null)
                 stack = slot.getStack();
         }
-        if (stack == null)
-            return;
 
         // BackpackDisplayMod.logInfo(stack + ":" + screenWidth + "," + screenHeight +
         // "," + event.getWidth()
@@ -67,9 +65,9 @@ public class BPDTooltip {
     private static void renderTooltip(int x, int y, int w, int h) {
         List<IDisplaySection> sections = SectionsManager.getSections();
 
-        /** Height of this tooltip */
+        // Height of this tooltip
         int height = 0;
-        /** Width of this tooltip */
+        // Width of this tooltip
         int width = 0;
 
         int availaleSections = 0;

@@ -1,14 +1,11 @@
 package io.bluebeaker.backpackdisplay;
 
-import org.apache.logging.log4j.Logger;
-
-import io.bluebeaker.backpackdisplay.section.DisplaySectionDummy;
 import io.bluebeaker.backpackdisplay.section.DisplaySectionFluid;
 import io.bluebeaker.backpackdisplay.section.DisplaySectionItem;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.common.config.Config.Type;
+import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -18,6 +15,7 @@ import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION,clientSideOnly = true)
 public class BackpackDisplayMod
@@ -76,10 +74,10 @@ public class BackpackDisplayMod
     }
     public static void logInfo(String log){
         if (logger!=null)
-        logger.info(log);
+            logger.info(log);
     }
     public static void logError(String log){
         if (logger!=null)
-        logger.error(log);
+            logger.error(log);
     }
 }

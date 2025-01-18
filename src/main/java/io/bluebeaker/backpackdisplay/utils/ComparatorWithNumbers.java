@@ -1,6 +1,7 @@
 package io.bluebeaker.backpackdisplay.utils;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 public class ComparatorWithNumbers implements Comparator<String> {
 
@@ -10,7 +11,7 @@ public class ComparatorWithNumbers implements Comparator<String> {
         String[] spl1 = splitByNumbers(arg1);
         int length = Math.min(spl0.length, spl1.length);
         for (int i = 0; i < length; i++) {
-            if (spl0[i] != spl1[i]) {
+            if (!Objects.equals(spl0[i], spl1[i])) {
                 int result=compareSubString(spl0[i], spl1[i]);
                 if(result!=0) return result;
             }
@@ -19,7 +20,7 @@ public class ComparatorWithNumbers implements Comparator<String> {
     }
 
     public int compareSubString(String arg0, String arg1) {
-        if (arg0 == arg1)
+        if (arg0.equals(arg1))
             return 0;
         int length = Math.min(arg0.length(), arg1.length());
         for (int i = 0; i < length; i++) {

@@ -1,11 +1,5 @@
 package io.bluebeaker.backpackdisplay.section;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import io.bluebeaker.backpackdisplay.BPDConfig;
 import io.bluebeaker.backpackdisplay.BPDRegistryItems;
 import io.bluebeaker.backpackdisplay.BackpackDisplayMod;
@@ -20,9 +14,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Loader;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class DisplaySectionItem implements IDisplaySection {
 
-    private ItemStack itemStack;
+    private ItemStack itemStack = ItemStack.EMPTY;
     private List<ItemStack> itemsToRender;
     /** Amount of items hidden by overflow */
     private int overflowItems = 0;
@@ -37,7 +37,7 @@ public class DisplaySectionItem implements IDisplaySection {
     /** Update the tooltip with a new ItemStack. */
     public void update(@Nonnull ItemStack stack) {
         // If stack is unchanged, skip updating
-        if (this.itemStack != null && ItemStack.areItemStacksEqual(stack, this.itemStack))
+        if (ItemStack.areItemStacksEqual(stack, this.itemStack))
             return;
         this.itemStack = stack.copy();
         this.itemsToRender = this.getItemsForItem(this.itemStack);
@@ -45,7 +45,7 @@ public class DisplaySectionItem implements IDisplaySection {
     }
 
     private List<ItemStack> getItemsForItem(ItemStack stack) {
-        if (stack == null || stack.isEmpty())
+        if (stack.isEmpty())
             return Collections.emptyList();
         List<ItemStack> items = new ArrayList<ItemStack>();
         if (Loader.isModLoaded("crafttweaker")) {
@@ -100,7 +100,7 @@ public class DisplaySectionItem implements IDisplaySection {
         this.height = pixelHeight;
     }
 
-    private static List<IDisplaySlotEntry> getRenderRules(ItemStack stack) {
+    private static @Nullable List<IDisplaySlotEntry> getRenderRules(ItemStack stack) {
         Item item = stack.getItem();
         List<IDisplaySlotEntry> entries = BPDRegistryItems.registry.get(item);
         return entries;
@@ -108,7 +108,6 @@ public class DisplaySectionItem implements IDisplaySection {
 
     @Override
     public void render(int x, int y) {
-        int count = 0;
         List<ItemStack> items = this.itemsToRender;
 
         GlStateManager.enableRescaleNormal();
@@ -125,10 +124,9 @@ public class DisplaySectionItem implements IDisplaySection {
         // Render every item
         for (int i = 0; i < totalCount; i++) {
             ItemStack stack2 = items.get(i);
-            int slotX = count % BPDConfig.tooltipWidth;
-            int slotY = count / BPDConfig.tooltipWidth;
+            int slotX = i % BPDConfig.tooltipWidth;
+            int slotY = i / BPDConfig.tooltipWidth;
             RenderUtils.renderItemStack(stack2, x + (slotX) * 18, y + (slotY) * 18);
-            count++;
         }
         RenderHelper.disableStandardItemLighting();
         GlStateManager.disableRescaleNormal();
@@ -151,7 +149,7 @@ public class DisplaySectionItem implements IDisplaySection {
 
     @Override
     public boolean isAvailable() {
-        return this.itemsToRender != null && this.itemsToRender.size() > 0;
+        return this.itemsToRender != null && !this.itemsToRender.isEmpty();
     }
 
     @Override

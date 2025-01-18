@@ -35,6 +35,8 @@ public class BPDRegistryFluid {
         if (!Item.REGISTRY.containsKey(itemID))
             return;
         Item item = Item.REGISTRY.getObject(itemID);
+        if(item==null)
+            return;
         Set<Integer> metadataList;
 
         if (itemsplit.length >= 3)
@@ -44,11 +46,9 @@ public class BPDRegistryFluid {
 
         IItemMatcher entry = new MetadataMatcher(metadataList);
 
-        if (entry != null && item != null) {
-            addEntry(item, entry);
-            if (BPDConfig.verbose_info)
-                BackpackDisplayMod.logInfo("Adding simple fluid rule for " + item.toString());
-        }
+        addEntry(item, entry);
+        if (BPDConfig.verbose_info)
+            BackpackDisplayMod.logInfo("Adding simple fluid rule for " + item.toString());
     }
 
     public static void addEntry(Item item, IItemMatcher entry) {

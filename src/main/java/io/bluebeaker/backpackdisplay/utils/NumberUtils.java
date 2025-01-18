@@ -1,9 +1,9 @@
 package io.bluebeaker.backpackdisplay.utils;
 
+import io.bluebeaker.backpackdisplay.BPDConfig;
+
 import java.util.HashSet;
 import java.util.Set;
-
-import io.bluebeaker.backpackdisplay.BPDConfig;
 
 public class NumberUtils {
 
@@ -38,7 +38,7 @@ public class NumberUtils {
     /**
      * @param metaString Comma-separated list of accepted meta values, may use '-' to define a range.
      * For Example: 1,2,5-9 -> {1,2,5,6,7,8,9}
-     * @return
+     * @return A set of acceptable meta values
      */
     public static Set<Integer> parseMeta(String metaString){
         Set<Integer> metadataList = new HashSet<Integer>();

@@ -9,7 +9,7 @@ public class ValueOperation {
     public final ValueOperator operator;
     public final String[] pathToValue;
     /**
-     * @param operation String starting with one of + - * / ^ %, followed by a nbt path string
+     * @param path String starting with one of + - * / ^ %, followed by a nbt path string
      */
     public ValueOperation(String path){
         this.pathToValue = NBTUtils.getKeysList(path.substring(1));
@@ -35,8 +35,8 @@ public class ValueOperation {
             return -1;
         }
         NBTBase tagNum = NBTUtils.getTagRecursive(tag, pathToValue);
-        if(NBTUtils.isNumber(tagNum))
-        return this.operator.calc(num, ((NBTPrimitive)tagNum).getInt());
-        else return -1;
+        if (tagNum != null && NBTUtils.isNumber(tagNum))
+            return this.operator.calc(num, ((NBTPrimitive) tagNum).getInt());
+        return -1;
     }
 }

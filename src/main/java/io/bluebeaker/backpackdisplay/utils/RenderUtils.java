@@ -5,7 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 public class RenderUtils {
@@ -15,7 +14,7 @@ public class RenderUtils {
 
     /**
      * Draw a text in the Corner of slot. For count label.
-     * 
+     *
      * @param x
      * @param y
      * @param text
@@ -61,7 +60,7 @@ public class RenderUtils {
      */
     public static void renderItemStack(ItemStack stack, int x, int y) {
         client.getRenderItem().renderItemIntoGUI(stack, x, y);
-        String numRep = null;
+        String numRep = "";
         if (stack.getCount() > 1)
             numRep = NumberUtils.getItemCountRepresentation(stack.getCount());
         if (fontRenderer.getStringWidth(numRep) > 16) {
@@ -74,7 +73,7 @@ public class RenderUtils {
     }
 
     public static void renderFluidStack(FluidStack stack, int x, int y) {
-        if (stack == null || stack.amount == 0)
+        if (stack.amount == 0)
             return;
         FluidRender.renderFluid(stack, x, y);
         String numRep = NumberUtils.getFluidCountRepresentation(stack.amount);

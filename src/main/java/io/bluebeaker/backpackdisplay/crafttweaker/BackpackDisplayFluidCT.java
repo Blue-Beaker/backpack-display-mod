@@ -1,8 +1,5 @@
 package io.bluebeaker.backpackdisplay.crafttweaker;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
@@ -13,6 +10,10 @@ import crafttweaker.api.util.IngredientMap;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 import youyihj.zenutils.api.reload.Reloadable;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Blue_Beaker
@@ -44,9 +45,7 @@ public class BackpackDisplayFluidCT {
     public static List<ILiquidStack> getDisplayFluids(IItemStack item) {
         List<ILiquidStack> items = new ArrayList<ILiquidStack>();
         for(IContainerFunctionFluid func:getFunctions(item)){
-            for(ILiquidStack stack : func.process(item)){
-                items.add(stack);
-            }
+            items.addAll(Arrays.asList(func.process(item)));
         }
         return items;
     }

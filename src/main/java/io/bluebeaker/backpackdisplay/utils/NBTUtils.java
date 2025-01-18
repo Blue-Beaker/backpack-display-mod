@@ -4,6 +4,8 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
+import javax.annotation.Nullable;
+
 public class NBTUtils {
 
     /**
@@ -19,7 +21,7 @@ public class NBTUtils {
      * @param path The path to the value in a list
      * @return     The value
      */
-    public static NBTBase getTagRecursive(NBTBase root, String[] path){
+    public static @Nullable NBTBase getTagRecursive(NBTBase root, String[] path){
         NBTBase tag = root;
         for(String key:path){
             if(!key.isEmpty()) {

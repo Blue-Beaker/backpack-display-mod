@@ -111,16 +111,16 @@ public class BPDConfig {
             }
             @Config.SlidingOption
             @Config.RangeInt(min = 0,max = 255)
-            public int alpha = 255;
+            public int alpha;
             @Config.SlidingOption
             @Config.RangeInt(min = 0,max = 255)
-            public int red = 255;
+            public int red;
             @Config.SlidingOption
             @Config.RangeInt(min = 0,max = 255)
-            public int green = 255;
+            public int green;
             @Config.SlidingOption
             @Config.RangeInt(min = 0,max = 255)
-            public int blue = 255;
+            public int blue;
             public int getColor(){
                 return (alpha<<24)+(red<<16)+(green<<8)+blue;
             }
