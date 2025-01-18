@@ -33,7 +33,8 @@ public class NBTUtils {
         }
         return tag;
     }
-    public static boolean isNumber(Tag nbt){
+    public static boolean isNumber(@Nullable Tag nbt){
+        if(nbt==null) return false;
         byte i=nbt.getId();
         return i >= 1 && i <= 6;
     }

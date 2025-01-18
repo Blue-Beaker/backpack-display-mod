@@ -5,6 +5,8 @@ import io.bluebeaker.backpackdisplay.BPDConfig;
 import io.bluebeaker.backpackdisplay.BackpackDisplayMod;
 import io.bluebeaker.backpackdisplay.Keybind;
 import me.shedaniel.autoconfig.AutoConfig;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -13,6 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+@OnlyIn(Dist.CLIENT)
 @Mod(BackpackDisplayMod.MOD_ID)
 public class BackpackDisplayForge {
     public BackpackDisplayForge() {

@@ -12,6 +12,7 @@ description = '''
 Shows what's in your backpack!
 '''
 logoFile = "icon.png"
+displayTest="IGNORE_ALL_VERSION"
 
 [[dependencies.backpackdisplay]]
 modId = "forge"
@@ -38,5 +39,12 @@ side = "BOTH"
 modId = "crafttweaker"
 mandatory = false
 versionRange = "[14.0.44,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.backpackdisplay]]
+modId = "cloth_config"
+mandatory = true
+versionRange = "[11.1.136,)"
 ordering = "AFTER"
 side = "BOTH"

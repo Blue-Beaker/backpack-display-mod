@@ -72,32 +72,46 @@ public class BPDConfig implements ConfigData {
                 "minecraft:red_shulker_box#list#BlockEntityTag.Items",
                 "minecraft:black_shulker_box#list#BlockEntityTag.Items",
                 //Storage Drawers (Creative ctrl+pick block)
-                "storagedrawers:basicdrawers#list#BlockEntityTag.Drawers;Item;Count",
-                "storagedrawers:customdrawers#list#BlockEntityTag.Drawers;Item;Count",
-                "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.0.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.0.Conv",
-                "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.1.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.1.Conv",
-                "storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.2.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.2.Conv",
+                "storagedrawers:oak_full_drawers_1#list#BlockEntityTag.Drawers;Item;Count",
+                "storagedrawers:oak_full_drawers_2#list#BlockEntityTag.Drawers;Item;Count",
+                "storagedrawers:oak_full_drawers_4#list#BlockEntityTag.Drawers;Item;Count",
+
+                "storagedrawers:birch_full_drawers_1#list#BlockEntityTag.Drawers;Item;Count",
+                "storagedrawers:birch_full_drawers_2#list#BlockEntityTag.Drawers;Item;Count",
+                "storagedrawers:birch_full_drawers_4#list#BlockEntityTag.Drawers;Item;Count",
+
+                "storagedrawers:jungle_full_drawers_1#list#BlockEntityTag.Drawers;Item;Count",
+                "storagedrawers:jungle_full_drawers_2#list#BlockEntityTag.Drawers;Item;Count",
+                "storagedrawers:jungle_full_drawers_4#list#BlockEntityTag.Drawers;Item;Count",
+                
+                "storagedrawers:spruce_full_drawers_1#list#BlockEntityTag.Drawers;Item;Count",
+                "storagedrawers:spruce_full_drawers_2#list#BlockEntityTag.Drawers;Item;Count",
+                "storagedrawers:spruce_full_drawers_4#list#BlockEntityTag.Drawers;Item;Count",
+
+                //Compacting drawers
+                "storagedrawers:compacting_drawers_2#single#BlockEntityTag.Drawers.Items.0.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.0.Conv",
+                "storagedrawers:compacting_drawers_2#single#BlockEntityTag.Drawers.Items.1.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.1.Conv",
+
+                "storagedrawers:compacting_drawers_3#single#BlockEntityTag.Drawers.Items.0.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.0.Conv",
+                "storagedrawers:compacting_drawers_3#single#BlockEntityTag.Drawers.Items.1.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.1.Conv",
+                "storagedrawers:compacting_drawers_3#single#BlockEntityTag.Drawers.Items.2.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.2.Conv",
                 //Storage Drawers (Digged)
-                "storagedrawers:basicdrawers#list#tile.Drawers;Item;Count",
-                "storagedrawers:customdrawers#list#tile.Drawers;Item;Count",
-                "storagedrawers:compdrawers#single#tile.Drawers.Items.0.Item;tile.Drawers.Count;/tile.Drawers.Items.0.Conv",
-                "storagedrawers:compdrawers#single#tile.Drawers.Items.1.Item;tile.Drawers.Count;/tile.Drawers.Items.1.Conv",
-                "storagedrawers:compdrawers#single#tile.Drawers.Items.2.Item;tile.Drawers.Count;/tile.Drawers.Items.2.Conv",
-                //Forestry Backpacks
-                "forestry:apiarist_bag#list#Slots",
-                "forestry:lepidopterist_bag#list#Slots",
-                "forestry:miner_bag#list#Slots",
-                "forestry:miner_bag_t2#list#Slots",
-                "forestry:digger_bag#list#Slots",
-                "forestry:digger_bag_t2#list#Slots",
-                "forestry:forester_bag#list#Slots",
-                "forestry:forester_bag_t2#list#Slots",
-                "forestry:hunter_bag#list#Slots",
-                "forestry:hunter_bag_t2#list#Slots",
-                "forestry:adventurer_bag#list#Slots",
-                "forestry:adventurer_bag_t2#list#Slots",
-                "forestry:builder_bag#list#Slots",
-                "forestry:builder_bag_t2#list#Slots"
+
+                //Forestry Backpacks [Disabled, forestry haven't updated yet]
+//                "forestry:apiarist_bag#list#Slots",
+//                "forestry:lepidopterist_bag#list#Slots",
+//                "forestry:miner_bag#list#Slots",
+//                "forestry:miner_bag_t2#list#Slots",
+//                "forestry:digger_bag#list#Slots",
+//                "forestry:digger_bag_t2#list#Slots",
+//                "forestry:forester_bag#list#Slots",
+//                "forestry:forester_bag_t2#list#Slots",
+//                "forestry:hunter_bag#list#Slots",
+//                "forestry:hunter_bag_t2#list#Slots",
+//                "forestry:adventurer_bag#list#Slots",
+//                "forestry:adventurer_bag_t2#list#Slots",
+//                "forestry:builder_bag#list#Slots",
+//                "forestry:builder_bag_t2#list#Slots"
         };
     }
 

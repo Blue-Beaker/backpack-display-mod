@@ -1,13 +1,13 @@
 package io.bluebeaker.backpackdisplay.displayslot;
 
 import io.bluebeaker.backpackdisplay.BackpackDisplayMod;
+import io.bluebeaker.backpackdisplay.utils.ItemUtils;
 import io.bluebeaker.backpackdisplay.utils.NBTUtils;
 import io.bluebeaker.backpackdisplay.utils.ValueOperator;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NumericTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,7 +42,7 @@ public class DisplaySlotEntrySingle extends DisplaySlotEntryBase {
         CompoundTag rootNBT = stack.getTag();
         Tag itemTag = NBTUtils.getTagRecursive(rootNBT, pathToItem);
         if(itemTag instanceof CompoundTag){
-            ItemStack newStack = new ItemStack((ItemLike) itemTag);
+            ItemStack newStack = ItemUtils.createStackFromNBT((CompoundTag) itemTag);
             if(!newStack.isEmpty()){
                 if(pathToCount.length>0){
                     Tag countTag = NBTUtils.getTagRecursive(rootNBT, pathToCount);

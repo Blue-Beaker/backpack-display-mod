@@ -27,6 +27,12 @@ configurations {
     developmentForge.extendsFrom common
 }
 
+repositories {
+    flatDir{
+        dir 'libs'
+    }
+}
+
 dependencies {
     forge "net.minecraftforge:forge:${rootProject.forge_version}"
     // Remove the next line if you don't want to depend on the API
@@ -42,6 +48,8 @@ dependencies {
     implementation(include("io.github.llamalad7:mixinextras-forge:${rootProject.mixinextras_version}"))
 
     modApi "me.shedaniel.cloth:cloth-config-forge:${rootProject.clothconfig_version}"
+
+    modRuntimeOnly "libs:StorageDrawers-1.20.1-12.9.13"
 }
 
 processResources {
