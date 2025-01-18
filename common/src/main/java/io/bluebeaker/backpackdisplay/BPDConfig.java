@@ -61,12 +61,13 @@ public class BPDConfig implements ConfigData {
                 "storagedrawers:{oak,birch,jungle,spruce,acacia,dark_oak,mangrove,cherry,bamboo,crimson,warped,framed}_{full,half}_drawers_{1,2,4}#list#{BlockEntityTag,tile}.Drawers;Item;Count",
 
                 //Compacting drawers
-                "storagedrawers:compacting_drawers_2#single#{BlockEntityTag,tile}.Drawers.Items.0.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.0.Conv",
-                "storagedrawers:compacting_drawers_2#single#{BlockEntityTag,tile}.Drawers.Items.1.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.1.Conv",
+                "storagedrawers:compacting_drawers_{2,3}#single#BlockEntityTag.Drawers.Items.0.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.0.Conv",
+                "storagedrawers:compacting_drawers_{2,3}#single#BlockEntityTag.Drawers.Items.1.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.1.Conv",
+                "storagedrawers:compacting_drawers_3#single#BlockEntityTag.Drawers.Items.2.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.2.Conv",
 
-                "storagedrawers:compacting_drawers_3#single#{BlockEntityTag,tile}.Drawers.Items.0.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.0.Conv",
-                "storagedrawers:compacting_drawers_3#single#{BlockEntityTag,tile}.Drawers.Items.1.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.1.Conv",
-                "storagedrawers:compacting_drawers_3#single#{BlockEntityTag,tile}.Drawers.Items.2.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.2.Conv",
+                "storagedrawers:compacting_drawers_{2,3}#single#tile.Drawers.Items.0.Item;tile.Drawers.Count;/tile.Drawers.Items.0.Conv",
+                "storagedrawers:compacting_drawers_{2,3}#single#tile.Drawers.Items.1.Item;tile.Drawers.Count;/tile.Drawers.Items.1.Conv",
+                "storagedrawers:compacting_drawers_3#single#tile.Drawers.Items.2.Item;tile.Drawers.Count;/tile.Drawers.Items.2.Conv",
         };
     }
 
