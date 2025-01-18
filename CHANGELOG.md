@@ -18,3 +18,6 @@ Added hot-reload support for ZenUtils.
 Fixed reading NBT from empty paths returning null, now returns the 'root' tag itself. Making it able to show contents in AE2 cells with config.  
 # 1.6.2
 Fix fluid lighting issue when using shaders.
+# 1.6.3
+Changed tooltip positioning behaviour, now no longer jumps to left when hit right border of the screen.  
+Added replacement template feature to simplificate configuration.  
