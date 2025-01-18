@@ -86,7 +86,33 @@ storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.1.Item;BlockEntit
 storagedrawers:compdrawers#single#BlockEntityTag.Drawers.Items.2.Item;BlockEntityTag.Drawers.Count;/BlockEntityTag.Drawers.Items.2.Conv
 ```
 
-### Crafttweaker Support
+### Replacement Templates
+Starting from v1.6.3 for MC1.12.2, and v2.0 for MC1.20.1, the replacement template feature is added to simplify writing lists in configurations, like adding a same rule to multiple items with similar IDs.  
+The format is just comma-separated values in curly brackets: `{value1,value2,value3}`  
+
+Multiple templates in one line will result in all conbinations of the templates. For example this line:
+```
+storagedrawers:{oak,birch}_{full,half}_drawers_{1,2,4}#list#tile.Drawers;Item;Count
+```
+equals to this bunch of lines:  
+```
+storagedrawers:oak_full_drawers_1#list#tile.Drawers;Item;Count
+storagedrawers:oak_full_drawers_2#list#tile.Drawers;Item;Count
+storagedrawers:oak_full_drawers_4#list#tile.Drawers;Item;Count
+storagedrawers:oak_half_drawers_1#list#tile.Drawers;Item;Count
+storagedrawers:oak_half_drawers_2#list#tile.Drawers;Item;Count
+storagedrawers:oak_half_drawers_4#list#tile.Drawers;Item;Count
+storagedrawers:birch_full_drawers_1#list#tile.Drawers;Item;Count
+storagedrawers:birch_full_drawers_2#list#tile.Drawers;Item;Count
+storagedrawers:birch_full_drawers_4#list#tile.Drawers;Item;Count
+storagedrawers:birch_half_drawers_1#list#tile.Drawers;Item;Count
+storagedrawers:birch_half_drawers_2#list#tile.Drawers;Item;Count
+storagedrawers:birch_half_drawers_4#list#tile.Drawers;Item;Count
+```
+For performance reasons there can be at most 10 templates in a single line. Excess ones won't work.  
+
+
+## Crafttweaker Support
 Starting from v1.3, crafttweaker is supported to add custom functions to get what items to display.  
 It's suggested to only write entries in a script with `#sideonly client` Preprocessor. Otherwise it will cause errors on dedicated server, because this mod is client only.  
 
