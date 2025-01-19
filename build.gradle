@@ -1,6 +1,11 @@
+import com.modrinth.minotaur.TaskModrinthUpload
+
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
     id "dev.architectury.loom" version "1.7-SNAPSHOT" apply false
+    id "com.modrinth.minotaur" version "2.+"
+    // It's safest to have this on 2.+ to get the latest features and
+    // bug fixes without having to worry about breaking changes.
 }
 
 architectury {
