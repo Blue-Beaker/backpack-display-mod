@@ -21,3 +21,5 @@ Fix fluid lighting issue when using shaders.
 # 1.6.3
 Changed tooltip positioning behaviour, now no longer jumps to left when hit right border of the screen.  
 Added replacement template feature to simplificate configuration.  
+# 1.6.4
+Provide more info (script and item) when catching exceptions in script functions, for easier debugging.  
