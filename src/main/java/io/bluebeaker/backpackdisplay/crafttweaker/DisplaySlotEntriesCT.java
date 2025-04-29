@@ -11,8 +11,9 @@ import stanhebben.zenscript.annotations.ZenMethod;
 import youyihj.zenutils.api.reload.Reloadable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Blue_Beaker
@@ -22,6 +23,7 @@ import java.util.List;
 
 public class DisplaySlotEntriesCT {
     private static final IngredientMap<IContainerFunction> PREVIEW_FUNCTIONS = new IngredientMap<>();
+    private static final Map<IContainerFunction,String> FUNC_DEFINITIONS = new HashMap<>();
 
     
     /**
@@ -44,7 +46,16 @@ public class DisplaySlotEntriesCT {
     public static List<IItemStack> getDisplayItems(IItemStack item) {
         List<IItemStack> items = new ArrayList<IItemStack>();
         for(IContainerFunction func:getFunctions(item)){
-            items.addAll(Arrays.asList(func.process(item)));
+            try {
+                for (IItemStack resultingStack : func.process(item)) {
+                    if(resultingStack==null){
+                        throw new NullPointerException("An item is null");
+                    }
+                    items.add(resultingStack);
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(String.format("Exception in the function defined in: %s, when getting items for: %s", FUNC_DEFINITIONS.get(func), item.toCommandString()),e);
+            }
         }
         return items;
     }
@@ -65,6 +76,7 @@ public class DisplaySlotEntriesCT {
         public void apply() {
 
             entry = PREVIEW_FUNCTIONS.register(ingredient, function);
+            FUNC_DEFINITIONS.put(function,CraftTweakerAPI.getScriptFileAndLine());
         }
 
         public void undo() {
