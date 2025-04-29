@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION,clientSideOnly = true)
+@Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION,clientSideOnly = true,acceptableRemoteVersions = "*")
 public class BackpackDisplayMod
 {
     public static final String MODID = Tags.MOD_ID;
