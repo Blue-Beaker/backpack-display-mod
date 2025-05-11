@@ -26,8 +26,11 @@ public class NBTUtils {
             if(!key.isEmpty()) {
                 if (tag instanceof CompoundTag)
                     tag = ((CompoundTag) tag).get(key);
-                else if (tag instanceof ListTag)
-                    tag = ((ListTag) tag).get(Integer.parseInt(key));
+                else if (tag instanceof ListTag listTag){
+                    int i = Integer.parseInt(key);
+                    if(i>=listTag.size()) return null;
+                    tag = listTag.get(i);
+                }
                 else return null;
             }
         }
